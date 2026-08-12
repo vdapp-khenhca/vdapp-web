@@ -3331,15 +3331,19 @@ function _accToRow(a){
 function _prodFromRow(r){
   return {
     id:r.id, name:r.name, desc:r.description, price:r.price, type:r.type, tags:r.tags,
-    image:r.image_url, versions:r.versions||[], versionLinks:r.version_links||{},
-    changelog:r.changelog||[], createdAt:r.created_at, updatedAt:r.updated_at
+    imgUrl:r.image_url||'', image:r.image_url||'', versions:r.versions||[], versionLinks:r.version_links||{},
+    changelog:r.changelog||[], createdAt:r.created_at, updatedAt:r.updated_at,
+    icon:r.icon||'📦', badge:r.badge||'', free:!!r.is_free,
+    images:r.images||[], descRich:r.desc_rich||'', video:r.video||''
   };
 }
 function _prodToRow(p){
   return {
     id:p.id, name:p.name||'', description:p.desc||'', price:p.price||0, type:p.type||'',
-    tags:p.tags||'', image_url:p.image||'', versions:p.versions||[],
-    version_links:p.versionLinks||{}, changelog:p.changelog||[]
+    tags:p.tags||'', image_url:p.imgUrl||p.image||'', versions:p.versions||[],
+    version_links:p.versionLinks||{}, changelog:p.changelog||[],
+    icon:p.icon||'📦', badge:p.badge||'', is_free:!!p.free,
+    images:p.images||[], desc_rich:p.descRich||'', video:p.video||''
   };
 }
 function _orderFromRow(r){
