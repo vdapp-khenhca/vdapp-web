@@ -1550,7 +1550,7 @@ tr:hover td { background: var(--bg3); }
 .pd-perk{ display:flex; align-items:center; gap:8px; font-size:13px; color:var(--text2); font-weight:500; }
 .pd-perk i{ color:var(--gold); font-size:16px; }
 
-/* ── Grid: content + sidebar ── */
+/* ── Grid: content + sidebar chọn phiên bản (không có nút mua — nút mua nằm ở thanh dính đáy dùng chung) ── */
 .pd-grid{ display:grid; grid-template-columns:1fr 320px; gap:44px; align-items:start; }
 .pd-content{ min-width:0; }
 .pd-sidebar{ position:sticky; top:88px; }
@@ -1563,36 +1563,37 @@ tr:hover td { background: var(--bg3); }
   font-size:11px; font-weight:800; letter-spacing:1px; text-transform:uppercase;
   color:var(--text3); margin-bottom:10px;
 }
-.pd-buybox-actions{ margin-top:12px; }
+.pd-buybox-actions{ display:none; } /* nút mua đã chuyển xuống thanh dính đáy dùng chung PC+mobile */
 
-/* ── Mobile sticky buy bar — chỉ hiện <900px ── */
-.pd-mobile-bar{ display:none; }
+/* ── Thanh mua ngay dính đáy — DÙNG CHUNG cho cả PC và mobile ── */
+.pd-mobile-bar{
+  display:flex; align-items:center; gap:16px;
+  position:fixed; left:0; right:0; bottom:0; z-index:55;
+  padding:14px 24px calc(14px + env(safe-area-inset-bottom));
+  background:var(--nav-bg); backdrop-filter:blur(20px) saturate(180%);
+  border-top:1px solid var(--border);
+}
+.pd-mobile-bar-inner{ max-width:1080px; margin:0 auto; width:100%; display:flex; align-items:center; gap:16px; }
+.pd-mobile-bar-price{ flex-shrink:0; }
+.pd-mobile-price{ font-size:22px; font-weight:800; letter-spacing:-.6px; color:var(--gold); line-height:1.1; }
+.pd-mobile-price.free{ color:#34c759; }
+.pd-mobile-pnote{ font-size:11px; color:var(--text3); margin-top:1px; }
+.pd-mobile-bar-action{ flex:1; max-width:320px; margin-left:auto; }
+.pd-mobile-bar-action .btn-buy-main{ margin-bottom:0; }
+.pd-body{ padding-bottom:110px; } /* chừa chỗ cho thanh dính đáy, áp dụng mọi kích thước màn hình */
 
 @media(max-width:900px){
   .pd-back{ position:absolute; top:14px; left:14px; z-index:20; }
   .pd-hero{ position:relative; padding-top:0; }
   .pd-hero-media{ aspect-ratio:16/11; }
-  .pd-body{ padding:0 20px 100px; }
+  .pd-body{ padding:0 20px 110px; }
   .pd-heading{ padding-top:22px; }
   .pd-price-row{ display:none; } /* giá chuyển xuống thanh sticky */
   .pd-perks{ gap:14px 20px; margin:16px 0 24px; }
 
   .pd-grid{ grid-template-columns:1fr; gap:0; }
-  .pd-sidebar{ display:none; } /* trên mobile, mua qua thanh sticky đáy */
-
-  .pd-mobile-bar{
-    display:flex; align-items:center; gap:12px;
-    position:fixed; left:0; right:0; bottom:0; z-index:55;
-    padding:12px 16px calc(12px + env(safe-area-inset-bottom));
-    background:var(--nav-bg); backdrop-filter:blur(20px) saturate(180%);
-    border-top:1px solid var(--border);
-  }
-  .pd-mobile-bar-price{ flex-shrink:0; }
-  .pd-mobile-price{ font-size:20px; font-weight:800; letter-spacing:-.6px; color:var(--gold); line-height:1.1; }
-  .pd-mobile-price.free{ color:#34c759; }
-  .pd-mobile-pnote{ font-size:10.5px; color:var(--text3); margin-top:1px; }
-  .pd-mobile-bar-action{ flex:1; }
-  .pd-mobile-bar-action .btn-buy-main{ margin-bottom:0; }
+  .pd-sidebar{ position:static; }
+  .pd-mobile-bar-action{ max-width:none; }
 }
 
 .detail-price{font-size:32px;font-weight:800;letter-spacing:-1.5px;color:var(--text);margin-bottom:2px;}
@@ -2123,13 +2124,15 @@ select, textarea {
     </div>
   </div>
 
-  <!-- ═══ MOBILE: thanh mua ngay dính đáy ═══ -->
+  <!-- ═══ Thanh mua ngay dính đáy — dùng chung PC & mobile ═══ -->
   <div class="pd-mobile-bar">
-    <div class="pd-mobile-bar-price">
-      <div id="pmPriceMobile" class="pd-mobile-price"></div>
-      <div id="pmPNoteMobile" class="pd-mobile-pnote"></div>
+    <div class="pd-mobile-bar-inner">
+      <div class="pd-mobile-bar-price">
+        <div id="pmPriceMobile" class="pd-mobile-price"></div>
+        <div id="pmPNoteMobile" class="pd-mobile-pnote"></div>
+      </div>
+      <div id="pmActionsMobile" class="pd-mobile-bar-action"></div>
     </div>
-    <div id="pmActionsMobile" class="pd-mobile-bar-action"></div>
   </div>
 </div>
 </div>
