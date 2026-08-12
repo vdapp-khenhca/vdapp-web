@@ -3976,7 +3976,7 @@ function renderProducts(){
     <div class="pcard-wrap">
     <div class="pcard" data-ptype="${p.type}">
       <!-- FRONT FACE -->
-      <div class="pcard-front">
+      <div class="pcard-front" onclick="openProdNew('${p.id}')" style="cursor:pointer;">
         <div class="pcard-thumb">
           ${thumbHtml}
           <div class="badge-row">
