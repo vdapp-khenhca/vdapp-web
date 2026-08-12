@@ -3294,6 +3294,16 @@ const SUPABASE_URL = 'https://xnbcnrrcgkazmlexozzl.supabase.co'; // <-- Kiểm t
 const SUPABASE_KEY = 'sb_publishable_dw7kprI5dNwj4OGO4Bw2Wg_fc8xhOhA';
 
 const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+// ── Đánh dấu phiên bản build — kiểm tra nhanh xem đang chạy bản Supabase mới hay bản Google Sheet cũ ──
+const BUILD_VERSION = 'supabase-v1 · ' + new Date().toISOString().slice(0,10);
+console.log('%c⚡ VDAPP build: ' + BUILD_VERSION, 'color:#C9A84C;font-weight:bold;font-size:12px;');
+window.addEventListener('DOMContentLoaded', () => {
+  const tag = document.createElement('div');
+  tag.textContent = BUILD_VERSION;
+  tag.style.cssText = 'position:fixed;bottom:6px;left:8px;z-index:99999;font-size:10px;color:rgba(255,255,255,0.25);font-family:monospace;pointer-events:none;user-select:none;';
+  document.body.appendChild(tag);
+});
 // Biến giả để tương thích các đoạn code cũ còn kiểm tra "if(API_URL...)" — luôn coi là đã cấu hình xong
 const API_URL = SUPABASE_URL;
 
@@ -4523,7 +4533,7 @@ function restorePayState(){
 
 function startProductPayment(){
   if(!currentUser){ closeProdModalNew(); openLogin(); showToast('Vui lòng đăng nhập để mua hàng','info'); return; }
-  const p=PRODUCTS.find(x=>x.id===_activeProdId); if(!p) return;
+  const p=PRODUCTS.find(x=>String(x.id)===String(_activeProdId)); if(!p) return;
   closeProdModalNew();
   openPayment({type:'product',productId:p.id,name:p.name.includes('|')?p.name.split('|')[1].trim():p.name,price:p.price,versions:p.versions,free:p.free,selectedVer:_activeVer||p.versions[0]||''});
 }
@@ -4548,7 +4558,7 @@ function closePayment(){ const el=document.getElementById('payOverlay'); if(el) 
 document.getElementById('payOverlay').addEventListener('click',function(e){ if(e.target===this) closePayment(); });
 
 function payNext(){
-  if(PAY.step===1&&PAY.type==='product') PAY.price=PRODUCTS.find(x=>x.id===PAY.productId)?.price||PAY.price;
+  if(PAY.step===1&&PAY.type==='product') PAY.price=PRODUCTS.find(x=>String(x.id)===String(PAY.productId))?.price||PAY.price;
   if(PAY.step===2){
     const nm=document.getElementById('pBuyerName').value.trim();
     const ph=document.getElementById('pBuyerPhone').value.trim();
@@ -4621,7 +4631,7 @@ function renderStep1(){
         <ul class="psc-features">${p.features.map(f=>`<li><i class="bi bi-check-circle-fill"></i>${f}</li>`).join('')}</ul>
       </div>`).join('')+`</div>`;
   } else {
-    const p=PRODUCTS.find(x=>x.id===PAY.productId);
+    const p=PRODUCTS.find(x=>String(x.id)===String(PAY.productId));
     document.getElementById('step1Title').textContent='Chọn phiên bản';
     document.getElementById('step1Sub').textContent=p?p.name:'';
     if(!p||!p.versions||p.versions.length===0){ el.innerHTML='<div style="color:var(--text2);font-size:14px;">Không có phiên bản nào.</div>'; return; }
@@ -4710,7 +4720,7 @@ function submitOrder(){
   const ph=document.getElementById('pBuyerPhone').value.trim()||'—';
   const em=document.getElementById('pBuyerEmail').value.trim();
   const orderId=Date.now();
-  const _prod = PRODUCTS.find(x=>x.id===PAY.productId);
+  const _prod = PRODUCTS.find(x=>String(x.id)===String(PAY.productId));
   const _versionLinks = _prod?.versionLinks || {};
   const _autoLink = _versionLinks[PAY.selectedVer] || '';
   const order={
@@ -5329,7 +5339,7 @@ function renderProdImgList(){
       <input type="text" placeholder="https://lh3.googleusercontent.com/d/..." value="${p.imgUrl||''}" data-prodimg="${p.id}" oninput="updateProdImg(${p.id},this.value)" style="padding:6px 10px;background:var(--input-bg);border:1px solid var(--border);border-radius:7px;color:var(--text);font-size:12px;font-family:var(--font);">
     </div>`).join('');
 }
-function updateProdImg(id,url){ const p=PRODUCTS.find(x=>x.id===id); if(p){p.imgUrl=url;p.thumb=url;} }
+function updateProdImg(id,url){ const p=PRODUCTS.find(x=>String(x.id)===String(id)); if(p){p.imgUrl=url;p.thumb=url;} }
 
 async function saveDriveSettings(){
   const qr=document.getElementById('qrDriveLink').value;
