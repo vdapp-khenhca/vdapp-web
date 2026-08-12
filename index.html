@@ -22,6 +22,7 @@
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
 <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <style>
 /* ── BE VIETNAM PRO — tối ưu tiếng Việt ── */
 :root {
@@ -3287,24 +3288,14 @@ select, textarea {
 //  APPAUTO v3.0 — Google Sheets + Drive Backend
 // ═══════════════════════════════════════════════════
 
-// ── API Config ──
+// ── API Config — Supabase ──
+// Project URL và Publishable key lấy tại Supabase → Project Settings → API Keys
+const SUPABASE_URL = 'https://xnbcnrrcgkazmlexozzl.supabase.co'; // <-- Kiểm tra lại đúng chưa (Settings → General → Project URL)
+const SUPABASE_KEY = 'sb_publishable_dw7kprI5dNwj4OGO4Bw2Wg_fc8xhOhA';
 
-/* ════════════════════════════════════════════════════════════
-   CẦN THÊM VÀO GOOGLE APPS SCRIPT (backend) — function sendEmail:
-
-   case 'sendEmail': return { ok:true, data: sendEmail(body) };
-
-   function sendEmail(params) {
-     const { email, subject, htmlBody } = params;
-     if (!email) return {sent:false,error:'Missing email'};
-     try {
-       MailApp.sendEmail({ to: email, subject: subject||'[VDAPP] Thông báo', htmlBody: htmlBody||'' });
-       return {sent:true};
-     } catch(e) { return {sent:false,error:e.toString()}; }
-   }
-   ════════════════════════════════════════════════════════════ */
-
-const API_URL = 'https://script.google.com/macros/s/AKfycbwfNvCGoCPWz5QkZYQkHK511WhnOI55A7rC7FkxX24rFDjdYCsS4ucZqmvUoqOtJ55F/exec'; // <-- Điền URL sau khi deploy
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+// Biến giả để tương thích các đoạn code cũ còn kiểm tra "if(API_URL...)" — luôn coi là đã cấu hình xong
+const API_URL = SUPABASE_URL;
 
 // ── Local Storage (cache + session only) ──
 const LS = {
@@ -3312,68 +3303,126 @@ const LS = {
   set(k,v){ try{ localStorage.setItem('aa_'+k, JSON.stringify(v)); }catch(e){} },
 };
 
-// ── API Layer ──
-// GET (read): JSONP — bypass CORS hoàn toàn
-// POST (write): fetch no-cors → fire-and-forget (Apps Script vẫn xử lý, chỉ không trả response)
-let _jsonpSeq = 0;
-
-function jsonpCall(url) {
-  return new Promise((resolve, reject) => {
-    const cbName = '__appauto_cb_' + (++_jsonpSeq);
-    const script = document.createElement('script');
-    let settled = false;
-    const timer = setTimeout(() => {
-      if(settled) return;
-      settled = true;
-      // Không delete window[cbName] ngay — để script đang load không lỗi ReferenceError
-      // Chuyển thành no-op thay vì delete
-      window[cbName] = function(){};
-      if (script.parentNode) script.parentNode.removeChild(script);
-      reject(new Error('JSONP timeout'));
-    }, 15000);
-    function cleanup() {
-      if(settled) return;
-      settled = true;
-      clearTimeout(timer);
-      // Dùng no-op thay vì delete để tránh "is not defined" nếu script vẫn đang chạy
-      window[cbName] = function(){};
-      if (script.parentNode) script.parentNode.removeChild(script);
-    }
-    window[cbName] = function(data) {
-      cleanup();
-      if (data && data.ok === false) reject(new Error(data.error || 'API error'));
-      else resolve(data && data.data !== undefined ? data.data : data);
-    };
-    script.src = url + (url.includes('?') ? '&' : '?') + 'callback=' + cbName;
-    script.onerror = () => { cleanup(); reject(new Error('Script load error')); };
-    document.head.appendChild(script);
-  });
+// ── Mapping: cột Supabase (snake_case) <-> object JS (camelCase) dùng trong toàn bộ UI ──
+function _accFromRow(r){
+  return {
+    username:r.username, password:r.password, name:r.name, email:r.email, phone:r.phone,
+    role:r.role, memberType:r.member_type, memberExpiry:r.member_expiry,
+    purchases:r.purchases||[], createdAt:r.created_at
+  };
+}
+function _accToRow(a){
+  return {
+    username:a.username, password:String(a.password), name:a.name||'', email:a.email||null,
+    phone:a.phone||'', role:a.role||'user', member_type:a.memberType||'free',
+    member_expiry:a.memberExpiry||null, purchases:a.purchases||[]
+  };
+}
+function _prodFromRow(r){
+  return {
+    id:r.id, name:r.name, desc:r.description, price:r.price, type:r.type, tags:r.tags,
+    image:r.image_url, versions:r.versions||[], versionLinks:r.version_links||{},
+    changelog:r.changelog||[], createdAt:r.created_at, updatedAt:r.updated_at
+  };
+}
+function _prodToRow(p){
+  return {
+    id:p.id, name:p.name||'', description:p.desc||'', price:p.price||0, type:p.type||'',
+    tags:p.tags||'', image_url:p.image||'', versions:p.versions||[],
+    version_links:p.versionLinks||{}, changelog:p.changelog||[]
+  };
+}
+function _orderFromRow(r){
+  return {
+    id:r.id, type:r.type, name:r.name, version:r.version, price:r.price,
+    buyer:r.buyer, phone:r.phone, email:r.email, _userId:r.user_id, productId:r.product_id,
+    note:r.note, status:r.status, createdAt:r.created_at, downloadUrl:r.download_url,
+    versionLinks:r.version_links||{}
+  };
+}
+function _orderToRow(o){
+  return {
+    id:o.id, type:o.type||'', name:o.name||'', version:o.version||'', price:o.price||0,
+    buyer:o.buyer||'', phone:o.phone||'', email:o.email||'', user_id:o._userId||'',
+    product_id:o.productId||null, note:o.note||'', status:o.status||'pending',
+    download_url:o.downloadUrl||'', version_links:o.versionLinks||{}
+  };
 }
 
-// Write qua POST no-cors: Apps Script nhận được, chỉ không trả response về browser
-// Dùng cho saveOrder, updateOrder, saveAccount — fire and forget
-function postNoCors(body) {
-  return fetch(API_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'text/plain' }, // text/plain tránh preflight
-    body: JSON.stringify(body)
-  }).catch(e => console.warn('[postNoCors] failed:', e.message));
-}
-
+// ── API Layer (giữ tên cũ để không phải sửa lại toàn bộ UI phía dưới) ──
 const API = {
   async get(action, params={}) {
-    let url = API_URL + '?action=' + action;
-    Object.keys(params).forEach(k => url += '&' + k + '=' + encodeURIComponent(params[k]));
-    return jsonpCall(url);
+    try {
+      if(action === 'getProducts'){
+        const { data, error } = await sb.from('products').select('*').order('created_at', { ascending:false });
+        if(error) throw error;
+        return (data||[]).map(_prodFromRow);
+      }
+      if(action === 'getOrders'){
+        const { data, error } = await sb.from('orders').select('*').order('created_at', { ascending:false });
+        if(error) throw error;
+        return (data||[]).map(_orderFromRow);
+      }
+      if(action === 'getAccounts'){
+        const { data, error } = await sb.from('accounts').select('*');
+        if(error) throw error;
+        return (data||[]).map(_accFromRow);
+      }
+      if(action === 'getSettings'){
+        const { data, error } = await sb.from('settings').select('*');
+        if(error) throw error;
+        const obj = {};
+        (data||[]).forEach(row => obj[row.key] = row.value);
+        return obj;
+      }
+      return null;
+    } catch(e){ console.warn('[API.get]', action, e.message); throw e; }
   },
   async post(body) {
-    // Dùng POST no-cors — không có response nhưng Sheets vẫn được cập nhật
-    await postNoCors(body);
-    // Không throw error vì no-cors không trả về gì
-    return { ok: true };
+    try {
+      const { action, data, id, username } = body;
+      if(action === 'saveProduct'){
+        const { error } = await sb.from('products').upsert(_prodToRow(data));
+        if(error) throw error;
+      } else if(action === 'saveAccount'){
+        const { error } = await sb.from('accounts').upsert(_accToRow(data), { onConflict:'username' });
+        if(error) throw error;
+      } else if(action === 'saveOrder'){
+        const { error } = await sb.from('orders').insert(_orderToRow(data));
+        if(error) throw error;
+      } else if(action === 'updateOrder'){
+        const row = {};
+        if('status' in data) row.status = data.status;
+        if('downloadUrl' in data) row.download_url = data.downloadUrl;
+        const { error } = await sb.from('orders').update(row).eq('id', id);
+        if(error) throw error;
+      } else if(action === 'updateAccount'){
+        const row = {};
+        if(data.memberType!==undefined) row.member_type = data.memberType;
+        if(data.password!==undefined) row.password = String(data.password);
+        if(data.purchases!==undefined){
+          row.purchases = (typeof data.purchases === 'string') ? JSON.parse(data.purchases) : data.purchases;
+        }
+        const { error } = await sb.from('accounts').update(row).eq('username', username);
+        if(error) throw error;
+      } else if(action === 'deleteProduct'){
+        const { error } = await sb.from('products').delete().eq('id', id);
+        if(error) throw error;
+      } else if(action === 'saveSettings'){
+        const rows = Object.keys(data).map(k => ({ key:k, value:data[k] }));
+        const { error } = await sb.from('settings').upsert(rows, { onConflict:'key' });
+        if(error) throw error;
+      } else if(action === 'sendEmail' || action === 'sendResetEmail' || action === 'trackView' || action === 'trackClick'){
+        // Email/analytics — cấu hình sau (Supabase Edge Function + Resend), tạm bỏ qua để không lỗi
+        return { ok:true, skipped:true };
+      }
+      return { ok:true };
+    } catch(e){ console.warn('[API.post]', body.action, e.message); return { ok:false, error:e.message }; }
   }
 };
+
+// Giữ hàm cũ để không phải sửa các chỗ gọi trực tiếp postNoCors(...)
+function postNoCors(body){ return API.post(body); }
 
 // ── Loading overlay ──
 function showLoading(msg='Đang tải...'){
@@ -3420,9 +3469,6 @@ const DEFAULT_PRODUCTS = [];
 
 // ═══ INIT ═══
 async function loadData(){
-  if(!API_URL || API_URL.includes('PASTE_YOUR')) {
-    _loadFromLocalStorage(); return;
-  }
   // Hiện skeleton ngay — không block UI
   showProductSkeleton();
   try {
@@ -3432,12 +3478,18 @@ async function loadData(){
     ]);
     PRODUCTS  = (prods  && prods.length)  ? prods  : [];
     ORDERS    = orders  || [];
-    ACCOUNTS  = (accs   && accs.length)   ? accs   : [{username:'admin',password:'admin123',name:'Nguyễn Văn Đảm',role:'admin',purchases:[]}];
+    ACCOUNTS  = (accs   && accs.length)   ? accs   : [];
+    if(!ACCOUNTS.find(a=>a.role==='admin')){
+      // Chưa có admin trong Supabase — tạo 1 tài khoản admin mặc định và lưu lên luôn
+      const adminAcc = {username:'admin',password:'admin123',name:'Nguyễn Văn Đảm',role:'admin',purchases:[],memberType:'free'};
+      ACCOUNTS.push(adminAcc);
+      API.post({action:'saveAccount', data:adminAcc}).catch(()=>{});
+    }
     if(settings && Object.keys(settings).length) SETTINGS = {...SETTINGS, ...settings};
     LS.set('products', PRODUCTS); LS.set('orders', ORDERS);
     LS.set('accounts', ACCOUNTS); LS.set('settings', SETTINGS);
   } catch(err) {
-    console.warn('API load failed, using cache:', err);
+    console.warn('Supabase load failed, using local cache:', err);
     _loadFromLocalStorage();
   }
   const saved_user = LS.get('session');
@@ -3474,74 +3526,62 @@ function _loadFromLocalStorage(){
 }
 async function saveProducts(){
   LS.set('products',PRODUCTS);
-  if(!API_URL||API_URL.includes('PASTE_YOUR')) return;
-  for(const p of PRODUCTS){ try{await API.post({action:'saveProduct',data:p});}catch(e){} }
+  try{
+    const rows = PRODUCTS.map(_prodToRow);
+    const { error } = await sb.from('products').upsert(rows);
+    if(error) console.warn('[saveProducts]', error.message);
+  }catch(e){ console.warn('[saveProducts]', e.message); }
 }
 async function saveAccounts(){
   LS.set('accounts',ACCOUNTS);
-  if(!API_URL||API_URL.includes('PASTE_YOUR')) return;
-  for(const a of ACCOUNTS){ try{await API.post({action:'saveAccount',data:a});}catch(e){} }
+  try{
+    const rows = ACCOUNTS.map(_accToRow);
+    const { error } = await sb.from('accounts').upsert(rows, { onConflict:'username' });
+    if(error) console.warn('[saveAccounts]', error.message);
+  }catch(e){ console.warn('[saveAccounts]', e.message); }
 }
 async function saveOrders(){ LS.set('orders',ORDERS); }
 async function saveSettings(){
   LS.set('settings',SETTINGS);
-  if(!API_URL||API_URL.includes('PASTE_YOUR')) return;
-  try{await API.post({action:'saveSettings',data:SETTINGS});}catch(e){}
+  try{
+    const rows = Object.keys(SETTINGS).map(k => ({ key:k, value:SETTINGS[k] }));
+    const { error } = await sb.from('settings').upsert(rows, { onConflict:'key' });
+    if(error) console.warn('[saveSettings]', error.message);
+  }catch(e){ console.warn('[saveSettings]', e.message); }
 }
 async function saveOrderRemote(order){
   LS.set('orders',ORDERS);
-  if(!API_URL||API_URL.includes('PASTE_YOUR')) return;
-  try{await API.post({action:'saveOrder',data:order});}catch(e){console.warn('saveOrder failed',e);}
+  try{
+    const { error } = await sb.from('orders').insert(_orderToRow(order));
+    if(error) console.warn('[saveOrder]', error.message);
+  }catch(e){ console.warn('[saveOrder] failed:', e.message); }
 }
 async function updateOrderRemote(id, updates){
   LS.set('orders',ORDERS);
-  if(!API_URL||API_URL.includes('PASTE_YOUR')) return;
   try{
-    await API.post({action:'updateOrder', id:String(id), data:updates});
-    console.log('[updateOrder] id='+id, updates);
+    const row = {};
+    if('status' in updates) row.status = updates.status;
+    if('downloadUrl' in updates) row.download_url = updates.downloadUrl;
+    const { error } = await sb.from('orders').update(row).eq('id', id);
+    if(error) console.warn('[updateOrder]', error.message);
   }catch(e){ console.warn('[updateOrder] failed:', e.message); }
 }
 async function uploadImageToDrive(file, productId, onProgress){
-  // Chunked upload SONG SONG — gửi tất cả chunks cùng lúc, nhanh gấp 4-5x
-  // onProgress(0..100) callback tuỳ chọn — không dùng showLoading global
-  const CHUNK_SIZE = 3500;
-  const PARALLEL   = 4; // số chunks gửi đồng thời
-
+  // Upload ảnh lên Supabase Storage (bucket: product-images) — thay cho Google Drive
+  if (onProgress) onProgress(10);
   const blob = await _resizeImage(file, 800, 0.82);
-  const base64 = await new Promise(r => {
-    const rd = new FileReader();
-    rd.onload = ev => r(ev.target.result.split(',')[1]);
-    rd.readAsDataURL(blob);
+  const fileName = 'img_'+Date.now()+'_'+Math.random().toString(36).slice(2,7)+'.jpg';
+  const path = String(productId||'misc') + '/' + fileName;
+  if (onProgress) onProgress(40);
+  const { data, error } = await sb.storage.from('product-images').upload(path, blob, {
+    contentType: 'image/jpeg', upsert: true
   });
-
-  const mimeType = 'image/jpeg';
-  const fileName = 'img_'+Date.now()+'_'+(file.name||'photo.jpg')
-    .replace(/[^a-zA-Z0-9._-]/g,'_').replace(/\.[^.]+$/,'.jpg');
-  const uploadId = 'up_'+Date.now()+'_'+Math.random().toString(36).slice(2,7);
-  const totalChunks = Math.ceil(base64.length / CHUNK_SIZE);
-
-  // Chia thành batches rồi gửi song song
-  let done = 0;
-  for (let batch = 0; batch < totalChunks; batch += PARALLEL) {
-    const batchChunks = [];
-    for (let i = batch; i < Math.min(batch + PARALLEL, totalChunks); i++) {
-      const chunk = base64.slice(i * CHUNK_SIZE, (i + 1) * CHUNK_SIZE);
-      const body = { action:'uploadChunk', uploadId, chunk, chunkIndex:i, totalChunks, mimeType, fileName, productId:String(productId) };
-      batchChunks.push(jsonpCall(API_URL + '?payload=' + encodeURIComponent(JSON.stringify(body))));
-    }
-    await Promise.all(batchChunks);
-    done += batchChunks.length;
-    if (onProgress) onProgress(Math.round(done / totalChunks * 90));
-  }
-
-  // Finalize
-  if (onProgress) onProgress(95);
-  const finalBody = { action:'finalizeUpload', uploadId, mimeType, fileName, productId:String(productId) };
-  const res = await jsonpCall(API_URL + '?payload=' + encodeURIComponent(JSON.stringify(finalBody)));
+  if (error) throw new Error('Upload thất bại: ' + error.message);
+  if (onProgress) onProgress(90);
+  const { data: pub } = sb.storage.from('product-images').getPublicUrl(path);
   if (onProgress) onProgress(100);
-  const url = res?.data?.url || res?.url || '';
-  if (!url) throw new Error('GS không trả về URL ảnh');
-  return url;
+  if (!pub || !pub.publicUrl) throw new Error('Không lấy được URL ảnh');
+  return pub.publicUrl;
 }
 
 
@@ -5154,10 +5194,16 @@ function saveAccount(){
   setTimeout(()=>document.getElementById('accSuccessMsg').classList.remove('show'),3000);
 }
 
-function deleteAcc(u){
+async function deleteAcc(u){
   if(u==='admin'){ showToast('Không thể xoá tài khoản admin chính','error'); return; }
   if(!confirm('Xoá tài khoản '+u+'?')) return;
-  ACCOUNTS=ACCOUNTS.filter(a=>a.username!==u); saveAccounts(); renderAccTable();
+  ACCOUNTS=ACCOUNTS.filter(a=>a.username!==u);
+  LS.set('accounts',ACCOUNTS);
+  try{
+    const { error } = await sb.from('accounts').delete().eq('username', u);
+    if(error) throw error;
+  }catch(e){ console.warn('[deleteAcc]', e.message); }
+  renderAccTable();
 }
 
 async function saveProfile(){
@@ -5351,33 +5397,19 @@ const AN = {
     return s;
   },
 
-  // ── Ghi pageview lên GS (fire-and-forget) ──
+  // ── Ghi pageview — TODO: tạo bảng "analytics_views" trên Supabase nếu cần thống kê ──
   trackPageView(){
-    if(!API_URL||API_URL.includes('PASTE_YOUR')) return;
-    const now  = new Date();
-    const date = now.toISOString().slice(0,10);
-    const hour = now.getHours();
-    const sid  = this._sid();
-    postNoCors({ action:'trackView', date, hour, sid });
+    // Tạm tắt — chưa có bảng analytics trên Supabase, tránh gọi hàm không tồn tại
   },
 
-  // ── Ghi click sản phẩm ──
+  // ── Ghi click sản phẩm — TODO: tạo bảng "analytics_clicks" trên Supabase nếu cần ──
   trackClick(productId){
-    if(!API_URL||API_URL.includes('PASTE_YOUR')) return;
-    const date = new Date().toISOString().slice(0,10);
-    postNoCors({ action:'trackClick', date, productId: String(productId) });
+    // Tạm tắt — chưa có bảng analytics trên Supabase
   },
 
-  // ── Đọc analytics từ GS ──
+  // ── Đọc analytics ──
   async loadStats(){
-    if(!API_URL||API_URL.includes('PASTE_YOUR')) return null;
-    try {
-      const [views, clicks] = await Promise.all([
-        jsonpCall(API_URL+'?action=getAnalyticsViews'),
-        jsonpCall(API_URL+'?action=getAnalyticsClicks'),
-      ]);
-      return { views: views||[], clicks: clicks||[] };
-    } catch(e){ console.warn('[Analytics] load failed:', e.message); return null; }
+    return null; // Chưa cấu hình — bảng thống kê chưa tồn tại
   },
 };
 
