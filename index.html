@@ -3403,7 +3403,7 @@ function _orderFromRow(r){
     id:r.id, type:r.type, name:r.name, version:r.version, price:r.price,
     buyer:r.buyer, phone:r.phone, email:r.email, _userId:r.user_id, productId:r.product_id,
     note:r.note, status:r.status, createdAt:r.created_at, downloadUrl:r.download_url,
-    versionLinks:r.version_links||{}
+    versionLinks:r.version_links||{}, orderCode:r.order_code||''
   };
 }
 function _orderToRow(o){
@@ -3411,7 +3411,8 @@ function _orderToRow(o){
     id:o.id, type:o.type||'', name:o.name||'', version:o.version||'', price:o.price||0,
     buyer:o.buyer||'', phone:o.phone||'', email:o.email||'', user_id:o._userId||'',
     product_id:o.productId||null, note:o.note||'', status:o.status||'pending',
-    download_url:o.downloadUrl||'', version_links:o.versionLinks||{}
+    download_url:o.downloadUrl||'', version_links:o.versionLinks||{},
+    order_code:o.orderCode||('DH'+String(o.id).slice(-6))
   };
 }
 
@@ -4604,7 +4605,7 @@ function openProductPayment(){ startProductPayment(); }
 
 function openPayment(opts){
   if(!currentUser){ openLogin(); showToast('Vui lòng đăng nhập để mua hàng','info'); return; }
-  PAY={...PAY,...opts,step:1};
+  PAY={...PAY,...opts,step:1,_orderCreated:false,_orderId:null};
   if(PAY.type==='product'&&PAY.versions&&PAY.versions.length>0){
     if(!PAY.selectedVer) PAY.selectedVer=PAY.versions[0];
     PAY.totalSteps=PAY.free?2:4;
@@ -4625,10 +4626,11 @@ function payNext(){
     const nm=document.getElementById('pBuyerName').value.trim();
     const ph=document.getElementById('pBuyerPhone').value.trim();
     if(!nm||!ph){ showToast('Vui lòng nhập họ tên và số điện thoại','error'); return; }
-    if(PAY.price===0){ submitOrder(); return; }
+    if(PAY.price===0){ createOrder(); goToWaitStep(); return; }
+    createOrder();   // tạo đơn NGAY để có mã đơn nhúng vào nội dung chuyển khoản
     buildQRStep();
   }
-  if(PAY.step===3){ submitOrder(); return; }
+  if(PAY.step===3){ goToWaitStep(); return; } // đơn đã tạo ở bước trước, chỉ chuyển màn hình chờ
   if(PAY.step>=PAY.totalSteps) return;
   PAY.step++;
   savePayState();
@@ -4727,15 +4729,14 @@ function updateEmailNotice(){
 }
 
 function buildQRStep(){
-  // ── FIX #4: VietQR MB Bank format ──
+  // ── VietQR MB Bank format ──
   // STK: 25088888999999, BIN: 970422
   const stk=SETTINGS.bankAcc||'25088888999999';
   const binMB='970422';
   const amount=PAY.price;
-  const nm=(document.getElementById('pBuyerName')?.value||'').trim().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[đĐ]/g,'d').replace(/\s+/g,' ').trim();
-  const ph=(document.getElementById('pBuyerPhone')?.value||'').trim();
-  const prodName=PAY.name.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[đĐ]/g,'d').replace(/[^a-zA-Z0-9 ]/g,'').trim().substring(0,20);
-  const content=`APPAUTO ${nm} ${ph} ${prodName}`.replace(/\s+/g,' ').trim().substring(0,50);
+  // Mã đơn hàng ngắn gọn, duy nhất — dùng để SePay đối chiếu tự động với đơn hàng trong hệ thống
+  const orderCode = PAY._orderCode || '';
+  const content=`APPAUTO ${orderCode}`.trim();
 
   document.getElementById('payBankAcc').textContent=stk;
   document.getElementById('payBankOwner').textContent=SETTINGS.bankOwner||'NGUYEN VAN DAM';
@@ -4777,11 +4778,13 @@ function buildWaitStep(){
   startGhostPoll(lastOrder?.id);
 }
 
-function submitOrder(){
+function createOrder(){
+  if(PAY._orderCreated) return; // chống tạo trùng nếu bấm nhiều lần / quay lại bước trước rồi tiến tới
   const nm=document.getElementById('pBuyerName').value.trim()||'Khách';
   const ph=document.getElementById('pBuyerPhone').value.trim()||'—';
   const em=document.getElementById('pBuyerEmail').value.trim();
   const orderId=Date.now();
+  const orderCode='DH'+String(orderId).slice(-6);
   const _prod = PRODUCTS.find(x=>String(x.id)===String(PAY.productId));
   const _versionLinks = _prod?.versionLinks || {};
   const _autoLink = _versionLinks[PAY.selectedVer] || '';
@@ -4790,7 +4793,7 @@ function submitOrder(){
     version:PAY.selectedVer||'—', price:PAY.price,
     buyer:nm, phone:ph, email:em, _userId:currentUser?.username||'',
     productId:PAY.productId||null,
-    note:`APPAUTO ${nm} ${ph}`.substring(0,60),
+    note:`APPAUTO ${orderCode}`, orderCode:orderCode,
     status:'pending', createdAt:new Date().toLocaleString('vi-VN'),
     downloadUrl:_autoLink,
     versionLinks:_versionLinks,
@@ -4799,6 +4802,9 @@ function submitOrder(){
   LS.set('orders',ORDERS);
   saveOrderRemote(order); // async, fire-and-forget
   watchOrderId(orderId);  // SyncEngine bắt đầu theo dõi ngay
+  PAY._orderCreated = true;
+  PAY._orderId = orderId;
+  PAY._orderCode = 'DH'+String(orderId).slice(-6); // dùng để SePay đối chiếu tự động
 
   // Register purchase for user
   if(currentUser){
@@ -4810,13 +4816,11 @@ function submitOrder(){
     }
   }
 
-  // Update pending badge
   refreshPendingBadge();
-
-  // Gửi email thông báo admin
   notifyAdminNewOrder(order);
+}
 
-  // Go to wait step
+function goToWaitStep(){
   PAY.step=PAY.totalSteps;
   renderPayStep();
   buildWaitStep();
@@ -4916,7 +4920,7 @@ function _renderMyProds(){
       </div>
       <div class="mpi-info">
         <div class="mpi-name">${name}</div>
-        <div class="mpi-sub">#${String(pu.orderId).slice(-6)} · ${ver} · ${pu.createdAt||order?.createdAt||''}</div>
+        <div class="mpi-sub">#${String(pu.orderId).slice(-6)} · ${ver} · ${formatDT(pu.createdAt||order?.createdAt)}</div>
       </div>
       ${action}
     </div>`;
@@ -5106,7 +5110,7 @@ function renderAdminOrders(){
       <td><div style="font-size:13px;font-weight:600;">${o.buyer}</div><div style="font-size:11px;color:var(--text2);">${o.phone}</div></td>
       <td><div style="font-size:13px;">${o.name}</div>${o.version&&o.version!=='—'?`<div style="font-size:11px;color:var(--gold);">${o.version}</div>`:''}</td>
       <td style="color:var(--gold);font-weight:700;">${o.price>0?formatVND(o.price):'Miễn phí'}</td>
-      <td style="font-size:12px;color:var(--text2);">${o.createdAt}</td>
+      <td style="font-size:12px;color:var(--text2);">${formatDT(o.createdAt)}</td>
       <td><span class="order-status ${o.status==='pending'?'os-pending':o.status==='approved'?'os-approved':'os-rejected'}"><i class="bi ${o.status==='pending'?'bi-clock-fill':o.status==='approved'?'bi-check-circle-fill':'bi-x-circle-fill'}"></i> ${o.status==='pending'?'Chờ duyệt':o.status==='approved'?'Đã duyệt':'Từ chối'}</span></td>
       <td>
         <div style="display:flex;flex-direction:column;gap:6px;">
@@ -5455,6 +5459,20 @@ function clearNavSearch(){ document.getElementById('navSearchInput').value=''; h
 
 // ═══ HELPERS ═══
 function formatVND(n){ return n.toLocaleString('vi-VN')+'đ'; }
+// Format timestamp Supabase (ISO string) thành dạng dễ đọc: "15:51 12/08/2026"
+function formatDT(iso){
+  if(!iso) return '—';
+  try{
+    const d = new Date(iso);
+    if(isNaN(d.getTime())) return String(iso);
+    const hh = String(d.getHours()).padStart(2,'0');
+    const mm = String(d.getMinutes()).padStart(2,'0');
+    const dd = String(d.getDate()).padStart(2,'0');
+    const mo = String(d.getMonth()+1).padStart(2,'0');
+    const yy = d.getFullYear();
+    return `${hh}:${mm} ${dd}/${mo}/${yy}`;
+  }catch(e){ return String(iso); }
+}
 
 // ═══════════════════════════════════════════════════
 //  ANALYTICS — ghi vào Google Sheet qua API
