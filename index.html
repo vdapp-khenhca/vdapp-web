@@ -5644,14 +5644,18 @@ function addVersionRow(ver='', link=''){
   if(!wrap) return;
   const row = document.createElement('div');
   row.className = 'ver-link-row';
-  row.style.cssText = 'display:grid;grid-template-columns:130px 1fr 32px;gap:6px;align-items:center;';
+  row.style.cssText = 'display:grid;grid-template-columns:130px 1fr 32px 32px;gap:6px;align-items:center;';
   row.innerHTML = `
     <input type="text" placeholder="v1.0" value="${ver}"
       style="padding:8px 10px;background:var(--input-bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;font-family:var(--font);"
       class="vl-ver">
-    <input type="text" placeholder="https://drive.google.com/file/d/..." value="${link}"
+    <input type="text" placeholder="https://docs.google.com/spreadsheets/d/... hoặc link Drive" value="${link}"
       style="padding:8px 10px;background:var(--input-bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:13px;font-family:var(--font);"
       class="vl-link">
+    <button type="button" onclick="_convertToCopyLink(this)" title="Chuyển thành link 'Tạo bản sao' (Google Sheets)"
+      style="width:32px;height:32px;background:var(--gold-pale);border:1px solid var(--border-gold);color:var(--gold);border-radius:8px;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;">
+      <i class="bi bi-arrow-repeat"></i>
+    </button>
     <button type="button" onclick="this.parentElement.remove()"
       style="width:32px;height:32px;background:rgba(232,64,64,.1);border:1px solid rgba(232,64,64,.3);color:#e84040;border-radius:8px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;">
       <i class="bi bi-x"></i>
@@ -5659,6 +5663,21 @@ function addVersionRow(ver='', link=''){
   wrap.appendChild(row);
 }
 
+function _convertToCopyLink(btn){
+  const row = btn.closest('.ver-link-row');
+  const input = row.querySelector('.vl-link');
+  const url = input.value.trim();
+  if(!url){ showToast('Chưa có link để chuyển','error'); return; }
+  const converted = toGSheetCopyLink(url);
+  if(converted === url){
+    showToast('Link này không phải Google Sheets hoặc đã là link Copy','info');
+    return;
+  }
+  input.value = converted;
+  input.style.borderColor = '#34c759';
+  setTimeout(()=>{ input.style.borderColor = 'var(--border)'; }, 1200);
+  showToast('✅ Đã chuyển thành link "Tạo bản sao"','success');
+}
 function getVersionLinks(){
   const rows = document.querySelectorAll('#versionLinksWrap .ver-link-row');
   const obj = {}; // { 'v2.0': 'https://...', 'v1.0': 'https://...' }
