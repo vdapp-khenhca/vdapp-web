@@ -1300,7 +1300,37 @@ tr:hover td { background: var(--bg3); }
 .pay-field input::placeholder { color:var(--text3); }
 .pay-field.full { grid-column:1/-1; }
 
-/* step 3 — QR & bank */
+/* ═══ PAYMENT MODAL — 1 màn hình duy nhất ═══ */
+.pay-modal-single { max-width: 900px; }
+.pay-single-body {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 28px;
+  padding: 26px;
+}
+@media(max-width:760px){
+  .pay-single-body { grid-template-columns: 1fr; padding: 20px; gap: 24px; }
+}
+.pay-single-left .pay-field input,
+#pBuyerEmail, #pBuyerPhone, #paySinglePrice {
+  width:100%; padding:13px 15px;
+  background:var(--input-bg); border:1px solid var(--border);
+  border-radius:9px; color:var(--text); font-size:16px; font-family:var(--font);
+  transition:border-color .2s;
+}
+#pBuyerEmail:focus, #pBuyerPhone:focus { outline:none; border-color:var(--gold); box-shadow:0 0 0 3px rgba(201,168,76,.12); }
+#pBuyerEmail::placeholder, #pBuyerPhone::placeholder { color:var(--text3); }
+.pay-single-right {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 20px;
+  height: fit-content;
+}
+@media(max-width:760px){
+  .pay-single-right { order: -1; }
+}
+/* step 3 — QR & bank (giữ lại style cũ cho qr-box) */
 .pay-qr-wrap {
   display:grid; grid-template-columns:auto 1fr; gap:28px; align-items:start;
   padding:6px 0;
@@ -3113,58 +3143,73 @@ select, textarea {
 
 
 
-<!-- ══════════ PAYMENT MODAL ══════════ -->
+<!-- ══════════ PAYMENT MODAL — 1 màn hình duy nhất ══════════ -->
 <div class="pay-overlay" id="payOverlay">
-  <div class="pay-modal">
+  <div class="pay-modal pay-modal-single">
     <div class="pay-modal-head">
       <div>
-        <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:3px;" id="payModalLabel">Thanh toán</div>
-        <h3 id="payModalTitle">Đăng ký hội viên</h3>
+        <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-bottom:3px;" id="payModalLabel">Mua sản phẩm</div>
+        <h3 id="payModalTitle">Tên sản phẩm</h3>
       </div>
-      <div style="display:flex;align-items:center;gap:14px;">
-        <div class="step-pills" id="stepPills"></div>
-        <button onclick="closePayment()" style="width:32px;height:32px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);color:var(--text2);font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;"><i class="bi bi-x-lg"></i></button>
-      </div>
+      <button onclick="closePayment()" style="width:32px;height:32px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);color:var(--text2);font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><i class="bi bi-x-lg"></i></button>
     </div>
 
-    <!-- STEP 1: Choose plan (for plan) OR choose version (for product) -->
-    <div class="pay-step" id="payStep1">
-      <div style="font-size:14px;font-weight:600;margin-bottom:4px;" id="step1Title">Chọn gói hội viên</div>
-      <div style="font-size:13px;color:var(--text2);margin-bottom:18px;" id="step1Sub">Chọn gói phù hợp với nhu cầu của bạn</div>
-      <div id="step1Content"></div>
-    </div>
+    <div class="pay-single-body">
+      <!-- ── LEFT: form thông tin ── -->
+      <div class="pay-single-left">
 
-    <!-- STEP 2: User info (gộp — chỉ Gmail + SĐT, không cần Họ tên bắt buộc) -->
-    <div class="pay-step" id="payStep2">
-      <div style="font-size:14px;font-weight:600;margin-bottom:4px;">Thông tin nhận hàng</div>
-      <div style="font-size:13px;color:var(--text2);margin-bottom:18px;">Sản phẩm sẽ được gửi qua Gmail này. Nếu bạn đã từng mua, hệ thống tự nhận diện tài khoản cũ.</div>
-      <div class="pay-info-grid">
-        <div class="pay-field full">
-          <label><i class="bi bi-envelope-fill"></i> Gmail kích hoạt <span style="color:#e84040;">*</span></label>
-          <input id="pBuyerEmail" placeholder="email@gmail.com" type="email" oninput="updateEmailNotice()">
+        <div id="payVersionBox" style="display:none;margin-bottom:16px;">
+          <label style="font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text2);display:block;margin-bottom:8px;">Phiên bản</label>
+          <div class="ver-grid" id="payVersionGrid"></div>
+        </div>
+
+        <div class="pay-field full" style="margin-bottom:14px;">
+          <label style="font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text2);display:block;margin-bottom:6px;">Giá tiền</label>
+          <input id="paySinglePrice" readonly style="font-weight:800;color:var(--gold);font-size:18px;background:var(--bg2);">
+        </div>
+
+        <div class="pay-field full" style="margin-bottom:14px;">
+          <label style="font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text2);display:block;margin-bottom:6px;"><i class="bi bi-envelope-fill"></i> Gmail kích hoạt <span style="color:#e84040;">*</span></label>
+          <input id="pBuyerEmail" placeholder="Nhập địa chỉ Gmail của bạn" type="email" oninput="updateEmailNotice()">
           <div id="emailNotice" style="display:none;margin-top:8px;padding:10px 13px;background:var(--gold-pale);border:1.5px solid var(--border-gold);border-radius:9px;font-size:12.5px;color:var(--gold);font-weight:600;line-height:1.6;">
             <i class="bi bi-info-circle-fill"></i> Sản phẩm sẽ gửi về: <strong id="emailNoticeVal"></strong>
           </div>
         </div>
-        <div class="pay-field full"><label><i class="bi bi-telephone-fill"></i> Số điện thoại / Zalo <span style="color:#e84040;">*</span></label><input id="pBuyerPhone" placeholder="0901234567"></div>
-      </div>
-    </div>
 
-    <!-- STEP 3: QR Payment -->
-    <div class="pay-step" id="payStep3">
-      <div style="font-size:14px;font-weight:600;margin-bottom:4px;">Quét QR chuyển khoản</div>
-      <div style="font-size:13px;color:var(--text2);margin-bottom:20px;">Chuyển khoản đúng số tiền và nội dung bên dưới</div>
-      <div class="pay-qr-wrap">
-        <div>
-          <div class="qr-box" id="payQrBox">
-            <div class="qr-box-ph" id="payQrPh">
-              <i class="bi bi-qr-code-scan"></i>
-              <span>Admin chưa<br>upload QR</span>
-            </div>
-          </div>
-          <div style="text-align:center;margin-top:10px;font-size:11px;color:var(--text2);">MB Bank – Quân Đội</div>
+        <div class="pay-field full" style="margin-bottom:16px;">
+          <label style="font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text2);display:block;margin-bottom:6px;"><i class="bi bi-telephone-fill"></i> Số điện thoại / Zalo <span style="color:#e84040;">*</span></label>
+          <input id="pBuyerPhone" placeholder="Nhập số điện thoại Zalo">
         </div>
-        <div class="pay-bank-info">
+
+        <div class="pay-note" style="margin-bottom:16px;">
+          <i class="bi bi-info-circle-fill" style="color:var(--gold);"></i>
+          Sau khi chuyển khoản, nhấn <strong>"Xác nhận đã chuyển khoản"</strong> để gửi đơn hàng. Admin sẽ duyệt và gửi file trong <strong>15–30 phút</strong> (hoặc tự động duyệt nếu hệ thống nhận diện được giao dịch).
+        </div>
+
+        <button class="btn-pay-next" id="paySingleSubmitBtn" onclick="submitSingleOrder()" style="width:100%;justify-content:center;">
+          <i class="bi bi-check-circle-fill"></i> Xác nhận đăng ký
+        </button>
+
+        <!-- Trạng thái chờ / thành công (ẩn ban đầu) -->
+        <div id="paySingleWait" style="display:none;margin-top:16px;">
+          <div id="ghostWaitStatus"></div>
+        </div>
+      </div>
+
+      <!-- ── RIGHT: QR ── -->
+      <div class="pay-single-right">
+        <div style="font-size:14px;font-weight:700;color:var(--text2);text-align:center;margin-bottom:14px;"><i class="bi bi-qr-code" style="color:var(--gold);"></i> Quét QR để thanh toán</div>
+        <div class="qr-box" id="payQrBox" style="margin:0 auto;">
+          <div class="qr-box-ph" id="payQrPh">
+            <i class="bi bi-qr-code-scan"></i>
+            <span>Admin chưa<br>upload QR</span>
+          </div>
+        </div>
+        <div style="text-align:center;margin-top:14px;">
+          <div style="font-size:13px;color:var(--text2);margin-bottom:4px;">Số tiền:</div>
+          <div style="font-size:22px;font-weight:900;color:var(--gold);letter-spacing:-.5px;" id="payAmount">0 đ</div>
+        </div>
+        <div class="pay-bank-info" style="margin-top:16px;">
           <div class="pbi-row">
             <div class="pbi-label"><i class="bi bi-credit-card-2-front-fill"></i> Số tài khoản</div>
             <div class="pbi-val"><span id="payBankAcc">25088888999999</span>
@@ -3176,48 +3221,13 @@ select, textarea {
             <div class="pbi-val"><span id="payBankOwner">NGUYEN VAN DAM</span></div>
           </div>
           <div class="pbi-row">
-            <div class="pbi-label"><i class="bi bi-currency-exchange"></i> Số tiền</div>
-            <div class="pbi-val amount"><span id="payAmount">499.000 đ</span>
-              <button class="copy-btn" onclick="copyText('payAmount')"><i class="bi bi-copy"></i></button>
-            </div>
-          </div>
-          <div class="pbi-row">
             <div class="pbi-label"><i class="bi bi-chat-left-text-fill"></i> Nội dung chuyển khoản</div>
-            <div class="pbi-val" style="font-size:13px;"><span id="payContent">APPAUTO Tên SĐT Gói</span>
+            <div class="pbi-val" style="font-size:13px;"><span id="payContent">APPAUTO ...</span>
               <button class="copy-btn" onclick="copyText('payContent')"><i class="bi bi-copy"></i></button>
             </div>
           </div>
-          <div class="pay-note">
-            <i class="bi bi-info-circle-fill" style="color:var(--gold);"></i>
-            Sau khi chuyển khoản, nhấn <strong>"Đã chuyển khoản"</strong> để gửi đơn hàng.
-            Admin sẽ duyệt và gửi file trong <strong>15–30 phút</strong>.
-          </div>
         </div>
       </div>
-    </div>
-
-    <!-- STEP 4: Done -->
-    <div class="pay-step" id="payStep4">
-      <div class="pay-confirm-box">
-        <div class="pay-confirm-icon">🎉</div>
-        <h4>Đơn hàng đã được gửi!</h4>
-        <p>Admin sẽ xem xét và duyệt đơn hàng của bạn.<br>Bạn sẽ nhận được file qua Zalo trong vòng <strong>15–30 phút</strong>.</p>
-        <div class="pay-order-card" id="payOrderSummary"></div>
-        <a href="https://zalo.me/0946770648" target="_blank" class="btn-prim" style="display:inline-flex;margin-top:4px;">
-          <svg width="16" height="16" viewBox="0 0 48 48"><rect width="48" height="48" rx="8" fill="#0068FF"/><text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="22" font-weight="bold" font-family="Arial">Z</text></svg>
-          Liên hệ Zalo để nhận sản phẩm
-        </a>
-      </div>
-    </div>
-
-    <!-- Footer nav -->
-    <div class="pay-footer" id="payFooter">
-      <button class="btn-pay-back" id="payBackBtn" onclick="payPrev()" style="display:none;">
-        <i class="bi bi-arrow-left"></i> Quay lại
-      </button>
-      <button class="btn-pay-next" id="payNextBtn" onclick="payNext()">
-        Tiếp theo <i class="bi bi-arrow-right"></i>
-      </button>
     </div>
   </div>
 </div>
@@ -4317,175 +4327,83 @@ function openProd(id){ openProdNew(id); }
 function closeProdModal(e){ if(e&&e.target!==document.getElementById('prodModalOv')) return; closeProdModalNew(); }
 function closeProdModalDirect(){ closeProdModalNew(); }
 
-// ═══ PAYMENT STATE ═══
-let PAY = {type:'plan',planId:'year',name:'',price:0,selectedVer:'',step:1,totalSteps:4,productId:null};
-
-// ── FIX #2: Save pay state to sessionStorage so F5 restores it ──
-function savePayState(){
-  if(PAY.step>=PAY.totalSteps) return; // don't save final step
-  sessionStorage.setItem('aa_paystate', JSON.stringify(PAY));
-}
-function clearPayState(){ sessionStorage.removeItem('aa_paystate'); }
-function restorePayState(){
-  try{
-    const s=sessionStorage.getItem('aa_paystate');
-    if(!s) return;
-    const saved=JSON.parse(s);
-    if(!saved||!saved.step||saved.step<2) return;
-    if(!currentUser) return; // need login
-    PAY=saved;
-    // Re-open payment modal at saved step
-    const modal=document.getElementById('payOverlay');
-    if(modal){
-      modal.classList.add('open');
-      document.body.style.overflow='hidden';
-      renderPayStep();
-    }
-  }catch(e){}
-}
+// ═══ PAYMENT STATE — 1 màn hình duy nhất ═══
+let PAY = {type:'plan',planId:'year',name:'',price:0,selectedVer:'',productId:null,versions:[],free:false,_orderCreated:false,_orderId:null,_orderCode:''};
 
 function startProductPayment(){
   const p=PRODUCTS.find(x=>String(x.id)===String(_activeProdId)); if(!p) return;
   closeProdModalNew();
   openPayment({type:'product',productId:p.id,name:p.name.includes('|')?p.name.split('|')[1].trim():p.name,price:p.price,versions:p.versions,free:p.free,selectedVer:_activeVer||p.versions[0]||''});
 }
-
 function openProductPayment(){ startProductPayment(); }
 
 function openPayment(opts){
-  PAY={...PAY,...opts,step:1,_orderCreated:false,_orderId:null};
-  if(PAY.type==='product'&&PAY.versions&&PAY.versions.length>0){
-    if(!PAY.selectedVer) PAY.selectedVer=PAY.versions[0];
-    PAY.totalSteps=PAY.free?2:4;
-  } else {
-    PAY.totalSteps=PAY.price===0?2:4;
-  }
+  PAY={type:'plan',planId:'year',name:'',price:0,selectedVer:'',productId:null,versions:[],free:false,_orderCreated:false,_orderId:null,_orderCode:'', ...opts};
   document.getElementById('payOverlay').classList.add('open');
   document.body.style.overflow='hidden';
-  renderPayStep();
+  renderPaySingle();
 }
-
-function closePayment(){ const el=document.getElementById('payOverlay'); if(el) el.classList.remove('open'); document.body.style.overflow=''; clearPayState(); }
+function closePayment(){ const el=document.getElementById('payOverlay'); if(el) el.classList.remove('open'); document.body.style.overflow=''; }
 document.getElementById('payOverlay').addEventListener('click',function(e){ if(e.target===this) closePayment(); });
 
-function payNext(){
-  if(PAY.step===1&&PAY.type==='product') PAY.price=PRODUCTS.find(x=>String(x.id)===String(PAY.productId))?.price||PAY.price;
-  if(PAY.step===2){
-    const em=document.getElementById('pBuyerEmail').value.trim();
-    const ph=document.getElementById('pBuyerPhone').value.trim();
-    if(!em || !em.includes('@')){ showToast('Vui lòng nhập Gmail hợp lệ','error'); return; }
-    if(!ph){ showToast('Vui lòng nhập số điện thoại','error'); return; }
-    ensureGuestAccount(em, ph); // tự tạo/gán tài khoản theo Gmail, không cần mật khẩu
-    if(PAY.price===0){ createOrder(); goToWaitStep(); return; }
-    createOrder();   // tạo đơn NGAY để có mã đơn nhúng vào nội dung chuyển khoản
-    buildQRStep();
-  }
-  if(PAY.step===3){ goToWaitStep(); return; } // đơn đã tạo ở bước trước, chỉ chuyển màn hình chờ
-  if(PAY.step>=PAY.totalSteps) return;
-  PAY.step++;
-  savePayState();
-  renderPayStep();
-}
+function renderPaySingle(){
+  document.getElementById('payModalLabel').textContent = PAY.type==='plan' ? 'Đăng ký hội viên' : 'Mua sản phẩm';
+  document.getElementById('payModalTitle').textContent = PAY.name;
 
-// Tự động tạo tài khoản "khách" theo Gmail nếu chưa có, hoặc dùng lại tài khoản cũ nếu Gmail đã tồn tại.
-// Không yêu cầu mật khẩu — chỉ dùng để gắn đơn hàng vào đúng người, xem lại qua Google Sign-In sau này.
-function ensureGuestAccount(email, phone){
-  let acc = ACCOUNTS.find(a => a.email && a.email.toLowerCase() === email.toLowerCase());
-  if(!acc){
-    let username = email.split('@')[0].toLowerCase().replace(/[^a-z0-9]/g,'_');
-    if(ACCOUNTS.find(a=>a.username===username)) username = username+'_'+Math.floor(Math.random()*9000+1000);
-    acc = {
-      username, password: Math.random().toString(36).slice(2,12), // mật khẩu ngẫu nhiên, không dùng tới
-      name: email.split('@')[0], phone, email,
-      role:'user', purchases:[],
-      createdAt: new Date().toLocaleDateString('vi-VN'),
-      memberType:'free', memberExpiry:null
-    };
-    ACCOUNTS.push(acc);
-    saveAccounts();
-  } else if(phone && acc.phone !== phone){
-    acc.phone = phone; // cập nhật SĐT mới nhất nếu khách đổi số
-    saveAccounts();
-  }
-  currentUser = acc;
-  LS.set('session', {username: acc.username});
-  renderNavUser();
-}
-function payPrev(){ if(PAY.step<=1) return; PAY.step--; savePayState(); renderPayStep(); }
+  // Reset form/trạng thái mỗi lần mở
+  document.getElementById('pBuyerEmail').value = currentUser?.email || '';
+  document.getElementById('pBuyerPhone').value = currentUser?.phone || '';
+  document.getElementById('emailNotice').style.display = 'none';
+  document.getElementById('paySingleWait').style.display = 'none';
+  document.querySelector('.pay-single-left > *:not(#paySingleWait)').style.display = '';
+  document.getElementById('paySingleSubmitBtn').style.display = 'flex';
+  document.getElementById('paySingleSubmitBtn').disabled = false;
+  document.getElementById('paySingleSubmitBtn').innerHTML = '<i class="bi bi-check-circle-fill"></i> Xác nhận đăng ký';
 
-function renderPayStep(){
-  const total=PAY.totalSteps;
-  const pills=document.getElementById('stepPills');
-  pills.innerHTML=Array.from({length:total},(_,i)=>{
-    const n=i+1; let cls='spill';
-    if(n<PAY.step) cls+=' done'; else if(n===PAY.step) cls+=' active';
-    return `<div class="${cls}"></div>`;
-  }).join('');
-
-  ['payStep1','payStep2','payStep3','payStep4'].forEach((id,i)=>{
-    const el=document.getElementById(id); if(el) el.classList.toggle('active',i+1===PAY.step);
-  });
-
-  document.getElementById('payModalLabel').textContent=PAY.type==='plan'?'Đăng ký hội viên':'Mua sản phẩm';
-  document.getElementById('payModalTitle').textContent=PAY.name;
-
-  if(PAY.step===1) renderStep1();
-  else if(PAY.step===2){
-    if(currentUser){
-      document.getElementById('pBuyerPhone').value=currentUser.phone||'';
-      const emailInp = document.getElementById('pBuyerEmail');
-      if(emailInp && currentUser.email){
-        emailInp.value = currentUser.email;
-        updateEmailNotice();
-      }
-    }
-  } else if(PAY.step===3) buildQRStep();
-  else if(PAY.step===4) buildWaitStep();
-
-  document.getElementById('payBackBtn').style.display=PAY.step>1&&PAY.step<PAY.totalSteps?'flex':'none';
-  const nb=document.getElementById('payNextBtn');
-  if(PAY.step>=PAY.totalSteps){ nb.style.display='none'; }
-  else if(PAY.step===3){ nb.innerHTML='<i class="bi bi-check-circle-fill"></i> Đã chuyển khoản'; nb.style.display='flex'; }
-  else if(PAY.step===2&&PAY.price===0){ nb.innerHTML='<i class="bi bi-gift-fill"></i> Lấy sản phẩm'; nb.style.display='flex'; }
-  else { nb.innerHTML='Tiếp theo <i class="bi bi-arrow-right"></i>'; nb.style.display='flex'; }
-}
-
-function renderStep1(){
-  const el=document.getElementById('step1Content');
-  if(PAY.type==='plan'){
-    document.getElementById('step1Title').textContent='Chọn gói hội viên';
-    document.getElementById('step1Sub').textContent='Chọn gói phù hợp với nhu cầu';
-    const plans=[
-      {id:'free',name:'Cơ Bản',price:0,period:'Miễn phí',features:['Sản phẩm miễn phí','Xem demo']},
-      {id:'year',name:'Hội Viên Năm',price:499000,period:'/năm – tiết kiệm 60%',features:['Toàn bộ sản phẩm','Giảm 40% mua mới','Hỗ trợ ưu tiên']},
-      {id:'lifetime',name:'Vĩnh Viễn',price:999000,period:'Dùng mãi mãi',features:['Tất cả gói Năm','Cập nhật suốt đời','VIP Support','Source code']},
-    ];
-    el.innerHTML=`<div class="plan-sel-grid">`+plans.map(p=>`
-      <div class="plan-sel-card ${p.id===PAY.planId?'selected':''}" onclick="selectPlan('${p.id}',${p.price},'${p.name}')">
-        <div class="psc-name">${p.name}</div>
-        <div class="psc-price"><sup>đ</sup>${p.price>0?(p.price/1000).toFixed(0)+'K':'0'}</div>
-        <div class="psc-period">${p.period}</div>
-        <ul class="psc-features">${p.features.map(f=>`<li><i class="bi bi-check-circle-fill"></i>${f}</li>`).join('')}</ul>
-      </div>`).join('')+`</div>`;
-  } else {
-    const p=PRODUCTS.find(x=>String(x.id)===String(PAY.productId));
-    document.getElementById('step1Title').textContent='Chọn phiên bản';
-    document.getElementById('step1Sub').textContent=p?p.name:'';
-    if(!p||!p.versions||p.versions.length===0){ el.innerHTML='<div style="color:var(--text2);font-size:14px;">Không có phiên bản nào.</div>'; return; }
-    el.innerHTML=`<div class="ver-grid">`+p.versions.map((v,i)=>`
-      <div class="ver-card ${v===PAY.selectedVer?'selected':''}" onclick="selectVersion('${v}')">
+  // Version box — chỉ hiện cho sản phẩm có nhiều phiên bản
+  const vBox = document.getElementById('payVersionBox');
+  const vGrid = document.getElementById('payVersionGrid');
+  if(PAY.type==='product' && PAY.versions && PAY.versions.length>0){
+    if(!PAY.selectedVer) PAY.selectedVer = PAY.versions[0];
+    vBox.style.display = '';
+    vGrid.innerHTML = PAY.versions.map(v=>`
+      <div class="ver-card ${v===PAY.selectedVer?'selected':''}" onclick="selectPaySingleVersion('${v}')">
         <div class="ver-name">${v}</div>
-        <div class="ver-price">${p.free?'Miễn phí':formatVND(p.price)}</div>
-      </div>`).join('')+`</div>
-    <div style="margin-top:16px;background:var(--bg2);border-radius:10px;padding:14px;">
-      <div style="font-size:12px;color:var(--text2);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px;"><i class="bi bi-list-check" style="color:var(--gold)"></i> Changelog</div>
-      <ul style="list-style:none;display:flex;flex-direction:column;gap:5px;">${(p.changelog||[]).map(l=>`<li style="font-size:13px;color:var(--text2);display:flex;gap:7px;"><i class="bi bi-check-circle" style="color:var(--gold);flex-shrink:0;margin-top:2px;"></i>${l}</li>`).join('')}</ul>
-    </div>`;
+      </div>`).join('');
+  } else {
+    vBox.style.display = 'none';
   }
+
+  updatePaySinglePrice();
+  buildPaySingleQR();
 }
 
-function selectPlan(id,price,name){ PAY.planId=id; PAY.price=price; PAY.name=name; renderStep1(); }
-function selectVersion(v){ PAY.selectedVer=v; renderStep1(); }
+function selectPaySingleVersion(v){
+  PAY.selectedVer = v;
+  document.querySelectorAll('#payVersionGrid .ver-card').forEach(c=>c.classList.toggle('selected', c.querySelector('.ver-name').textContent===v));
+}
+
+function updatePaySinglePrice(){
+  const priceInp = document.getElementById('paySinglePrice');
+  priceInp.value = PAY.price>0 ? formatVND(PAY.price) : 'Miễn phí';
+}
+
+function buildPaySingleQR(){
+  const stk = SETTINGS.bankAcc || '25088888999999';
+  const binMB = '970422';
+  const amount = PAY.price;
+  document.getElementById('payBankAcc').textContent = stk;
+  document.getElementById('payBankOwner').textContent = SETTINGS.bankOwner || 'NGUYEN VAN DAM';
+  document.getElementById('payAmount').textContent = amount>0 ? formatVND(amount) : 'Miễn phí';
+  document.getElementById('payContent').textContent = 'Tạo đơn để nhận nội dung CK';
+
+  const qrBox = document.getElementById('payQrBox');
+  if(amount>0){
+    qrBox.innerHTML = `<div class="qr-box-ph"><i class="bi bi-qr-code-scan"></i><span>QR sẽ hiện sau<br>khi xác nhận đăng ký</span></div>`;
+  } else {
+    qrBox.innerHTML = `<div class="qr-box-ph"><i class="bi bi-gift-fill" style="color:var(--gold);font-size:40px;"></i><span>Sản phẩm miễn phí</span></div>`;
+  }
+}
 
 function updateEmailNotice(){
   const emailInp = document.getElementById('pBuyerEmail');
@@ -4501,54 +4419,79 @@ function updateEmailNotice(){
   }
 }
 
-function buildQRStep(){
-  // ── VietQR MB Bank format ──
-  // STK: 25088888999999, BIN: 970422
-  const stk=SETTINGS.bankAcc||'25088888999999';
-  const binMB='970422';
-  const amount=PAY.price;
-  // Mã đơn hàng ngắn gọn, duy nhất — dùng để SePay đối chiếu tự động với đơn hàng trong hệ thống
-  const orderCode = PAY._orderCode || '';
-  const content=`APPAUTO ${orderCode}`.trim();
+function submitSingleOrder(){
+  if(PAY._orderCreated) return;
+  const em = document.getElementById('pBuyerEmail').value.trim();
+  const ph = document.getElementById('pBuyerPhone').value.trim();
+  if(!em || !em.includes('@')){ showToast('Vui lòng nhập Gmail hợp lệ','error'); return; }
+  if(!ph){ showToast('Vui lòng nhập số điện thoại','error'); return; }
 
-  document.getElementById('payBankAcc').textContent=stk;
-  document.getElementById('payBankOwner').textContent=SETTINGS.bankOwner||'NGUYEN VAN DAM';
-  document.getElementById('payAmount').textContent=amount>0?formatVND(amount):'Miễn phí';
-  document.getElementById('payContent').textContent=content;
+  const btn = document.getElementById('paySingleSubmitBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<i class="bi bi-hourglass-split"></i> Đang xử lý...';
 
-  // Generate VietQR for MB Bank
-  const qrBox=document.getElementById('payQrBox');
+  ensureGuestAccount(em, ph);
+  createOrder();
+
+  // Cập nhật QR + nội dung CK theo đơn vừa tạo
+  const stk = SETTINGS.bankAcc || '25088888999999';
+  const binMB = '970422';
+  const amount = PAY.price;
+  const content = `APPAUTO ${PAY._orderCode}`.trim();
+  document.getElementById('payContent').textContent = content;
+  const qrBox = document.getElementById('payQrBox');
   if(amount>0){
-    // Use VietQR API — my_qr(bank_account, bank_bin, amount, description)
-    const qrUrl=`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(`2|99|${binMB}|${stk}|${amount}|${content}|0|0`)}`;
-    // Official VietQR format
-    const vietqrUrl=`https://img.vietqr.io/image/${binMB}-${stk}-compact2.png?amount=${amount}&addInfo=${encodeURIComponent(content)}&accountName=${encodeURIComponent(SETTINGS.bankOwner||'NGUYEN VAN DAM')}`;
-    qrBox.innerHTML=`<img src="${vietqrUrl}" alt="VietQR MB Bank" style="width:100%;height:100%;object-fit:contain;" onerror="this.src='${qrUrl}'">`;
-  } else {
-    qrBox.innerHTML=`<div class="qr-box-ph"><i class="bi bi-gift-fill" style="color:var(--gold);font-size:40px;"></i><span>Sản phẩm miễn phí</span></div>`;
+    const vietqrUrl = `https://img.vietqr.io/image/${binMB}-${stk}-compact2.png?amount=${amount}&addInfo=${encodeURIComponent(content)}&accountName=${encodeURIComponent(SETTINGS.bankOwner||'NGUYEN VAN DAM')}`;
+    qrBox.innerHTML = `<img src="${vietqrUrl}" alt="VietQR MB Bank" style="width:100%;height:100%;object-fit:contain;">`;
   }
+
+  // Ẩn form, hiện trạng thái chờ
+  document.querySelectorAll('.pay-single-left > *').forEach(el=>{ if(el.id!=='paySingleWait') el.style.display='none'; });
+  const waitBox = document.getElementById('paySingleWait');
+  waitBox.style.display = 'block';
+  const status = document.getElementById('ghostWaitStatus');
+  status.innerHTML = `
+    <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:left;margin-bottom:12px;">
+      <div style="display:flex;justify-content:space-between;padding:5px 0;font-size:13px;"><span style="color:var(--text2);">Mã đơn</span><span style="font-family:monospace;color:var(--gold);font-weight:700;">#${String(PAY._orderId).slice(-6)}</span></div>
+      <div style="display:flex;justify-content:space-between;padding:5px 0;font-size:13px;"><span style="color:var(--text2);">Sản phẩm</span><span>${PAY.name}</span></div>
+      <div style="display:flex;justify-content:space-between;padding:5px 0;font-size:13px;"><span style="color:var(--text2);">Tổng tiền</span><span style="font-weight:700;color:var(--gold);">${amount>0?formatVND(amount):'Miễn phí'}</span></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:8px;color:var(--text2);font-size:13px;">
+      <div style="width:8px;height:8px;background:var(--gold);border-radius:50%;animation:pulse 1.5s infinite;"></div>
+      Đang chờ admin xác nhận thanh toán...
+    </div>`;
+
+  if(amount===0){
+    setTimeout(()=>{ closePayment(); showToast('Đã đăng ký thành công! Kiểm tra "Sản phẩm của tôi"','success'); }, 800);
+    return;
+  }
+
+  startGhostPoll(PAY._orderId);
 }
 
-function buildWaitStep(){
-  const summary=document.getElementById('payOrderSummary');
-  if(!summary) return;
-  const lastOrder=[...ORDERS].reverse().find(o=>o._userId===currentUser?.username&&o.status==='pending');
-  if(lastOrder){
-    summary.innerHTML=`
-      <div class="poc-row"><span>Mã đơn</span><span style="font-family:monospace;color:var(--gold);">#${lastOrder.id.toString().slice(-6)}</span></div>
-      <div class="poc-row"><span>Sản phẩm</span><span>${lastOrder.name}</span></div>
-      ${lastOrder.version&&lastOrder.version!=='—'?`<div class="poc-row"><span>Phiên bản</span><span>${lastOrder.version}</span></div>`:''}
-      <div class="poc-row"><span>Người mua</span><span>${lastOrder.buyer}</span></div>
-      <div class="poc-row"><span>Tổng tiền</span><span>${lastOrder.price>0?formatVND(lastOrder.price):'Miễn phí'}</span></div>
-      <div id="ghostWaitStatus" style="margin-top:16px;">
-        <div style="display:flex;align-items:center;gap:8px;color:var(--text2);font-size:13px;">
-          <div style="width:8px;height:8px;background:var(--gold);border-radius:50%;animation:pulse 1.5s infinite;"></div>
-          Đang chờ admin xác nhận...
-        </div>
-      </div>`;
+// Tự động tạo tài khoản "khách" theo Gmail nếu chưa có, hoặc dùng lại tài khoản cũ nếu Gmail đã tồn tại.
+// Không yêu cầu mật khẩu — chỉ dùng để gắn đơn hàng vào đúng người, xem lại qua Google Sign-In sau này.
+function ensureGuestAccount(email, phone){
+  let acc = ACCOUNTS.find(a => a.email && a.email.toLowerCase() === email.toLowerCase());
+  if(!acc){
+    let username = email.split('@')[0].toLowerCase().replace(/[^a-z0-9]/g,'_');
+    if(ACCOUNTS.find(a=>a.username===username)) username = username+'_'+Math.floor(Math.random()*9000+1000);
+    acc = {
+      username, password: Math.random().toString(36).slice(2,12),
+      name: email.split('@')[0], phone, email,
+      role:'user', purchases:[],
+      createdAt: new Date().toLocaleDateString('vi-VN'),
+      memberType:'free', memberExpiry:null
+    };
+    ACCOUNTS.push(acc);
+    saveAccounts();
+  } else if(phone && acc.phone !== phone){
+    acc.phone = phone;
+    saveAccounts();
   }
-  clearPayState();
-  startGhostPoll(lastOrder?.id);
+  currentUser = acc;
+  LS.set('session', {username: acc.username});
+  renderNavUser();
 }
 
 function createOrder(){
@@ -4591,12 +4534,6 @@ function createOrder(){
 
   refreshPendingBadge();
   notifyAdminNewOrder(order);
-}
-
-function goToWaitStep(){
-  PAY.step=PAY.totalSteps;
-  renderPayStep();
-  buildWaitStep();
 }
 
 function copyText(elId){
@@ -5446,8 +5383,7 @@ window.addEventListener('DOMContentLoaded',async ()=>{
   const ba=document.getElementById('payBankAcc'); const bo=document.getElementById('payBankOwner');
   if(ba) ba.textContent=SETTINGS.bankAcc; if(bo) bo.textContent=SETTINGS.bankOwner;
 
-  // Restore pay state AFTER login restored
-  setTimeout(restorePayState, 400);
+
 
 });
 
@@ -5966,7 +5902,6 @@ function _onOrderApproved(order) {
   const vl = (typeof order.versionLinks==='object' && order.versionLinks) ? order.versionLinks : {};
   const dlUrl = order.downloadUrl || vl[order.version] || '';
   const waitStatus = document.getElementById('ghostWaitStatus');
-
   if(order.status === 'approved') {
     if(waitStatus) {
       waitStatus.innerHTML = `
@@ -5984,6 +5919,7 @@ function _onOrderApproved(order) {
           }
         </div>`;
     }
+    PAY._orderCreated = false;
     // Sync account purchases
     API.get('getAccounts').then(accs => {
       if(accs){ ACCOUNTS=accs; LS.set('accounts',ACCOUNTS);
