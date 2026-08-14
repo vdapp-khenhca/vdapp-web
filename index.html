@@ -5690,6 +5690,8 @@ function getVersionLinks(){
     const link = row.querySelector('.vl-link').value.trim();
     if(ver){ obj[ver] = link; vers.push(ver); }
   });
+  // Hàng cuối cùng nhập trong form = version mới nhất -> đảo mảng để nó lên đầu (versions[0])
+  vers.reverse();
   return { obj, vers };
 }
 
