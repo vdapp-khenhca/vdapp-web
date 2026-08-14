@@ -3234,20 +3234,19 @@ select, textarea {
       <div id="step1Content"></div>
     </div>
 
-    <!-- STEP 2: User info -->
+    <!-- STEP 2: User info (gộp — chỉ Gmail + SĐT, không cần Họ tên bắt buộc) -->
     <div class="pay-step" id="payStep2">
-      <div style="font-size:14px;font-weight:600;margin-bottom:4px;">Thông tin người mua</div>
-      <div style="font-size:13px;color:var(--text2);margin-bottom:18px;">Để admin xác nhận và gửi sản phẩm cho bạn</div>
+      <div style="font-size:14px;font-weight:600;margin-bottom:4px;">Thông tin nhận hàng</div>
+      <div style="font-size:13px;color:var(--text2);margin-bottom:18px;">Sản phẩm sẽ được gửi qua Gmail này. Nếu bạn đã từng mua, hệ thống tự nhận diện tài khoản cũ.</div>
       <div class="pay-info-grid">
-        <div class="pay-field"><label><i class="bi bi-person-fill"></i> Họ và tên</label><input id="pBuyerName" placeholder="Nguyễn Văn A"></div>
-        <div class="pay-field"><label><i class="bi bi-telephone-fill"></i> Số điện thoại / Zalo</label><input id="pBuyerPhone" placeholder="0901234567"></div>
         <div class="pay-field full">
-          <label><i class="bi bi-envelope-fill"></i> Gmail nhận sản phẩm</label>
+          <label><i class="bi bi-envelope-fill"></i> Gmail kích hoạt <span style="color:#e84040;">*</span></label>
           <input id="pBuyerEmail" placeholder="email@gmail.com" type="email" oninput="updateEmailNotice()">
-          <div id="emailNotice" style="display:none;margin-top:8px;padding:10px 13px;background:rgba(232,64,64,.1);border:1.5px solid rgba(232,64,64,.4);border-radius:9px;font-size:12.5px;color:#e84040;font-weight:600;line-height:1.6;">
-            <i class="bi bi-exclamation-triangle-fill"></i> Bạn sẽ nhận sản phẩm qua Gmail này: <strong id="emailNoticeVal" style="color:#ff4444;"></strong>
+          <div id="emailNotice" style="display:none;margin-top:8px;padding:10px 13px;background:var(--gold-pale);border:1.5px solid var(--border-gold);border-radius:9px;font-size:12.5px;color:var(--gold);font-weight:600;line-height:1.6;">
+            <i class="bi bi-info-circle-fill"></i> Sản phẩm sẽ gửi về: <strong id="emailNoticeVal"></strong>
           </div>
         </div>
+        <div class="pay-field full"><label><i class="bi bi-telephone-fill"></i> Số điện thoại / Zalo <span style="color:#e84040;">*</span></label><input id="pBuyerPhone" placeholder="0901234567"></div>
       </div>
     </div>
 
@@ -3694,131 +3693,6 @@ function togglePassVis(inputId, iconId){
   }
 }
 
-function _switchToLogin(el){
-  var email = el ? el.getAttribute('data-email') : '';
-  switchLoginTab('login', document.querySelectorAll('.ltab')[0]);
-  var inp = document.getElementById('loginUser');
-  if(inp && email) inp.value = email;
-}
-
-// ── Login mode: email / phone ──
-let _loginMode = 'email';
-function setLoginMode(mode){
-  _loginMode = mode;
-  const emailBtn = document.getElementById('loginModeEmailBtn');
-  const phoneBtn = document.getElementById('loginModePhoneBtn');
-  const emailField = document.getElementById('loginEmailField');
-  const phoneField = document.getElementById('loginPhoneField');
-  if(mode === 'email'){
-    emailBtn.style.background = 'var(--gold)'; emailBtn.style.color = '#050d1a'; emailBtn.style.fontWeight = '700';
-    phoneBtn.style.background = 'transparent'; phoneBtn.style.color = 'var(--text2)'; phoneBtn.style.fontWeight = '600';
-    emailField.style.display = ''; phoneField.style.display = 'none';
-  } else {
-    phoneBtn.style.background = 'var(--gold)'; phoneBtn.style.color = '#050d1a'; phoneBtn.style.fontWeight = '700';
-    emailBtn.style.background = 'transparent'; emailBtn.style.color = 'var(--text2)'; emailBtn.style.fontWeight = '600';
-    phoneField.style.display = ''; emailField.style.display = 'none';
-  }
-  document.getElementById('loginErr').textContent = '';
-}
-
-// ── Register mode: email / phone ──
-let _regMode = 'email';
-function setRegMode(mode){
-  _regMode = mode;
-  const emailBtn = document.getElementById('regModeEmailBtn');
-  const phoneBtn = document.getElementById('regModePhoneBtn');
-  const emailField = document.getElementById('regEmailField');
-  const phoneLabel = document.getElementById('regPhoneLabel');
-  if(mode === 'email'){
-    emailBtn.style.background = 'var(--gold)'; emailBtn.style.color = '#050d1a'; emailBtn.style.fontWeight = '700';
-    phoneBtn.style.background = 'transparent'; phoneBtn.style.color = 'var(--text2)'; phoneBtn.style.fontWeight = '600';
-    emailField.style.display = '';
-    phoneLabel.innerHTML = 'Số điện thoại / Zalo <span style="color:#e84040;">*</span>';
-    document.getElementById('regPhoneMsg').innerHTML = '';
-  } else {
-    phoneBtn.style.background = 'var(--gold)'; phoneBtn.style.color = '#050d1a'; phoneBtn.style.fontWeight = '700';
-    emailBtn.style.background = 'transparent'; emailBtn.style.color = 'var(--text2)'; emailBtn.style.fontWeight = '600';
-    emailField.style.display = 'none';
-    phoneLabel.innerHTML = 'Số điện thoại (dùng để đăng nhập) <span style="color:#e84040;">*</span>';
-    document.getElementById('regEmailMsg').innerHTML = '';
-  }
-  document.getElementById('loginErr').textContent = '';
-}
-
-function checkPhoneExists(val){
-  const msg = document.getElementById('regPhoneMsg');
-  if(!msg) return;
-  const v = val.trim();
-  if(!v){ msg.textContent=''; return; }
-  const exists = ACCOUNTS.find(a => a.phone && a.phone===v);
-  if(exists){
-    msg.innerHTML='<span style="color:#FFA500;font-weight:600;"><i class="bi bi-exclamation-circle-fill"></i> Số này đã có tài khoản. <a href="#" onclick="_switchToLoginPhone(this)" data-phone="'+v+'" style="color:var(--gold);font-weight:700;">Đăng nhập ngay →</a></span>';
-  } else if(v.length>=9){
-    msg.innerHTML='<span style="color:#34c759;"><i class="bi bi-check-circle-fill"></i> Có thể dùng số này</span>';
-  }
-}
-function _switchToLoginPhone(el){
-  var phone = el ? el.getAttribute('data-phone') : '';
-  switchLoginTab('login', document.querySelectorAll('.ltab')[0]);
-  setLoginMode('phone');
-  var inp = document.getElementById('loginPhoneInput');
-  if(inp && phone) inp.value = phone;
-}
-function showForgotPass(){
-  const d = document.getElementById('forgotPassDiv');
-  if(d) d.style.display = d.style.display==='none' ? 'block' : 'none';
-}
-
-async function doForgotPass(){
-  const email = document.getElementById('forgotEmail').value.trim();
-  const msg   = document.getElementById('forgotMsg');
-  if(!email || !email.includes('@')){ msg.style.color='#e84040'; msg.textContent='Vui lòng nhập Gmail hợp lệ.'; return; }
-  // Tìm account theo email (ưu tiên) hoặc username
-  const acc = ACCOUNTS.find(a =>
-    (a.email && a.email.toLowerCase()===email.toLowerCase()) ||
-    a.username===email
-  );
-  if(!acc){
-    msg.style.color='#e84040';
-    msg.textContent='Không tìm thấy tài khoản với Gmail này. Hãy kiểm tra lại hoặc tạo tài khoản mới.';
-    return;
-  }
-  try {
-    msg.style.color='var(--text2)'; msg.textContent='Đang gửi...';
-    const targetEmail = acc.email || email;
-    const resetHtml = `
-      <h2 style="margin:0 0 16px;font-size:20px;font-weight:800;color:#0a0a0a;">Khôi phục mật khẩu</h2>
-      <p style="margin:0 0 20px;">Xin chào <strong>${acc.name || acc.username}</strong>,</p>
-      <p style="margin:0 0 20px;">Bạn (hoặc ai đó) vừa yêu cầu lấy lại mật khẩu cho tài khoản VDAPP của mình. Dưới đây là thông tin đăng nhập:</p>
-      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f9f9f9;border-radius:10px;margin:0 0 24px;">
-        <tr>
-          <td style="padding:16px 20px;border-bottom:1px solid #ececec;font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#777777;">Tài khoản</td>
-        </tr>
-        <tr>
-          <td style="padding:16px 20px;font-size:15px;font-weight:600;color:#0a0a0a;">${targetEmail}</td>
-        </tr>
-        <tr>
-          <td style="padding:16px 20px;border-top:1px solid #ececec;border-bottom:1px solid #ececec;font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#777777;">Mật khẩu</td>
-        </tr>
-        <tr>
-          <td style="padding:16px 20px;font-size:18px;font-weight:800;color:#b88a00;letter-spacing:1px;">${acc.password}</td>
-        </tr>
-      </table>
-      <p style="margin:0 0 8px;font-size:13px;color:#777777;">Vì lý do bảo mật, bạn nên đăng nhập và đổi mật khẩu ngay sau khi nhận được email này.</p>
-      <div style="text-align:center;margin-top:28px;">
-        <a href="https://vdapp.io.vn" style="display:inline-block;padding:14px 32px;background:linear-gradient(135deg,#b88a00,#e0af1a);color:#050d1a;border-radius:980px;font-weight:700;font-size:14px;text-decoration:none;">Đăng nhập ngay</a>
-      </div>
-      <p style="margin:24px 0 0;font-size:12px;color:#aaaaaa;">Nếu bạn không yêu cầu email này, vui lòng bỏ qua hoặc liên hệ chúng tôi qua Zalo.</p>
-    `;
-    await API.post({action:'sendResetEmail', data:{email: targetEmail, subject: '[VDAPP] Khôi phục mật khẩu tài khoản', htmlBody: resetHtml}});
-    msg.style.color='#34c759';
-    msg.innerHTML='✅ Đã gửi mật khẩu về <strong>'+targetEmail+'</strong>. Kiểm tra hộp thư (kể cả Spam).';
-  } catch(e){
-    msg.style.color='var(--text2)';
-    msg.textContent='Gửi thất bại. Liên hệ admin qua Zalo: 0946770648';
-  }
-}
-
 // ═══ TOAST ═══
 function showToast(msg,type='info'){
   let t = document.getElementById('toastEl');
@@ -3852,60 +3726,6 @@ function closeLogin(){ document.getElementById('loginOverlay').classList.remove(
 
 function openAdminLogin(){ closeLogin(); document.getElementById('adminLoginOverlay').classList.add('open'); }
 
-function switchLoginTab(tab,btn){
-  document.querySelectorAll('.ltab').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById('loginFormDiv').style.display=tab==='login'?'':'none';
-  document.getElementById('registerFormDiv').style.display=tab==='register'?'':'none';
-  document.getElementById('loginErr').textContent='';
-  document.getElementById('loginOk').textContent='';
-}
-
-async function doLogin(){
-  const isPhoneMode = _loginMode === 'phone';
-  const emailOrUser = isPhoneMode
-    ? document.getElementById('loginPhoneInput').value.trim()
-    : document.getElementById('loginUser').value.trim();
-  const p = document.getElementById('loginPass').value;
-  const remember = document.getElementById('rememberMe')?.checked;
-  const btn = document.querySelector('#loginFormDiv .btn-login-submit');
-  const err = document.getElementById('loginErr');
-  if(!emailOrUser||!p){ err.textContent='Vui lòng nhập đầy đủ'; return; }
-  btn.disabled=true; btn.innerHTML='<i class="bi bi-hourglass-split"></i> Đang đăng nhập...';
-  await new Promise(r=>setTimeout(r,300));
-
-  // Tìm theo SĐT, hoặc email (ưu tiên), hoặc username (backward compat)
-  let acc = ACCOUNTS.find(a => {
-    const matchLogin = isPhoneMode
-      ? (a.phone && a.phone === emailOrUser)
-      : ((a.email && a.email.toLowerCase()===emailOrUser.toLowerCase()) || a.username===emailOrUser);
-    return matchLogin && String(a.password)===String(p);
-  });
-  btn.disabled=false; btn.innerHTML='<i class="bi bi-box-arrow-in-right"></i> Đăng nhập';
-
-  if(!acc){
-    const exists = ACCOUNTS.find(a => isPhoneMode
-      ? (a.phone && a.phone === emailOrUser)
-      : ((a.email && a.email.toLowerCase()===emailOrUser.toLowerCase()) || a.username===emailOrUser)
-    );
-    if(exists){
-      err.innerHTML = isPhoneMode
-        ? 'Mật khẩu không đúng.'
-        : 'Mật khẩu không đúng. <a href="#" onclick="showForgotPass()" style="color:var(--gold);font-weight:700;">Quên mật khẩu?</a>';
-    } else {
-      err.textContent = isPhoneMode ? 'Không tìm thấy tài khoản với số này.' : 'Không tìm thấy tài khoản với Gmail này.';
-    }
-    return;
-  }
-
-  currentUser = acc;
-  if(remember) LS.set('session',{username:acc.username});
-  closeLogin();
-  renderNavUser();
-  showToast('Đăng nhập thành công! Chào '+acc.name+' 👋','success');
-  if(acc.role==='admin') openAdmin();
-}
-
 function doAdminLogin(){
   const p=document.getElementById('adminLoginPass').value;
   if(p!==SETTINGS.adminPass){ document.getElementById('adminLoginErr').textContent='Mật khẩu không đúng'; return; }
@@ -3917,72 +3737,6 @@ function doAdminLogin(){
     if(adm){ currentUser=adm; renderNavUser(); }
   }
   openAdmin();
-}
-
-function checkEmailExists(val){
-  // Live check khi nhập email — hiện thông báo nếu đã tồn tại
-  const msg = document.getElementById('regEmailMsg');
-  if(!msg) return;
-  const v = val.trim().toLowerCase();
-  if(!v || !v.includes('@')){ msg.textContent=''; return; }
-  const exists = ACCOUNTS.find(a => a.email && a.email.toLowerCase()===v);
-  if(exists){
-    msg.innerHTML='<span style="color:#FFA500;font-weight:600;"><i class="bi bi-exclamation-circle-fill"></i> Gmail này đã có tài khoản. <a href="#" onclick="_switchToLogin(this)" data-email="'+v+'" style="color:var(--gold);font-weight:700;">Đăng nhập ngay →</a> hoặc <a href="#" onclick="showForgotPass()" style="color:var(--gold);font-weight:700;">quên mật khẩu?</a></span>';
-  } else if(v.includes('@')){
-    msg.innerHTML='<span style="color:#34c759;"><i class="bi bi-check-circle-fill"></i> Gmail hợp lệ</span>';
-  }
-}
-
-function doRegister(){
-  const isPhoneMode = _regMode === 'phone';
-  const name  = document.getElementById('regName').value.trim();
-  const email = document.getElementById('regEmail').value.trim();
-  const phone = document.getElementById('regPhone').value.trim();
-  const pass  = document.getElementById('regPass').value;
-  const err   = document.getElementById('loginErr');
-  const ok    = document.getElementById('loginOk');
-  err.textContent=''; ok.textContent='';
-
-  // Validation
-  if(!name)  { err.textContent='Vui lòng nhập họ và tên'; document.getElementById('regName').focus(); return; }
-  if(!isPhoneMode){
-    if(!email || !email.includes('@')){ err.textContent='Vui lòng nhập Gmail hợp lệ'; document.getElementById('regEmail').focus(); return; }
-  }
-  if(!phone) { err.textContent = isPhoneMode ? 'Vui lòng nhập số điện thoại' : 'Vui lòng nhập số điện thoại / Zalo'; document.getElementById('regPhone').focus(); return; }
-  if(!pass)  { err.textContent='Vui lòng nhập mật khẩu'; document.getElementById('regPass').focus(); return; }
-  if(pass.length<6){ err.textContent='Mật khẩu tối thiểu 6 ký tự'; return; }
-
-  if(isPhoneMode){
-    if(ACCOUNTS.find(a => a.phone && a.phone === phone)){
-      err.innerHTML='Số này đã có tài khoản. <a href="#" onclick="_switchToLoginPhone(this)" data-phone="'+phone+'" style="color:var(--gold);font-weight:700;">Đăng nhập ngay →</a>';
-      return;
-    }
-  } else {
-    if(ACCOUNTS.find(a => a.email && a.email.toLowerCase()===email.toLowerCase())){
-      err.innerHTML='Gmail này đã có tài khoản. <a href="#" onclick="_switchToLogin(this)" data-email="'+email+'" style="color:var(--gold);font-weight:700;">Đăng nhập ngay →</a> hoặc <a href="#" onclick="showForgotPass()" style="color:var(--gold);font-weight:700;">quên mật khẩu?</a>';
-      return;
-    }
-  }
-
-  let username = isPhoneMode
-    ? ('u'+phone.replace(/[^0-9]/g,''))
-    : email.split('@')[0].toLowerCase().replace(/[^a-z0-9]/g,'_');
-  if(ACCOUNTS.find(a=>a.username===username)) username = username+'_'+Math.floor(Math.random()*9000+1000);
-
-  const acc = {
-    username, password:String(pass),
-    name, phone, email: isPhoneMode ? '' : email,
-    role:'user', purchases:[],
-    createdAt: new Date().toLocaleDateString('vi-VN'),
-    memberType:'free', memberExpiry:null
-  };
-  ACCOUNTS.push(acc);
-  saveAccounts();
-  currentUser = acc;
-  LS.set('session',{username:acc.username});
-  closeLogin();
-  renderNavUser();
-  showToast('Đăng ký thành công! Chào mừng '+name+' 🎉','success');
 }
 
 function logout(){
@@ -4693,7 +4447,6 @@ function restorePayState(){
 }
 
 function startProductPayment(){
-  if(!currentUser){ closeProdModalNew(); openLogin(); showToast('Vui lòng đăng nhập để mua hàng','info'); return; }
   const p=PRODUCTS.find(x=>String(x.id)===String(_activeProdId)); if(!p) return;
   closeProdModalNew();
   openPayment({type:'product',productId:p.id,name:p.name.includes('|')?p.name.split('|')[1].trim():p.name,price:p.price,versions:p.versions,free:p.free,selectedVer:_activeVer||p.versions[0]||''});
@@ -4702,7 +4455,6 @@ function startProductPayment(){
 function openProductPayment(){ startProductPayment(); }
 
 function openPayment(opts){
-  if(!currentUser){ openLogin(); showToast('Vui lòng đăng nhập để mua hàng','info'); return; }
   PAY={...PAY,...opts,step:1,_orderCreated:false,_orderId:null};
   if(PAY.type==='product'&&PAY.versions&&PAY.versions.length>0){
     if(!PAY.selectedVer) PAY.selectedVer=PAY.versions[0];
@@ -4721,9 +4473,11 @@ document.getElementById('payOverlay').addEventListener('click',function(e){ if(e
 function payNext(){
   if(PAY.step===1&&PAY.type==='product') PAY.price=PRODUCTS.find(x=>String(x.id)===String(PAY.productId))?.price||PAY.price;
   if(PAY.step===2){
-    const nm=document.getElementById('pBuyerName').value.trim();
+    const em=document.getElementById('pBuyerEmail').value.trim();
     const ph=document.getElementById('pBuyerPhone').value.trim();
-    if(!nm||!ph){ showToast('Vui lòng nhập họ tên và số điện thoại','error'); return; }
+    if(!em || !em.includes('@')){ showToast('Vui lòng nhập Gmail hợp lệ','error'); return; }
+    if(!ph){ showToast('Vui lòng nhập số điện thoại','error'); return; }
+    ensureGuestAccount(em, ph); // tự tạo/gán tài khoản theo Gmail, không cần mật khẩu
     if(PAY.price===0){ createOrder(); goToWaitStep(); return; }
     createOrder();   // tạo đơn NGAY để có mã đơn nhúng vào nội dung chuyển khoản
     buildQRStep();
@@ -4733,6 +4487,31 @@ function payNext(){
   PAY.step++;
   savePayState();
   renderPayStep();
+}
+
+// Tự động tạo tài khoản "khách" theo Gmail nếu chưa có, hoặc dùng lại tài khoản cũ nếu Gmail đã tồn tại.
+// Không yêu cầu mật khẩu — chỉ dùng để gắn đơn hàng vào đúng người, xem lại qua Google Sign-In sau này.
+function ensureGuestAccount(email, phone){
+  let acc = ACCOUNTS.find(a => a.email && a.email.toLowerCase() === email.toLowerCase());
+  if(!acc){
+    let username = email.split('@')[0].toLowerCase().replace(/[^a-z0-9]/g,'_');
+    if(ACCOUNTS.find(a=>a.username===username)) username = username+'_'+Math.floor(Math.random()*9000+1000);
+    acc = {
+      username, password: Math.random().toString(36).slice(2,12), // mật khẩu ngẫu nhiên, không dùng tới
+      name: email.split('@')[0], phone, email,
+      role:'user', purchases:[],
+      createdAt: new Date().toLocaleDateString('vi-VN'),
+      memberType:'free', memberExpiry:null
+    };
+    ACCOUNTS.push(acc);
+    saveAccounts();
+  } else if(phone && acc.phone !== phone){
+    acc.phone = phone; // cập nhật SĐT mới nhất nếu khách đổi số
+    saveAccounts();
+  }
+  currentUser = acc;
+  LS.set('session', {username: acc.username});
+  renderNavUser();
 }
 function payPrev(){ if(PAY.step<=1) return; PAY.step--; savePayState(); renderPayStep(); }
 
@@ -4755,9 +4534,7 @@ function renderPayStep(){
   if(PAY.step===1) renderStep1();
   else if(PAY.step===2){
     if(currentUser){
-      document.getElementById('pBuyerName').value=currentUser.name||'';
       document.getElementById('pBuyerPhone').value=currentUser.phone||'';
-      // Auto-fill email từ tài khoản
       const emailInp = document.getElementById('pBuyerEmail');
       if(emailInp && currentUser.email){
         emailInp.value = currentUser.email;
@@ -4878,9 +4655,9 @@ function buildWaitStep(){
 
 function createOrder(){
   if(PAY._orderCreated) return; // chống tạo trùng nếu bấm nhiều lần / quay lại bước trước rồi tiến tới
-  const nm=document.getElementById('pBuyerName').value.trim()||'Khách';
-  const ph=document.getElementById('pBuyerPhone').value.trim()||'—';
   const em=document.getElementById('pBuyerEmail').value.trim();
+  const nm=currentUser?.name || em.split('@')[0] || 'Khách';
+  const ph=document.getElementById('pBuyerPhone').value.trim()||'—';
   const orderId=Date.now();
   const orderCode='DH'+String(orderId).slice(-6);
   const _prod = PRODUCTS.find(x=>String(x.id)===String(PAY.productId));
