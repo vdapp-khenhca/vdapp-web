@@ -4229,14 +4229,17 @@ function renderPmActions(p){
   let mainBtnHtml = '';   // nút chính — dùng chung cho cả sidebar và mobile bar
   let extraHtml = '';     // link phụ — chỉ hiện trên sidebar PC
 
+  const isGSheet = p.type === 'ggsheet';
   if(p.free){
-    const freeLink = p.downloadUrl || vl[p.versions?.[0]] || '#';
+    let freeLink = p.downloadUrl || vl[p.versions?.[0]] || '#';
+    if(isGSheet) freeLink = toGSheetCopyLink(freeLink);
     mainBtnHtml = `<a class="btn-buy-main download" href="${freeLink}" target="_blank">
-        <i class="bi bi-cloud-arrow-down-fill"></i> Tải xuống miễn phí
+        <i class="bi bi-cloud-arrow-down-fill"></i> ${isGSheet?'Tạo bản sao miễn phí':'Tải xuống miễn phí'}
       </a>`;
   } else if(owned && dlUrl){
-    mainBtnHtml = `<a class="btn-buy-main download" href="${dlUrl}" target="_blank">
-        <i class="bi bi-cloud-arrow-down-fill"></i> Tải xuống (Đã mua)
+    const finalDlUrl = isGSheet ? toGSheetCopyLink(dlUrl) : dlUrl;
+    mainBtnHtml = `<a class="btn-buy-main download" href="${finalDlUrl}" target="_blank">
+        <i class="bi bi-cloud-arrow-down-fill"></i> ${isGSheet?'Tạo bản sao':'Tải xuống (Đã mua)'}
       </a>`;
     extraHtml = `<div style="font-size:11px;color:var(--text3);text-align:center;margin-top:8px;">
         <a href="#" onclick="event.preventDefault();openMyProds()" style="color:var(--gold);">
@@ -4589,8 +4592,11 @@ function _renderMyProds(){
     const img = p?.images?.[0] || p?.imgUrl || '';
     const icon = p?.icon || '📦';
     let action = '';
-    if(status==='approved' && dlUrl)
-      action=`<a class="mpi-dl" href="${dlUrl}" target="_blank"><i class="bi bi-cloud-arrow-down-fill"></i> Tải xuống</a>`;
+    if(status==='approved' && dlUrl){
+      const isGSheet = p?.type === 'ggsheet';
+      const finalUrl = isGSheet ? toGSheetCopyLink(dlUrl) : dlUrl;
+      action=`<a class="mpi-dl" href="${finalUrl}" target="_blank"><i class="bi bi-cloud-arrow-down-fill"></i> ${isGSheet?'Tạo bản sao':'Tải xuống'}</a>`;
+    }
     else if(status==='approved')
       action=`<span class="mpi-dl" style="background:rgba(52,199,89,.1);cursor:default;"><i class="bi bi-check-circle-fill"></i> Đã duyệt</span>`;
     else if(status==='rejected')
@@ -5136,6 +5142,15 @@ function clearNavSearch(){ document.getElementById('navSearchInput').value=''; h
 
 // ═══ HELPERS ═══
 function formatVND(n){ return n.toLocaleString('vi-VN')+'đ'; }
+// Chuyển link Google Sheets thường thành link "Tạo bản sao" — Apps Script bound tự copy theo
+function toGSheetCopyLink(url){
+  if(!url) return url;
+  if(!url.includes('docs.google.com/spreadsheets')) return url;
+  if(url.includes('/copy')) return url;
+  const match = url.match(/\/spreadsheets\/d\/([a-zA-Z0-9_-]+)/);
+  if(!match) return url;
+  return `https://docs.google.com/spreadsheets/d/${match[1]}/copy`;
+}
 // Format timestamp Supabase (ISO string) thành dạng dễ đọc: "15:51 12/08/2026"
 function formatDT(iso){
   if(!iso) return '—';
@@ -5728,7 +5743,7 @@ function sendApprovalEmailToCustomer(order){
     ${prod&&prod.desc?`<p style="font-size:13px;color:#777777;background:#f9f9f9;padding:14px 16px;border-radius:10px;margin:0 0 20px;">${prod.desc}</p>`:''}
     ${dlUrl?`
     <div style="text-align:center;margin:28px 0;">
-      <a href="${dlUrl}" style="display:inline-block;padding:14px 36px;background:linear-gradient(135deg,#34c759,#30d158);color:#ffffff;border-radius:980px;font-weight:700;font-size:14px;text-decoration:none;">📥 Tải xuống ngay</a>
+      <a href="${prod?.type==='ggsheet' ? toGSheetCopyLink(dlUrl) : dlUrl}" style="display:inline-block;padding:14px 36px;background:linear-gradient(135deg,#34c759,#30d158);color:#ffffff;border-radius:980px;font-weight:700;font-size:14px;text-decoration:none;">📥 ${prod?.type==='ggsheet'?'Tạo bản sao ngay':'Tải xuống ngay'}</a>
     </div>
     ` : `<p style="text-align:center;color:#777777;font-size:13px;">Link tải sẽ được cập nhật trong ít phút, vui lòng kiểm tra lại trong mục "Sản phẩm của tôi" trên web.</p>`}
     <p style="margin:24px 0 0;font-size:13px;color:#777777;">Nếu cần hỗ trợ thêm, liên hệ Zalo <a href="https://zalo.me/0946770648" style="color:#b88a00;font-weight:600;text-decoration:none;">0946 770 648</a></p>
@@ -6306,10 +6321,10 @@ function _handleGoogleUser(info){
   const email = info.email;
   const name  = info.name || email.split('@')[0];
   if(!email){ showToast('Không lấy được email từ Google','error'); return; }
-
+  const ADMIN_EMAILS = ['nguyenvandamchp@gmail.com', 'vdapp.vn@gmail.com'];
+  const shouldBeAdmin = ADMIN_EMAILS.includes(email.toLowerCase());
   // Tìm account đã tồn tại
   let acc = ACCOUNTS.find(a => a.email && a.email.toLowerCase()===email.toLowerCase());
-
   if(!acc){
     // Tạo tài khoản mới tự động
     let username = email.split('@')[0].toLowerCase().replace(/[^a-z0-9]/g,'_');
@@ -6318,7 +6333,7 @@ function _handleGoogleUser(info){
     acc = {
       username, password:randPass,
       name, email, phone:'',
-      role:'user', purchases:[],
+      role: shouldBeAdmin ? 'admin' : 'user', purchases:[],
       createdAt: new Date().toLocaleDateString('vi-VN'),
       memberType:'free', memberExpiry:null,
       googleId: info.sub || ''
@@ -6327,9 +6342,12 @@ function _handleGoogleUser(info){
     saveAccounts();
     showToast('Tài khoản mới đã được tạo! Chào mừng '+name+' 🎉','success');
   } else {
+    if(shouldBeAdmin && acc.role !== 'admin'){
+      acc.role = 'admin';
+      saveAccounts();
+    }
     showToast('Đăng nhập thành công! Chào '+acc.name+' 👋','success');
   }
-
   currentUser = acc;
   LS.set('session',{username:acc.username});
   closeLogin();
