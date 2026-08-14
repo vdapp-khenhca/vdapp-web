@@ -1849,6 +1849,28 @@ select, textarea {
 <!-- PARTICLE CANVAS -->
 <canvas id="particles-canvas"></canvas>
 
+<!-- ZALO FLOATING BUTTON -->
+<a href="https://zalo.me/0946770648" target="_blank" rel="noopener" id="zaloFloatBtn"
+  style="position:fixed;right:22px;bottom:22px;z-index:9990;width:58px;height:58px;border-radius:50%;
+    background:#0068FF;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 6px 24px rgba(0,104,255,.45);text-decoration:none;
+    animation:zaloPulse 2.2s ease-in-out infinite;transition:transform .2s;"
+  onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'"
+  title="Chat Zalo với VDAPP">
+  <svg width="30" height="30" viewBox="0 0 48 48" fill="none">
+    <text x="50%" y="58%" dominant-baseline="middle" text-anchor="middle" fill="#fff" font-size="22" font-weight="900" font-family="Arial">Z</text>
+  </svg>
+</a>
+<style>
+@keyframes zaloPulse {
+  0%,100% { box-shadow:0 6px 24px rgba(0,104,255,.45), 0 0 0 0 rgba(0,104,255,.5); }
+  50%      { box-shadow:0 6px 24px rgba(0,104,255,.45), 0 0 0 12px rgba(0,104,255,0); }
+}
+@media(max-width:600px){
+  #zaloFloatBtn{ right:14px; bottom:88px; width:52px; height:52px; }
+}
+</style>
+
 <!-- NAV -->
 <nav>
   <a href="#" class="logo">
@@ -1911,9 +1933,20 @@ select, textarea {
 
     <!-- Login form -->
     <div id="loginFormDiv">
-      <div class="form-field">
+      <div style="display:flex;gap:0;margin-bottom:14px;background:var(--bg3);border-radius:9px;padding:3px;">
+        <button type="button" id="loginModeEmailBtn" onclick="setLoginMode('email')"
+          style="flex:1;padding:7px;border:none;background:var(--gold);color:#050d1a;border-radius:7px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:var(--font);">Gmail</button>
+        <button type="button" id="loginModePhoneBtn" onclick="setLoginMode('phone')"
+          style="flex:1;padding:7px;border:none;background:transparent;color:var(--text2);border-radius:7px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:var(--font);">Số điện thoại</button>
+      </div>
+      <div class="form-field" id="loginEmailField">
         <label>Gmail</label>
         <input type="email" id="loginUser" placeholder="example@gmail.com" autocomplete="email"
+          onkeydown="if(event.key==='Enter')document.getElementById('loginPass').focus()">
+      </div>
+      <div class="form-field" id="loginPhoneField" style="display:none;">
+        <label>Số điện thoại</label>
+        <input type="tel" id="loginPhoneInput" placeholder="0901234567" autocomplete="tel"
           onkeydown="if(event.key==='Enter')document.getElementById('loginPass').focus()">
       </div>
       <div class="form-field">
@@ -1950,12 +1983,18 @@ select, textarea {
 
     <!-- Register form -->
     <div id="registerFormDiv" style="display:none;">
+      <div style="display:flex;gap:0;margin-bottom:14px;background:var(--bg3);border-radius:9px;padding:3px;">
+        <button type="button" id="regModeEmailBtn" onclick="setRegMode('email')"
+          style="flex:1;padding:7px;border:none;background:var(--gold);color:#050d1a;border-radius:7px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:var(--font);">Đăng ký bằng Gmail</button>
+        <button type="button" id="regModePhoneBtn" onclick="setRegMode('phone')"
+          style="flex:1;padding:7px;border:none;background:transparent;color:var(--text2);border-radius:7px;font-size:12.5px;font-weight:600;cursor:pointer;font-family:var(--font);">Đăng ký bằng SĐT</button>
+      </div>
       <div class="form-field">
         <label>Họ và tên <span style="color:#e84040;">*</span></label>
         <input type="text" id="regName" placeholder="Nguyễn Văn A"
           onkeydown="if(event.key==='Enter')document.getElementById('regEmail').focus()">
       </div>
-      <div class="form-field">
+      <div class="form-field" id="regEmailField">
         <label>Gmail <span style="color:#e84040;">*</span></label>
         <input type="email" id="regEmail" placeholder="example@gmail.com" autocomplete="email"
           onkeydown="if(event.key==='Enter')document.getElementById('regPhone').focus()"
@@ -1963,9 +2002,11 @@ select, textarea {
         <div id="regEmailMsg" style="font-size:11.5px;margin-top:5px;min-height:16px;"></div>
       </div>
       <div class="form-field">
-        <label>Số điện thoại / Zalo <span style="color:#e84040;">*</span></label>
+        <label id="regPhoneLabel">Số điện thoại / Zalo <span style="color:#e84040;">*</span></label>
         <input type="tel" id="regPhone" placeholder="0901234567"
-          onkeydown="if(event.key==='Enter')document.getElementById('regPass').focus()">
+          onkeydown="if(event.key==='Enter')document.getElementById('regPass').focus()"
+          oninput="if(_regMode==='phone')checkPhoneExists(this.value)">
+        <div id="regPhoneMsg" style="font-size:11.5px;margin-top:5px;min-height:16px;"></div>
       </div>
       <div class="form-field">
         <label>Mật khẩu <span style="color:#e84040;">*</span></label>
@@ -3646,6 +3687,70 @@ function _switchToLogin(el){
   var inp = document.getElementById('loginUser');
   if(inp && email) inp.value = email;
 }
+
+// ── Login mode: email / phone ──
+let _loginMode = 'email';
+function setLoginMode(mode){
+  _loginMode = mode;
+  const emailBtn = document.getElementById('loginModeEmailBtn');
+  const phoneBtn = document.getElementById('loginModePhoneBtn');
+  const emailField = document.getElementById('loginEmailField');
+  const phoneField = document.getElementById('loginPhoneField');
+  if(mode === 'email'){
+    emailBtn.style.background = 'var(--gold)'; emailBtn.style.color = '#050d1a'; emailBtn.style.fontWeight = '700';
+    phoneBtn.style.background = 'transparent'; phoneBtn.style.color = 'var(--text2)'; phoneBtn.style.fontWeight = '600';
+    emailField.style.display = ''; phoneField.style.display = 'none';
+  } else {
+    phoneBtn.style.background = 'var(--gold)'; phoneBtn.style.color = '#050d1a'; phoneBtn.style.fontWeight = '700';
+    emailBtn.style.background = 'transparent'; emailBtn.style.color = 'var(--text2)'; emailBtn.style.fontWeight = '600';
+    phoneField.style.display = ''; emailField.style.display = 'none';
+  }
+  document.getElementById('loginErr').textContent = '';
+}
+
+// ── Register mode: email / phone ──
+let _regMode = 'email';
+function setRegMode(mode){
+  _regMode = mode;
+  const emailBtn = document.getElementById('regModeEmailBtn');
+  const phoneBtn = document.getElementById('regModePhoneBtn');
+  const emailField = document.getElementById('regEmailField');
+  const phoneLabel = document.getElementById('regPhoneLabel');
+  if(mode === 'email'){
+    emailBtn.style.background = 'var(--gold)'; emailBtn.style.color = '#050d1a'; emailBtn.style.fontWeight = '700';
+    phoneBtn.style.background = 'transparent'; phoneBtn.style.color = 'var(--text2)'; phoneBtn.style.fontWeight = '600';
+    emailField.style.display = '';
+    phoneLabel.innerHTML = 'Số điện thoại / Zalo <span style="color:#e84040;">*</span>';
+    document.getElementById('regPhoneMsg').innerHTML = '';
+  } else {
+    phoneBtn.style.background = 'var(--gold)'; phoneBtn.style.color = '#050d1a'; phoneBtn.style.fontWeight = '700';
+    emailBtn.style.background = 'transparent'; emailBtn.style.color = 'var(--text2)'; emailBtn.style.fontWeight = '600';
+    emailField.style.display = 'none';
+    phoneLabel.innerHTML = 'Số điện thoại (dùng để đăng nhập) <span style="color:#e84040;">*</span>';
+    document.getElementById('regEmailMsg').innerHTML = '';
+  }
+  document.getElementById('loginErr').textContent = '';
+}
+
+function checkPhoneExists(val){
+  const msg = document.getElementById('regPhoneMsg');
+  if(!msg) return;
+  const v = val.trim();
+  if(!v){ msg.textContent=''; return; }
+  const exists = ACCOUNTS.find(a => a.phone && a.phone===v);
+  if(exists){
+    msg.innerHTML='<span style="color:#FFA500;font-weight:600;"><i class="bi bi-exclamation-circle-fill"></i> Số này đã có tài khoản. <a href="#" onclick="_switchToLoginPhone(this)" data-phone="'+v+'" style="color:var(--gold);font-weight:700;">Đăng nhập ngay →</a></span>';
+  } else if(v.length>=9){
+    msg.innerHTML='<span style="color:#34c759;"><i class="bi bi-check-circle-fill"></i> Có thể dùng số này</span>';
+  }
+}
+function _switchToLoginPhone(el){
+  var phone = el ? el.getAttribute('data-phone') : '';
+  switchLoginTab('login', document.querySelectorAll('.ltab')[0]);
+  setLoginMode('phone');
+  var inp = document.getElementById('loginPhoneInput');
+  if(inp && phone) inp.value = phone;
+}
 function showForgotPass(){
   const d = document.getElementById('forgotPassDiv');
   if(d) d.style.display = d.style.display==='none' ? 'block' : 'none';
@@ -3699,7 +3804,11 @@ function toggleTheme(){
 }
 
 // ═══ AUTH ═══
-function openLogin(){ document.getElementById('loginOverlay').classList.add('open'); }
+function openLogin(){
+  document.getElementById('loginOverlay').classList.add('open');
+  setLoginMode('email');
+  setRegMode('email');
+}
 function closeLogin(){ document.getElementById('loginOverlay').classList.remove('open'); document.getElementById('loginErr').textContent=''; document.getElementById('loginOk').textContent=''; }
 // loginOverlay listener — element exists in DOM above
 
@@ -3715,7 +3824,10 @@ function switchLoginTab(tab,btn){
 }
 
 async function doLogin(){
-  const emailOrUser = document.getElementById('loginUser').value.trim();
+  const isPhoneMode = _loginMode === 'phone';
+  const emailOrUser = isPhoneMode
+    ? document.getElementById('loginPhoneInput').value.trim()
+    : document.getElementById('loginUser').value.trim();
   const p = document.getElementById('loginPass').value;
   const remember = document.getElementById('rememberMe')?.checked;
   const btn = document.querySelector('#loginFormDiv .btn-login-submit');
@@ -3724,22 +3836,26 @@ async function doLogin(){
   btn.disabled=true; btn.innerHTML='<i class="bi bi-hourglass-split"></i> Đang đăng nhập...';
   await new Promise(r=>setTimeout(r,300));
 
-  // Tìm theo email (ưu tiên) hoặc username (backward compat)
-  let acc = ACCOUNTS.find(a =>
-    ((a.email && a.email.toLowerCase()===emailOrUser.toLowerCase()) || a.username===emailOrUser)
-    && String(a.password)===String(p)
-  );
+  // Tìm theo SĐT, hoặc email (ưu tiên), hoặc username (backward compat)
+  let acc = ACCOUNTS.find(a => {
+    const matchLogin = isPhoneMode
+      ? (a.phone && a.phone === emailOrUser)
+      : ((a.email && a.email.toLowerCase()===emailOrUser.toLowerCase()) || a.username===emailOrUser);
+    return matchLogin && String(a.password)===String(p);
+  });
   btn.disabled=false; btn.innerHTML='<i class="bi bi-box-arrow-in-right"></i> Đăng nhập';
 
   if(!acc){
-    // Kiểm tra xem email có tồn tại không — để gợi ý "quên mật khẩu"
-    const emailExists = ACCOUNTS.find(a =>
-      (a.email && a.email.toLowerCase()===emailOrUser.toLowerCase()) || a.username===emailOrUser
+    const exists = ACCOUNTS.find(a => isPhoneMode
+      ? (a.phone && a.phone === emailOrUser)
+      : ((a.email && a.email.toLowerCase()===emailOrUser.toLowerCase()) || a.username===emailOrUser)
     );
-    if(emailExists){
-      err.innerHTML='Mật khẩu không đúng. <a href="#" onclick="showForgotPass()" style="color:var(--gold);font-weight:700;">Quên mật khẩu?</a>';
+    if(exists){
+      err.innerHTML = isPhoneMode
+        ? 'Mật khẩu không đúng.'
+        : 'Mật khẩu không đúng. <a href="#" onclick="showForgotPass()" style="color:var(--gold);font-weight:700;">Quên mật khẩu?</a>';
     } else {
-      err.textContent='Không tìm thấy tài khoản với Gmail này.';
+      err.textContent = isPhoneMode ? 'Không tìm thấy tài khoản với số này.' : 'Không tìm thấy tài khoản với Gmail này.';
     }
     return;
   }
@@ -3780,6 +3896,7 @@ function checkEmailExists(val){
 }
 
 function doRegister(){
+  const isPhoneMode = _regMode === 'phone';
   const name  = document.getElementById('regName').value.trim();
   const email = document.getElementById('regEmail').value.trim();
   const phone = document.getElementById('regPhone').value.trim();
@@ -3790,25 +3907,33 @@ function doRegister(){
 
   // Validation
   if(!name)  { err.textContent='Vui lòng nhập họ và tên'; document.getElementById('regName').focus(); return; }
-  if(!email || !email.includes('@')){ err.textContent='Vui lòng nhập Gmail hợp lệ'; document.getElementById('regEmail').focus(); return; }
-  if(!phone) { err.textContent='Vui lòng nhập số điện thoại / Zalo'; document.getElementById('regPhone').focus(); return; }
+  if(!isPhoneMode){
+    if(!email || !email.includes('@')){ err.textContent='Vui lòng nhập Gmail hợp lệ'; document.getElementById('regEmail').focus(); return; }
+  }
+  if(!phone) { err.textContent = isPhoneMode ? 'Vui lòng nhập số điện thoại' : 'Vui lòng nhập số điện thoại / Zalo'; document.getElementById('regPhone').focus(); return; }
   if(!pass)  { err.textContent='Vui lòng nhập mật khẩu'; document.getElementById('regPass').focus(); return; }
   if(pass.length<6){ err.textContent='Mật khẩu tối thiểu 6 ký tự'; return; }
 
-  // Kiểm tra email đã tồn tại chưa
-  if(ACCOUNTS.find(a => a.email && a.email.toLowerCase()===email.toLowerCase())){
-    err.innerHTML='Gmail này đã có tài khoản. <a href="#" onclick="_switchToLogin(this)" data-email="'+email+'" style="color:var(--gold);font-weight:700;">Đăng nhập ngay →</a> hoặc <a href="#" onclick="showForgotPass()" style="color:var(--gold);font-weight:700;">quên mật khẩu?</a>';
-    return;
+  if(isPhoneMode){
+    if(ACCOUNTS.find(a => a.phone && a.phone === phone)){
+      err.innerHTML='Số này đã có tài khoản. <a href="#" onclick="_switchToLoginPhone(this)" data-phone="'+phone+'" style="color:var(--gold);font-weight:700;">Đăng nhập ngay →</a>';
+      return;
+    }
+  } else {
+    if(ACCOUNTS.find(a => a.email && a.email.toLowerCase()===email.toLowerCase())){
+      err.innerHTML='Gmail này đã có tài khoản. <a href="#" onclick="_switchToLogin(this)" data-email="'+email+'" style="color:var(--gold);font-weight:700;">Đăng nhập ngay →</a> hoặc <a href="#" onclick="showForgotPass()" style="color:var(--gold);font-weight:700;">quên mật khẩu?</a>';
+      return;
+    }
   }
 
-  // Username = phần trước @ của email, đảm bảo unique
-  let username = email.split('@')[0].toLowerCase().replace(/[^a-z0-9]/g,'_');
-  // Nếu username đã tồn tại thì thêm số ngẫu nhiên
+  let username = isPhoneMode
+    ? ('u'+phone.replace(/[^0-9]/g,''))
+    : email.split('@')[0].toLowerCase().replace(/[^a-z0-9]/g,'_');
   if(ACCOUNTS.find(a=>a.username===username)) username = username+'_'+Math.floor(Math.random()*9000+1000);
 
   const acc = {
     username, password:String(pass),
-    name, phone, email,
+    name, phone, email: isPhoneMode ? '' : email,
     role:'user', purchases:[],
     createdAt: new Date().toLocaleDateString('vi-VN'),
     memberType:'free', memberExpiry:null
