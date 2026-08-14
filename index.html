@@ -4220,12 +4220,10 @@ function renderPmActions(p){
   const owned   = isOwned(p.id);
   const pending = !owned && hasPendingOrder(p.id);
   const vl      = p.versionLinks || {};
-  // Đã mua = sở hữu trọn đời -> luôn ưu tiên link của bản MỚI NHẤT hiện tại của sản phẩm
-  const latestVer = p.versions?.[0] || '';
+  // Đã mua = sở hữu trọn đời mọi version -> tải đúng version đang được CHỌN, không khoá cứng bản mới nhất
+  const selVer  = _activeVer || (p.versions?.[0]||'');
   const myOrder = owned ? getOwnedOrder(p.id) : null;
-  const dlUrl   = owned
-    ? (vl[latestVer] || myOrder?.downloadUrl || '')   // owned -> luôn lấy bản mới nhất từ chính sản phẩm
-    : '';
+  const dlUrl   = owned ? (vl[selVer] || '') : '';
 
   let mainBtnHtml = '';   // nút chính — dùng chung cho cả sidebar và mobile bar
   let extraHtml = '';     // link phụ — chỉ hiện trên sidebar PC
@@ -4241,9 +4239,8 @@ function renderPmActions(p){
   } else if(owned && dlUrl){
     const finalDlUrl = toGSheetCopyLink(dlUrl);
     const isGSheetLink = finalDlUrl !== dlUrl;
-    const isLatest = latestVer && latestVer === (myOrder?.version || '');
     mainBtnHtml = `<a class="btn-buy-main download" href="${finalDlUrl}" target="_blank">
-        <i class="bi bi-cloud-arrow-down-fill"></i> ${isGSheetLink?'Tạo bản sao':'Tải xuống'} ${!isLatest && myOrder?.version ? `(${latestVer} - Cập nhật miễn phí)` : '(Đã mua)'}
+        <i class="bi bi-cloud-arrow-down-fill"></i> ${isGSheetLink?`Tạo bản sao (${selVer})`:`Tải xuống (${selVer})`}
       </a>`;
     extraHtml = `<div style="font-size:11px;color:var(--text3);text-align:center;margin-top:8px;">
         <a href="#" onclick="event.preventDefault();openMyProds()" style="color:var(--gold);">
@@ -4252,7 +4249,7 @@ function renderPmActions(p){
       </div>`;
   } else if(owned){
     mainBtnHtml = `<button class="btn-buy-main pending" disabled>
-        <i class="bi bi-hourglass-split"></i> Đã mua — Chờ admin gửi link
+        <i class="bi bi-hourglass-split"></i> Đã mua — Chưa có link cho ${selVer}
       </button>`;
     extraHtml = `<div style="font-size:11px;color:var(--text3);text-align:center;margin-top:8px;">
         <a href="#" onclick="event.preventDefault();openMyProds()" style="color:var(--gold);">Xem đơn hàng của tôi →</a>
@@ -4303,8 +4300,11 @@ function switchPmTab(tab,btn){
 
 function selectPmVer(ver,btn){
   _activeVer=ver;
-  document.querySelectorAll('#pmVersionsNew .vtag').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('#pmVersionsNew .dver-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
+  // Cập nhật lại nút tải theo version vừa chọn
+  const p = PRODUCTS.find(x=>String(x.id)===String(_activeProdId));
+  if(p) renderPmActions(p);
 }
 
 function closeProdModalNew(){
