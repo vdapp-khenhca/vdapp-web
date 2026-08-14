@@ -18,8 +18,37 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://vdapp.vn">
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" id="biCss1">
+<script>
+(function(){
+  function testLoaded(){
+    var span=document.createElement('span');
+    span.className='bi bi-check';
+    span.style.cssText='position:absolute;visibility:hidden;font-family:"bootstrap-icons"';
+    document.body.appendChild(span);
+    var ok = getComputedStyle(span,'::before').fontFamily.toLowerCase().indexOf('bootstrap-icons')>-1;
+    document.body.removeChild(span);
+    return ok;
+  }
+  function addLink(href){
+    var l=document.createElement('link');
+    l.rel='stylesheet'; l.href=href;
+    document.head.appendChild(l);
+  }
+  window.addEventListener('load', function(){
+    setTimeout(function(){
+      if(!testLoaded()){
+        addLink('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css');
+        setTimeout(function(){
+          if(!testLoaded()){
+            addLink('https://unpkg.com/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css');
+          }
+        }, 600);
+      }
+    }, 400);
+  });
+})();
+</script>
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
 <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
@@ -81,8 +110,8 @@
 
 
 /* ── LIGHT MODE ICON & TEXT FIXES — Aqua Gold ── */
-[data-theme="light"] .fi-icon { background: rgba(0,148,184,0.10); border-color: rgba(0,148,184,0.22); color: var(--accent); }
-[data-theme="light"] .cicon { background: rgba(0,148,184,0.10); border-color: rgba(0,148,184,0.22); color: var(--accent); }
+[data-theme="light"] .fi-icon { background: var(--gold-pale); border-color: var(--border-gold); color: var(--gold); }
+[data-theme="light"] .cicon { background: var(--gold-pale); border-color: var(--border-gold); color: var(--gold); }
 [data-theme="light"] .step-n { color: rgba(0,148,184,0.13); }
 [data-theme="light"] .pcard-type.webapp { color: #0080a0; background: rgba(0,148,184,.09); border-color: rgba(0,148,184,.20); }
 [data-theme="light"] .pcard-type.ggsheet { color: #1a8a3a; background: rgba(26,138,58,.08); border-color: rgba(26,138,58,.18); }
@@ -2342,7 +2371,7 @@ select, textarea {
     <div class="plan-card featured">
       <div class="plan-badge"><i class="bi bi-fire"></i> Phổ biến nhất</div>
       <div class="plan-name">Hội viên năm</div>
-      <div class="plan-price"><sup>đ</sup>499K</div>
+      <div class="plan-price"><sup>đ</sup>499.000</div>
       <div class="plan-period">/ năm — tiết kiệm 60%</div>
       <ul class="plan-features">
         <li><span class="ck"><i class="bi bi-check-circle-fill"></i></span> Toàn bộ webapp & sheets</li>
@@ -2354,7 +2383,7 @@ select, textarea {
     </div>
     <div class="plan-card">
       <div class="plan-name">Vĩnh viễn</div>
-      <div class="plan-price"><sup>đ</sup>999K</div>
+      <div class="plan-price"><sup>đ</sup>999.000</div>
       <div class="plan-period">Một lần, dùng mãi mãi</div>
       <ul class="plan-features">
         <li><span class="ck"><i class="bi bi-check-circle-fill"></i></span> Toàn bộ sản phẩm hiện tại</li>
@@ -4474,7 +4503,7 @@ function openProdNew(id){
           <div style="padding:12px 14px;">
             <div style="font-size:10px;font-weight:700;color:${typeColor};margin-bottom:4px;">${typeLabel} | ${sn.split('(')[0].trim()}</div>
             <div style="font-size:13px;font-weight:600;color:var(--text);line-height:1.4;margin-bottom:8px;">${sn}</div>
-            <div style="font-size:16px;font-weight:700;color:var(--text);">${rp.free?`<span style="color:#34c759;">Miễn phí</span>`:`${(rp.price/1000).toFixed(0)}.000 đ`}</div>
+            <div style="font-size:16px;font-weight:700;color:var(--text);">${rp.free?`<span style="color:#34c759;">Miễn phí</span>`:formatVND(rp.price)}</div>
           </div>
         </div>`;
       }).join('');
