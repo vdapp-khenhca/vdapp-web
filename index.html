@@ -19,6 +19,7 @@
 <link rel="canonical" href="https://vdapp.vn">
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
 <script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
@@ -54,28 +55,28 @@
   --shadow: 0 24px 80px rgba(0,0,0,0.5);
 }
 [data-theme="light"] {
-  /* ── Aqua Gold — Thủy Kim Quý Phái ── */
-  --bg: #f0fafb;
-  --bg2: #dff4fb;
-  --bg3: #c2eaf5;
+  /* ── Ivory Gold — chữ luôn nổi rõ trên nền sáng ── */
+  --bg: #f7f6f2;
+  --bg2: #efece4;
+  --bg3: #e3ded2;
   --surface: #ffffff;
-  --surface2: #e8f9fc;
-  --border: rgba(0,168,204,0.15);
-  --border-gold: rgba(180,120,0,0.30);
-  --text: #062030;
-  --text2: #1a5a6e;
-  --text3: #4a8a9a;
-  --gold: #b87800;
-  --gold2: #d99a10;
-  --gold-pale: rgba(184,120,0,0.10);
-  --accent: #0094b8;
-  --nav-bg: rgba(225,248,253,0.96);
-  --hero-bg1: rgba(0,168,204,0.09);
-  --hero-bg2: rgba(184,120,0,0.05);
+  --surface2: #faf8f3;
+  --border: rgba(20,20,20,0.10);
+  --border-gold: rgba(150,100,0,0.35);
+  --text: #14100a;
+  --text2: #3f3a30;
+  --text3: #6b6455;
+  --gold: #9a6a00;
+  --gold2: #c98f10;
+  --gold-pale: rgba(154,106,0,0.12);
+  --accent: #0a5c78;
+  --nav-bg: rgba(250,248,243,0.97);
+  --hero-bg1: rgba(154,106,0,0.08);
+  --hero-bg2: rgba(10,92,120,0.05);
   --card-bg: #ffffff;
-  --card-hover: #e4f7fb;
-  --input-bg: rgba(0,168,204,0.06);
-  --shadow: 0 24px 80px rgba(0,100,140,0.13);
+  --card-hover: #f3efe4;
+  --input-bg: rgba(20,20,20,0.04);
+  --shadow: 0 24px 80px rgba(20,15,5,0.14);
 }
 
 
@@ -888,7 +889,41 @@ section { padding: 96px 5vw; position: relative; z-index:1; }
   padding: 3px 9px; border-radius: 5px;
   border: 1px solid rgba(255,255,255,.12);
 }
-.pcard-body { padding: 18px 18px 16px; }
+.pcard-body { padding: 12px 14px 12px; }
+/* ═══ Card kiểu mới: ảnh trong khung nhỏ, info nằm ngoài ═══ */
+.pcard-outer { display:flex; flex-direction:column; gap:10px; }
+.pcard-frame {
+  border-radius: 16px; overflow: hidden; position: relative;
+  border: 1px solid var(--border); background: var(--card-bg);
+  box-shadow: 0 4px 16px rgba(0,0,0,.08);
+  transition: transform .25s, box-shadow .25s, border-color .25s;
+  cursor: pointer;
+}
+.pcard-frame:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,.14); border-color: var(--border-gold); }
+.pcard-outer-body { padding: 0 2px; }
+.pcard-outer-type {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 10px; font-weight: 800; letter-spacing: 1px;
+  text-transform: uppercase; margin-bottom: 6px;
+  padding: 3px 9px; border-radius: 5px;
+}
+.pcard-outer-type.webapp { color: var(--accent); background: rgba(74,144,217,.1); border: 1px solid rgba(74,144,217,.2); }
+.pcard-outer-type.ggsheet { color: #34c759; background: rgba(52,199,89,.1); border: 1px solid rgba(52,199,89,.2); }
+.pcard-outer-name {
+  font-size: 13.5px; font-weight: 700; letter-spacing: -0.2px; line-height: 1.35; margin-bottom: 8px;
+  color: var(--text); cursor: pointer;
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+}
+.pcard-outer-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.pcard-outer-price { font-size: 15px; font-weight: 800; color: var(--gold); letter-spacing: -0.3px; }
+.pcard-outer-price.free { color: #34c759; }
+.pcard-outer-btn {
+  background: var(--gold-pale); border: 1px solid var(--border-gold); color: var(--gold);
+  font-size: 11.5px; font-weight: 700; padding: 6px 14px; border-radius: 8px; cursor: pointer;
+  font-family: var(--font); display: flex; align-items: center; gap: 5px; white-space: nowrap;
+  transition: all .2s;
+}
+.pcard-outer-btn:hover { background: var(--gold); color: #050d1a; }
 /* type pill */
 .pcard-type {
   display: inline-flex; align-items: center; gap: 5px;
@@ -3974,10 +4009,8 @@ function renderProducts(){
         <i class="bi bi-eye-fill"></i> Xem chi tiết
       </button>`;
     return `
-    <div class="pcard-wrap">
-    <div class="pcard" data-ptype="${p.type}">
-      <!-- FRONT FACE -->
-      <div class="pcard-front" onclick="openProdNew('${p.id}')" style="cursor:pointer;">
+    <div class="pcard-outer">
+      <div class="pcard-frame" data-ptype="${p.type}" onclick="openProdNew('${p.id}')">
         <div class="pcard-thumb">
           ${thumbHtml}
           <div class="badge-row">
@@ -3986,28 +4019,15 @@ function renderProducts(){
           </div>
           ${ver?`<div class="pcard-vchip">${ver}</div>`:''}
         </div>
-        <div class="pcard-body">
-          <div class="pcard-type ${p.type}"><i class="bi ${p.type==='webapp'?'bi-lightning-charge-fill':'bi-file-earmark-spreadsheet-fill'}"></i> ${p.type==='webapp'?'Webapp':'Google Sheets'}</div>
-          <div class="pcard-name">${shortName}</div>
-          <div class="pcard-desc">${p.desc||''}</div>
-          <div class="pcard-tags">${ptags}</div>
-          <div class="pcard-divider"></div>
-          <div class="pcard-foot">
-            <div class="pcard-price ${p.free?'free':''}">${p.free?'<i class="bi bi-gift-fill"></i> Miễn phí':`<span class="p-curr"></span><span class="p-num">${(p.price/1000).toFixed(0)}</span><span class="p-unit">K đ</span>`}</div>
-            <button onclick="event.stopPropagation();openProdNew('${p.id}')" style="background:var(--gold-pale);border:1px solid var(--border-gold);color:var(--gold);font-size:11px;font-weight:600;padding:4px 10px;border-radius:6px;cursor:pointer;font-family:var(--font);display:flex;align-items:center;gap:4px;"><i class="bi bi-eye-fill"></i> Xem</button>
-          </div>
+      </div>
+      <div class="pcard-outer-body">
+        <div class="pcard-outer-type ${p.type}"><i class="bi ${p.type==='webapp'?'bi-lightning-charge-fill':'bi-file-earmark-spreadsheet-fill'}"></i> ${p.type==='webapp'?'Webapp':'Google Sheets'}</div>
+        <div class="pcard-outer-name" onclick="openProdNew('${p.id}')">${shortName}</div>
+        <div class="pcard-outer-foot">
+          <div class="pcard-outer-price ${p.free?'free':''}">${p.free?'Miễn phí':formatVND(p.price)}</div>
+          <button class="pcard-outer-btn" onclick="event.stopPropagation();openProdNew('${p.id}')"><i class="bi bi-eye-fill"></i> Xem</button>
         </div>
       </div>
-      <!-- BACK FACE -->
-      <div class="pcard-back">
-        <div style="font-size:36px;filter:drop-shadow(0 4px 12px rgba(201,168,76,.5));">${p.icon||'📦'}</div>
-        <div style="font-size:14px;font-weight:800;color:#fff;letter-spacing:-.3px;line-height:1.3;">${shortName}</div>
-        <div style="font-size:12px;color:rgba(255,255,255,.55);line-height:1.55;max-width:220px;">${(p.desc||'').substring(0,80)}${p.desc&&p.desc.length>80?'...':''}</div>
-        <div style="display:flex;gap:5px;flex-wrap:wrap;justify-content:center;">${tagsPreview}</div>
-        <div style="text-align:center;position:relative;z-index:1;">${priceBack}</div>
-        <div style="width:100%;display:flex;flex-direction:column;gap:8px;position:relative;z-index:1;">${ownedBack}</div>
-      </div>
-    </div>
     </div>`;
   }).join('');
 }
@@ -4089,7 +4109,7 @@ function _renderHotProds(){
           display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${sn}</div>
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
           <div style="font-size:20px;font-weight:900;color:var(--gold);letter-spacing:-.5px;">
-            ${p.free?'<span style="color:#34c759;font-size:13px;font-weight:700;">🎁 Miễn phí</span>':`${(p.price/1000).toFixed(0)}<span style="font-size:11px;font-weight:600;color:var(--text3);">K đ</span>`}
+            ${p.free?'<span style="color:#34c759;font-size:13px;font-weight:700;">🎁 Miễn phí</span>':`${formatVND(p.price)}`}
           </div>
           ${sold?`<span style="font-size:10px;color:var(--text3);"><i class="bi bi-bag-check-fill" style="color:var(--gold);"></i> ${sold}</span>`:''}
         </div>
