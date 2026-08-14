@@ -4229,17 +4229,19 @@ function renderPmActions(p){
   let mainBtnHtml = '';   // nút chính — dùng chung cho cả sidebar và mobile bar
   let extraHtml = '';     // link phụ — chỉ hiện trên sidebar PC
 
-  const isGSheet = p.type === 'ggsheet';
   if(p.free){
     let freeLink = p.downloadUrl || vl[p.versions?.[0]] || '#';
-    if(isGSheet) freeLink = toGSheetCopyLink(freeLink);
+    const convertedFree = toGSheetCopyLink(freeLink);
+    const isGSheetLink = convertedFree !== freeLink;
+    freeLink = convertedFree;
     mainBtnHtml = `<a class="btn-buy-main download" href="${freeLink}" target="_blank">
-        <i class="bi bi-cloud-arrow-down-fill"></i> ${isGSheet?'Tạo bản sao miễn phí':'Tải xuống miễn phí'}
+        <i class="bi bi-cloud-arrow-down-fill"></i> ${isGSheetLink?'Tạo bản sao miễn phí':'Tải xuống miễn phí'}
       </a>`;
   } else if(owned && dlUrl){
-    const finalDlUrl = isGSheet ? toGSheetCopyLink(dlUrl) : dlUrl;
+    const finalDlUrl = toGSheetCopyLink(dlUrl);
+    const isGSheetLink = finalDlUrl !== dlUrl;
     mainBtnHtml = `<a class="btn-buy-main download" href="${finalDlUrl}" target="_blank">
-        <i class="bi bi-cloud-arrow-down-fill"></i> ${isGSheet?'Tạo bản sao':'Tải xuống (Đã mua)'}
+        <i class="bi bi-cloud-arrow-down-fill"></i> ${isGSheetLink?'Tạo bản sao':'Tải xuống (Đã mua)'}
       </a>`;
     extraHtml = `<div style="font-size:11px;color:var(--text3);text-align:center;margin-top:8px;">
         <a href="#" onclick="event.preventDefault();openMyProds()" style="color:var(--gold);">
@@ -4593,9 +4595,9 @@ function _renderMyProds(){
     const icon = p?.icon || '📦';
     let action = '';
     if(status==='approved' && dlUrl){
-      const isGSheet = p?.type === 'ggsheet';
-      const finalUrl = isGSheet ? toGSheetCopyLink(dlUrl) : dlUrl;
-      action=`<a class="mpi-dl" href="${finalUrl}" target="_blank"><i class="bi bi-cloud-arrow-down-fill"></i> ${isGSheet?'Tạo bản sao':'Tải xuống'}</a>`;
+      const finalUrl = toGSheetCopyLink(dlUrl);
+      const isGSheetLink = finalUrl !== dlUrl;
+      action=`<a class="mpi-dl" href="${finalUrl}" target="_blank"><i class="bi bi-cloud-arrow-down-fill"></i> ${isGSheetLink?'Tạo bản sao':'Tải xuống'}</a>`;
     }
     else if(status==='approved')
       action=`<span class="mpi-dl" style="background:rgba(52,199,89,.1);cursor:default;"><i class="bi bi-check-circle-fill"></i> Đã duyệt</span>`;
@@ -5743,7 +5745,7 @@ function sendApprovalEmailToCustomer(order){
     ${prod&&prod.desc?`<p style="font-size:13px;color:#777777;background:#f9f9f9;padding:14px 16px;border-radius:10px;margin:0 0 20px;">${prod.desc}</p>`:''}
     ${dlUrl?`
     <div style="text-align:center;margin:28px 0;">
-      <a href="${prod?.type==='ggsheet' ? toGSheetCopyLink(dlUrl) : dlUrl}" style="display:inline-block;padding:14px 36px;background:linear-gradient(135deg,#34c759,#30d158);color:#ffffff;border-radius:980px;font-weight:700;font-size:14px;text-decoration:none;">📥 ${prod?.type==='ggsheet'?'Tạo bản sao ngay':'Tải xuống ngay'}</a>
+      <a href="${toGSheetCopyLink(dlUrl)}" style="display:inline-block;padding:14px 36px;background:linear-gradient(135deg,#34c759,#30d158);color:#ffffff;border-radius:980px;font-weight:700;font-size:14px;text-decoration:none;">📥 ${toGSheetCopyLink(dlUrl)!==dlUrl?'Tạo bản sao ngay':'Tải xuống ngay'}</a>
     </div>
     ` : `<p style="text-align:center;color:#777777;font-size:13px;">Link tải sẽ được cập nhật trong ít phút, vui lòng kiểm tra lại trong mục "Sản phẩm của tôi" trên web.</p>`}
     <p style="margin:24px 0 0;font-size:13px;color:#777777;">Nếu cần hỗ trợ thêm, liên hệ Zalo <a href="https://zalo.me/0946770648" style="color:#b88a00;font-weight:600;text-decoration:none;">0946 770 648</a></p>
