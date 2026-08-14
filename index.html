@@ -4047,12 +4047,7 @@ history.replaceState({page:'home'},'','');
 function isOwned(prodId){
   if(!currentUser) return false;
   const uid = currentUser.username;
-  // Check purchases trong account — chỉ approved
-  const acc = ACCOUNTS.find(a=>a.username===uid);
-  const inPurchases = acc?.purchases && Array.isArray(acc.purchases) &&
-    acc.purchases.some(pu=>String(pu.productId)===String(prodId) && pu.status==='approved');
-  if(inPurchases) return true;
-  // Check orders từ Sheets — CHỈ approved (không check downloadUrl)
+  // Nguồn sự thật duy nhất: bảng orders trên Supabase — không đọc accounts.purchases nữa
   return ORDERS.some(o=>
     String(o.productId)===String(prodId) &&
     o._userId===uid &&
@@ -4073,23 +4068,12 @@ function hasPendingOrder(prodId){
 function getOwnedOrder(prodId){
   if(!currentUser) return null;
   const uid = currentUser.username;
-  // Ưu tiên order từ ORDERS (sync từ Sheets)
-  const fromOrders = ORDERS.find(o=>
+  // Chỉ đọc từ orders — không còn fallback vào accounts.purchases
+  return ORDERS.find(o=>
     String(o.productId)===String(prodId) &&
     o._userId===uid &&
     (o.status==='approved' || o.status==='pending')
-  );
-  if(fromOrders) return fromOrders;
-  // Fallback: purchases trong account
-  const acc = ACCOUNTS.find(a=>a.username===uid);
-  if(!acc?.purchases) return null;
-  const pu = Array.isArray(acc.purchases)
-    ? acc.purchases.find(p=>String(p.productId)===String(prodId))
-    : null;
-  if(!pu) return null;
-  return ORDERS.find(o=>String(o.id)===String(pu.orderId)) || {
-    id: pu.orderId, status: pu.status||'pending', downloadUrl: pu.downloadUrl||''
-  };
+  ) || null;
 }
 
 // ═══ PRODUCT MODAL (NEW) ═══
@@ -4565,10 +4549,8 @@ function _renderMyProds(){
   const body=document.getElementById('myProdsBody');
   if(!body) return;
   const uid = currentUser.username;
-  // Gộp orders từ Sheets + purchases từ account
+  // Chỉ đọc từ orders — accounts.purchases không còn là nguồn dữ liệu cho màn hình này
   const allMyOrders = ORDERS.filter(o => o._userId === uid && o.type === 'product');
-  const acc = ACCOUNTS.find(a=>a.username===uid);
-  const purchases = (acc?.purchases && Array.isArray(acc.purchases)) ? acc.purchases : [];
   const seen = new Set();
   const merged = [];
   allMyOrders.forEach(o => {
@@ -4579,10 +4561,6 @@ function _renderMyProds(){
         downloadUrl:o.downloadUrl, versionLinks:o.versionLinks,
         version:o.version, createdAt:o.createdAt});
     }
-  });
-  purchases.forEach(pu => {
-    const key = String(pu.productId);
-    if(!seen.has(key)){ seen.add(key); merged.push(pu); }
   });
 
   if(!merged.length){
@@ -4843,28 +4821,22 @@ async function approveOrder(id){
     o.downloadUrl = vl[o.version] || '';
   }
   LS.set('orders', ORDERS);
-  // Update order trên Sheets — fire & forget, không await
   updateOrderRemote(id, {status:'approved', downloadUrl:o.downloadUrl});
-  // Update account purchase nếu có — fire & forget
-  const acc = ACCOUNTS.find(a=>a.username===o._userId);
-  if(acc){
-    if(acc.purchases && Array.isArray(acc.purchases)){
-      const pu = acc.purchases.find(p=>String(p.orderId)===String(id));
-      if(pu){ pu.status='approved'; pu.downloadUrl=o.downloadUrl||''; }
-    }
-    if(o.type==='plan') acc.memberType='premium';
-    LS.set('accounts', ACCOUNTS);
-    // Chỉ update account này, không loop tất cả
-    if(API_URL&&!API_URL.includes('PASTE_YOUR')){
-      API.post({action:'updateAccount', username:acc.username,
-        data:{purchases:JSON.stringify(acc.purchases||[]),
-              memberType:acc.memberType||'free'}}).catch(()=>{});
+  // Nâng cấp memberType nếu là gói hội viên — không còn ghi accounts.purchases nữa,
+  // vì orders là nguồn sự thật duy nhất cho quyền sở hữu sản phẩm
+  if(o.type==='plan'){
+    const acc = ACCOUNTS.find(a=>a.username===o._userId);
+    if(acc){
+      acc.memberType='premium';
+      LS.set('accounts', ACCOUNTS);
+      if(API_URL&&!API_URL.includes('PASTE_YOUR')){
+        API.post({action:'updateAccount', username:acc.username,
+          data:{memberType:acc.memberType}}).catch(()=>{});
+      }
     }
   }
-  // Re-render ngay lập tức — không chờ API
   renderAdminOrders(); renderAdminDash(); refreshPendingBadge();
   showToast('✅ Đã duyệt đơn #'+String(id).slice(-6),'success');
-  // Gửi mail cảm ơn + thông tin sản phẩm cho khách
   sendApprovalEmailToCustomer(o);
 }
 
