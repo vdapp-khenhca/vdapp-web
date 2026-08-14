@@ -4220,11 +4220,12 @@ function renderPmActions(p){
   const owned   = isOwned(p.id);
   const pending = !owned && hasPendingOrder(p.id);
   const vl      = p.versionLinks || {};
-  // Lấy link theo version đang chọn (_activeVer)
-  const selVer  = _activeVer || (p.versions?.[0]||'');
+  // Đã mua = sở hữu trọn đời -> luôn ưu tiên link của bản MỚI NHẤT hiện tại của sản phẩm
+  const latestVer = p.versions?.[0] || '';
   const myOrder = owned ? getOwnedOrder(p.id) : null;
-  const myVl    = (myOrder?.versionLinks && typeof myOrder.versionLinks==='object') ? myOrder.versionLinks : vl;
-  const dlUrl   = myOrder?.downloadUrl || myVl[selVer] || myVl[myOrder?.version||''] || '';
+  const dlUrl   = owned
+    ? (vl[latestVer] || myOrder?.downloadUrl || '')   // owned -> luôn lấy bản mới nhất từ chính sản phẩm
+    : '';
 
   let mainBtnHtml = '';   // nút chính — dùng chung cho cả sidebar và mobile bar
   let extraHtml = '';     // link phụ — chỉ hiện trên sidebar PC
@@ -4240,8 +4241,9 @@ function renderPmActions(p){
   } else if(owned && dlUrl){
     const finalDlUrl = toGSheetCopyLink(dlUrl);
     const isGSheetLink = finalDlUrl !== dlUrl;
+    const isLatest = latestVer && latestVer === (myOrder?.version || '');
     mainBtnHtml = `<a class="btn-buy-main download" href="${finalDlUrl}" target="_blank">
-        <i class="bi bi-cloud-arrow-down-fill"></i> ${isGSheetLink?'Tạo bản sao':'Tải xuống (Đã mua)'}
+        <i class="bi bi-cloud-arrow-down-fill"></i> ${isGSheetLink?'Tạo bản sao':'Tải xuống'} ${!isLatest && myOrder?.version ? `(${latestVer} - Cập nhật miễn phí)` : '(Đã mua)'}
       </a>`;
     extraHtml = `<div style="font-size:11px;color:var(--text3);text-align:center;margin-top:8px;">
         <a href="#" onclick="event.preventDefault();openMyProds()" style="color:var(--gold);">
@@ -4587,9 +4589,10 @@ function _renderMyProds(){
     const vl = (order?.versionLinks && typeof order.versionLinks==='object')
       ? order.versionLinks : (p?.versionLinks||{});
     const ver = order?.version || pu.version || '';
+    const latestVer = p?.versions?.[0] || '';
     const dlUrl = (status==='approved')
-      ? (order?.downloadUrl || vl[ver] || '')
-      : '';
+          ? ((p?.versionLinks?.[latestVer]) || order?.downloadUrl || vl[ver] || '')
+          : '';
     const name = p ? (p.name.includes('|') ? p.name.split('|')[1].trim() : p.name) : 'Sản phẩm';
     const img = p?.images?.[0] || p?.imgUrl || '';
     const icon = p?.icon || '📦';
