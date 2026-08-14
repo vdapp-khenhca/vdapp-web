@@ -4339,6 +4339,9 @@ function openProductPayment(){ startProductPayment(); }
 
 function openPayment(opts){
   PAY={type:'plan',planId:'year',name:'',price:0,selectedVer:'',productId:null,versions:[],free:false,_orderCreated:false,_orderId:null,_orderCode:'', ...opts};
+  // Sinh sẵn mã đơn ngay khi mở modal, để QR hiện ngay — đơn thật chỉ ghi xuống DB khi khách bấm xác nhận
+  PAY._orderId = Date.now();
+  PAY._orderCode = 'DH'+String(PAY._orderId).slice(-6);
   document.getElementById('payOverlay').classList.add('open');
   document.body.style.overflow='hidden';
   renderPaySingle();
@@ -4395,16 +4398,18 @@ function buildPaySingleQR(){
   document.getElementById('payBankAcc').textContent = stk;
   document.getElementById('payBankOwner').textContent = SETTINGS.bankOwner || 'NGUYEN VAN DAM';
   document.getElementById('payAmount').textContent = amount>0 ? formatVND(amount) : 'Miễn phí';
-  document.getElementById('payContent').textContent = 'Tạo đơn để nhận nội dung CK';
 
   const qrBox = document.getElementById('payQrBox');
   if(amount>0){
-    qrBox.innerHTML = `<div class="qr-box-ph"><i class="bi bi-qr-code-scan"></i><span>QR sẽ hiện sau<br>khi xác nhận đăng ký</span></div>`;
+    const content = `APPAUTO ${PAY._orderCode}`.trim();
+    document.getElementById('payContent').textContent = content;
+    const vietqrUrl = `https://img.vietqr.io/image/${binMB}-${stk}-compact2.png?amount=${amount}&addInfo=${encodeURIComponent(content)}&accountName=${encodeURIComponent(SETTINGS.bankOwner||'NGUYEN VAN DAM')}`;
+    qrBox.innerHTML = `<img src="${vietqrUrl}" alt="VietQR MB Bank" style="width:100%;height:100%;object-fit:contain;">`;
   } else {
+    document.getElementById('payContent').textContent = 'Không cần chuyển khoản';
     qrBox.innerHTML = `<div class="qr-box-ph"><i class="bi bi-gift-fill" style="color:var(--gold);font-size:40px;"></i><span>Sản phẩm miễn phí</span></div>`;
   }
 }
-
 function updateEmailNotice(){
   const emailInp = document.getElementById('pBuyerEmail');
   const notice   = document.getElementById('emailNotice');
@@ -4433,17 +4438,7 @@ function submitSingleOrder(){
   ensureGuestAccount(em, ph);
   createOrder();
 
-  // Cập nhật QR + nội dung CK theo đơn vừa tạo
-  const stk = SETTINGS.bankAcc || '25088888999999';
-  const binMB = '970422';
   const amount = PAY.price;
-  const content = `APPAUTO ${PAY._orderCode}`.trim();
-  document.getElementById('payContent').textContent = content;
-  const qrBox = document.getElementById('payQrBox');
-  if(amount>0){
-    const vietqrUrl = `https://img.vietqr.io/image/${binMB}-${stk}-compact2.png?amount=${amount}&addInfo=${encodeURIComponent(content)}&accountName=${encodeURIComponent(SETTINGS.bankOwner||'NGUYEN VAN DAM')}`;
-    qrBox.innerHTML = `<img src="${vietqrUrl}" alt="VietQR MB Bank" style="width:100%;height:100%;object-fit:contain;">`;
-  }
 
   // Ẩn form, hiện trạng thái chờ
   document.querySelectorAll('.pay-single-left > *').forEach(el=>{ if(el.id!=='paySingleWait') el.style.display='none'; });
@@ -4499,8 +4494,8 @@ function createOrder(){
   const em=document.getElementById('pBuyerEmail').value.trim();
   const nm=currentUser?.name || em.split('@')[0] || 'Khách';
   const ph=document.getElementById('pBuyerPhone').value.trim()||'—';
-  const orderId=Date.now();
-  const orderCode='DH'+String(orderId).slice(-6);
+  const orderId=PAY._orderId || Date.now();      // dùng mã đã sinh khi mở modal
+  const orderCode=PAY._orderCode || ('DH'+String(orderId).slice(-6));
   const _prod = PRODUCTS.find(x=>String(x.id)===String(PAY.productId));
   const _versionLinks = _prod?.versionLinks || {};
   const _autoLink = _versionLinks[PAY.selectedVer] || '';
