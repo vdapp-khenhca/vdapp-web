@@ -3542,7 +3542,10 @@ async function updateOrderRemote(id, updates){
     const row = {};
     if('status' in updates) row.status = updates.status;
     if('downloadUrl' in updates) row.download_url = updates.downloadUrl;
-    const { error } = await sb.from('orders').update(row).eq('id', id);
+    const { error } = await sb.from('orders')
+      .update(row)
+      .eq('id', id)
+      .select();
     if(error) console.warn('[updateOrder]', error.message);
   }catch(e){ console.warn('[updateOrder] failed:', e.message); }
 }
