@@ -1846,7 +1846,7 @@ select, textarea {
       <p>Nhập mật khẩu quản trị</p>
     </div>
     <div class="login-err" id="adminLoginErr"></div>
-    <div class="form-field"><label>Mật khẩu Admin</label><input type="password" id="adminLoginPass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doAdminLogin()"></div>
+    <div class="form-field"><label>Mật khẩu Admin</label><input type="text" name="username" autocomplete="username" value="admin" tabindex="-1" aria-hidden="true" readonly style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;"><input type="password" autocomplete="current-password" id="adminLoginPass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doAdminLogin()"></div>
     <button class="btn-login-submit" onclick="doAdminLogin()"><i class="bi bi-shield-lock-fill"></i> Vào Admin</button>
     <p style="text-align:center;margin-top:12px;font-size:12px;color:var(--text3);">Demo: <strong style="color:var(--gold)">admin123</strong></p>
   </div>
@@ -2819,11 +2819,11 @@ select, textarea {
         <div class="aform" style="margin-bottom:20px;">
           <div class="aform-title">Thêm tài khoản người dùng</div>
           <div class="aform-grid">
-            <div><label>Tên đăng nhập</label><input type="text" id="accUser" placeholder="user123"></div>
+            <div><label>Tên đăng nhập</label><input type="text" autocomplete="off" id="accUser" placeholder="user123"></div>
             <div>
               <label>Mật khẩu</label>
               <div style="position:relative;">
-                <input type="password" id="accPass" placeholder="••••••••" style="padding-right:38px;width:100%;box-sizing:border-box;">
+                <input type="password" autocomplete="new-password" id="accPass" placeholder="••••••••" style="padding-right:38px;width:100%;box-sizing:border-box;">
                 <button type="button" onclick="togglePassVis('accPass','eyeAccPass')" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text3);font-size:15px;"><i class="bi bi-eye-fill" id="eyeAccPass"></i></button>
               </div>
             </div>
@@ -2874,18 +2874,18 @@ select, textarea {
             <div>
               <label>Mật khẩu Admin hiện tại</label>
               <div style="position:relative;">
-                <input type="password" id="adminPassInput" placeholder="admin123" style="padding-right:40px;width:100%;box-sizing:border-box;">
+                <input type="text" name="username" autocomplete="username" value="admin" tabindex="-1" aria-hidden="true" readonly style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none;"><input type="password" autocomplete="current-password" id="adminPassInput" placeholder="admin123" style="padding-right:40px;width:100%;box-sizing:border-box;">
                 <button type="button" onclick="togglePassVis('adminPassInput','eyeAdmin')" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text3);font-size:15px;"><i class="bi bi-eye-fill" id="eyeAdmin"></i></button>
               </div>
             </div>
             <div>
               <label>Đổi mật khẩu mới (để trống = không đổi)</label>
               <div style="position:relative;">
-                <input type="password" id="prNewPass" placeholder="Mật khẩu mới..." style="padding-right:40px;width:100%;box-sizing:border-box;">
+                <input type="password" autocomplete="new-password" id="prNewPass" placeholder="Mật khẩu mới..." style="padding-right:40px;width:100%;box-sizing:border-box;">
                 <button type="button" onclick="togglePassVis('prNewPass','eyeNew')" style="position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;color:var(--text3);font-size:15px;"><i class="bi bi-eye-fill" id="eyeNew"></i></button>
               </div>
             </div>
-            <div><label>Xác nhận mật khẩu mới</label><input type="password" id="prNewPass2" placeholder="Nhập lại mật khẩu mới"></div>
+            <div><label>Xác nhận mật khẩu mới</label><input type="password" autocomplete="new-password" id="prNewPass2" placeholder="Nhập lại mật khẩu mới"></div>
           </div>
           <div class="aform-actions">
             <button class="btn-asave" onclick="saveProfile()"><i class="bi bi-floppy-fill"></i> Lưu thay đổi</button>
