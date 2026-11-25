@@ -63,27 +63,27 @@
 /* ── THEME TOKENS ── */
 [data-theme="light"] {
   /* Theme 3 - Xanh La Tuoi Mat: nen sang co dinh, khong con che do toi */
-  --bg: #F5FBF6;
-  --bg2: #EDF7EF;
-  --bg3: #E1F4E9;
+  --bg: #F4F9F7;
+  --bg2: #EBF4F1;
+  --bg3: #DDEBE6;
   --surface: #FFFFFF;
-  --surface2: #F0F9F2;
-  --border: #DCEEE1;
-  --border-gold: rgba(14,159,110,0.35);
-  --text: #0B241A;
-  --text2: #33523F;
-  --text3: #6E8A76;
-  --gold: #0E9F6E;
-  --gold2: #3ECF8E;
-  --gold-pale: rgba(14,159,110,0.08);
-  --accent: #0B7A55;
-  --nav-bg: rgba(245,251,246,0.92);
-  --hero-bg1: rgba(14,159,110,0.10);
-  --hero-bg2: rgba(169,223,194,0.22);
+  --surface2: #EFF6F3;
+  --border: #D5E6E0;
+  --border-gold: rgba(28,107,92,0.35);
+  --text: #0A2621;
+  --text2: #35544D;
+  --text3: #6F8C85;
+  --gold: #1C6B5C;
+  --gold2: #3A9C88;
+  --gold-pale: rgba(28,107,92,0.08);
+  --accent: #14524A;
+  --nav-bg: rgba(244,249,247,0.92);
+  --hero-bg1: rgba(28,107,92,0.10);
+  --hero-bg2: rgba(160,205,193,0.22);
   --card-bg: #FFFFFF;
-  --card-hover: #F5FBF6;
-  --input-bg: rgba(14,159,110,0.04);
-  --shadow: 0 24px 80px rgba(11,36,26,0.14);
+  --card-hover: #F4F9F7;
+  --input-bg: rgba(28,107,92,0.04);
+  --shadow: 0 24px 80px rgba(10,38,33,0.14);
 }
 
 /* ── LIGHT MODE — Black & Gold ── */
@@ -109,7 +109,7 @@
 }
 [data-theme="light"] .nav-search-inline input:focus {
   border-color: var(--gold) !important;
-  box-shadow: 0 0 0 3px rgba(11,122,85,0.14) !important;
+  box-shadow: 0 0 0 3px rgba(20,82,74,0.14) !important;
 }
 
 /* Modals / panels */
@@ -126,7 +126,7 @@
 [data-theme="light"] textarea:focus,
 [data-theme="light"] select:focus {
   border-color: var(--gold) !important;
-  box-shadow: 0 0 0 3px rgba(11,122,85,0.14) !important;
+  box-shadow: 0 0 0 3px rgba(20,82,74,0.14) !important;
   outline: none !important;
 }
 
@@ -136,7 +136,7 @@
 [data-theme="light"] ::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.35); }
 
 /* Text selection */
-[data-theme="light"] ::selection { background: rgba(11,122,85,0.20); color: #0a0a0a; }
+[data-theme="light"] ::selection { background: rgba(20,82,74,0.20); color: #0a0a0a; }
 
 /* Dividers & separators */
 [data-theme="light"] hr,
@@ -146,7 +146,7 @@
 [data-theme="light"] tr:hover td { background: var(--bg3) !important; }
 
 /* Toast / notification */
-[data-theme="light"] .toast.success { background: #f0fdf4 !important; border-color: rgba(52,199,89,.35) !important; color: #166534 !important; }
+[data-theme="light"] .toast.success { background: #F1F8F6 !important; border-color: rgba(46,158,126,.35) !important; color: #14524A !important; }
 [data-theme="light"] .toast.error   { background: #fef2f2 !important; border-color: rgba(232,64,64,.35) !important; color: #b91c1c !important; }
 [data-theme="light"] .toast.info    { background: var(--gold-pale) !important; border-color: var(--border-gold) !important; color: var(--gold) !important; }
 
@@ -211,7 +211,7 @@ nav {
 .nav-search-inline input:focus {
   outline: none;
   border-color: var(--gold);
-  box-shadow: 0 0 0 3px rgba(14,159,110,0.13);
+  box-shadow: 0 0 0 3px rgba(28,107,92,0.13);
 }
 .nav-search-inline input::placeholder { color: var(--text3); }
 .nav-search-inline .nsi {
@@ -250,8 +250,8 @@ nav {
   display: flex; align-items: center; justify-content: center;
   font-size: 18px;
 }
-.nsr-icon.webapp { background: rgba(11,122,85,.12); }
-.nsr-icon.ggsheet { background: rgba(52,199,89,.12); }
+.nsr-icon.webapp { background: rgba(20,82,74,.12); }
+.nsr-icon.ggsheet { background: rgba(46,158,126,.12); }
 .nsr-name { font-size: 13px; font-weight: 600; line-height: 1.3; }
 .nsr-type { font-size: 11px; color: var(--text2); margin-top: 1px; }
 .nsr-price { margin-left: auto; font-size: 13px; font-weight: 700; color: var(--gold); white-space: nowrap; }
@@ -265,13 +265,13 @@ nav {
 .logo-img {
   height: 40px; width: auto; max-width: 40px;
   object-fit: contain; border-radius: 7px;
-  filter: brightness(0) invert(1) drop-shadow(0 2px 8px rgba(14,159,110,0.4));
+  filter: brightness(0) invert(1) drop-shadow(0 2px 8px rgba(28,107,92,0.4));
 }
 [data-theme="light"] .logo-img {
-  filter: brightness(0) saturate(100%) invert(48%) sepia(99%) saturate(347%) hue-rotate(118deg) brightness(93%) contrast(96%) drop-shadow(0 2px 6px rgba(11,122,85,0.25));
+  filter: brightness(0) saturate(100%) invert(48%) sepia(99%) saturate(347%) hue-rotate(118deg) brightness(93%) contrast(96%) drop-shadow(0 2px 6px rgba(20,82,74,0.25));
 }
 [data-theme="light"] .footer-logo-img {
-  filter: brightness(0) saturate(100%) invert(48%) sepia(99%) saturate(347%) hue-rotate(118deg) brightness(93%) contrast(96%) drop-shadow(0 2px 10px rgba(11,122,85,0.35));
+  filter: brightness(0) saturate(100%) invert(48%) sepia(99%) saturate(347%) hue-rotate(118deg) brightness(93%) contrast(96%) drop-shadow(0 2px 10px rgba(20,82,74,0.35));
 }
 .logo-mark {
   width: 34px; height: 34px; border-radius: 9px;
@@ -381,7 +381,7 @@ nav {
 @media(max-width:600px){
   .form-field input { font-size: 16px; padding: 14px 16px; }
 }
-.form-field input:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(14,159,110,0.15); }
+.form-field input:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(28,107,92,0.15); }
 .login-err { font-size: 13px; color: #ff5e5e; text-align: center; margin-bottom: 10px; min-height: 20px; }
 .btn-login-submit {
   width: 100%; padding: 13px;
@@ -444,7 +444,7 @@ nav {
   display: inline-flex; align-items: center; gap: 8px;
   transition: all .2s;
 }
-.btn-prim:hover { filter: brightness(1.12); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(14,159,110,0.35); }
+.btn-prim:hover { filter: brightness(1.12); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(28,107,92,0.35); }
 .btn-sec {
   background: transparent; color: var(--text);
   border: 1px solid var(--border);
@@ -504,7 +504,7 @@ section { padding: 96px 5vw; position: relative; z-index:1; }
   color: var(--text); font-size: 16px; font-family: var(--font);
   transition: border-color .2s, box-shadow .2s;
 }
-.search-box input:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(14,159,110,0.12); }
+.search-box input:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(28,107,92,0.12); }
 .search-box input::placeholder { color: var(--text3); }
 .search-box .si {
   position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
@@ -569,7 +569,7 @@ section { padding: 96px 5vw; position: relative; z-index:1; }
   padding: 2px;
   /* Viền gold gradient luôn hiện — không cần hover */
   background: linear-gradient(130deg,
-    #0E9F6E, #3ECF8E, #3ECF8E, #0E9F6E, #3ECF8E, #0B7A55, #0E9F6E);
+    #1C6B5C, #3A9C88, #3A9C88, #1C6B5C, #3A9C88, #14524A, #1C6B5C);
   background-size: 300% 300%;
   animation: borderRunAlways 4s linear infinite;
   transition: box-shadow .35s;
@@ -577,10 +577,10 @@ section { padding: 96px 5vw; position: relative; z-index:1; }
 /* Hover: thêm glow + tăng tốc animation */
 .pcard-wrap:hover {
   background: linear-gradient(130deg,
-    #0E9F6E, #3ECF8E, #0B7A55, #34c759, #7ED3A8, #0E9F6E, #3ECF8E);
+    #1C6B5C, #3A9C88, #14524A, #2E9E7E, #8CC7B8, #1C6B5C, #3A9C88);
   background-size: 300% 300%;
   animation: borderRun 1.8s linear infinite;
-  box-shadow: 0 0 22px rgba(14,159,110,.35), 0 0 44px rgba(14,159,110,.15);
+  box-shadow: 0 0 22px rgba(28,107,92,.35), 0 0 44px rgba(28,107,92,.15);
 }
 .pcard-wrap::after { display: none; }
 
@@ -599,7 +599,7 @@ section { padding: 96px 5vw; position: relative; z-index:1; }
   transform: rotateX(8deg) rotateY(-4deg) translateY(-14px) scale(1.04);
   box-shadow:
     /* top-left light */
-    -4px -4px 20px rgba(14,159,110,.15),
+    -4px -4px 20px rgba(28,107,92,.15),
     /* depth shadow — simulates card thickness */
     6px 10px 0 -1px rgba(0,0,0,.35),
     8px 14px 0 -2px rgba(0,0,0,.2),
@@ -635,7 +635,7 @@ section { padding: 96px 5vw; position: relative; z-index:1; }
 }
 .pcard-back::after {
   content:''; position:absolute; inset:0;
-  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(14,159,110,.14) 0%, transparent 70%);
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(28,107,92,.14) 0%, transparent 70%);
   pointer-events: none;
 }
 /* Hover does NOT flip — only 3D tilt. Front stays visible. */
@@ -652,8 +652,8 @@ section { padding: 96px 5vw; position: relative; z-index:1; }
 }
 
 /* Type-specific edge color */
-.pcard[data-ptype="webapp"]  { --edge: rgba(11,122,85,.5); }
-.pcard[data-ptype="ggsheet"] { --edge: rgba(52,199,89,.5); }
+.pcard[data-ptype="webapp"]  { --edge: rgba(20,82,74,.5); }
+.pcard[data-ptype="ggsheet"] { --edge: rgba(46,158,126,.5); }
 
 @media(prefers-reduced-motion:reduce){ .pcard,.pcard-wrap::after{ animation:none !important; transition:none !important; } }
 @media(max-width:600px){
@@ -679,16 +679,16 @@ section { padding: 96px 5vw; position: relative; z-index:1; }
 }
 /* thumb gradient bg varies by type */
 .pcard[data-ptype="webapp"] .pcard-thumb {
-  background: linear-gradient(135deg, #06231A 0%, #0B4A34 50%, #083626 100%);
+  background: linear-gradient(135deg, #08231F 0%, #12463D 50%, #0D3A33 100%);
 }
 .pcard[data-ptype="ggsheet"] .pcard-thumb {
-  background: linear-gradient(135deg, #0a2a18 0%, #1a5c2e 50%, #0d311d 100%);
+  background: linear-gradient(135deg, #0A2A25 0%, #1C6B5C 50%, #0D3530 100%);
 }
 [data-theme="light"] .pcard[data-ptype="webapp"] .pcard-thumb {
-  background: linear-gradient(135deg, #E1F4E9 0%, #A9DFC2 100%);
+  background: linear-gradient(135deg, #DDEBE6 0%, #A0CDC1 100%);
 }
 [data-theme="light"] .pcard[data-ptype="ggsheet"] .pcard-thumb {
-  background: linear-gradient(135deg, #d4f0dc 0%, #a8e0b8 100%);
+  background: linear-gradient(135deg, #D3E8E2 0%, #A9D3C8 100%);
 }
 .pcard-thumb img { width: 100%; height: 100%; object-fit: contain; object-position: center; }
 .pcard-thumb-ph { display: flex; flex-direction: column; align-items: center; gap: 10px; }
@@ -714,18 +714,18 @@ section { padding: 96px 5vw; position: relative; z-index:1; }
   background: linear-gradient(90deg, var(--gold), var(--gold2));
   color: #FFFFFF; font-size: 10px; font-weight: 800; letter-spacing: 1px;
   padding: 4px 10px; border-radius: 6px; text-transform: uppercase;
-  box-shadow: 0 2px 8px rgba(14,159,110,.5);
+  box-shadow: 0 2px 8px rgba(28,107,92,.5);
   display: flex; align-items: center; gap: 4px;
 }
 .badge-free {
-  background: linear-gradient(90deg,#34c759,#30d158);
+  background: linear-gradient(90deg,#2E9E7E,#3AAE8D);
   color: #fff; font-size: 10px; font-weight: 800; letter-spacing: 1px;
   padding: 4px 10px; border-radius: 6px; text-transform: uppercase;
-  box-shadow: 0 2px 8px rgba(52,199,89,.5);
+  box-shadow: 0 2px 8px rgba(46,158,126,.5);
   display: flex; align-items: center; gap: 4px;
 }
 .badge-updated {
-  background: rgba(11,122,85,.85); backdrop-filter: blur(4px);
+  background: rgba(20,82,74,.85); backdrop-filter: blur(4px);
   color: #fff; font-size: 10px; font-weight: 700; letter-spacing: 1px;
   padding: 4px 10px; border-radius: 6px; text-transform: uppercase;
 }
@@ -748,9 +748,9 @@ section { padding: 96px 5vw; position: relative; z-index:1; }
   cursor: pointer;
 }
 @keyframes pcardGoldWave {
-  0%   { box-shadow: 0 20px 48px rgba(0,0,0,.22), 0 0 0 2px var(--gold), 0 0 16px 2px rgba(11,122,85,.35); }
-  50%  { box-shadow: 0 20px 48px rgba(0,0,0,.26), 0 0 0 2px var(--gold2), 0 0 26px 6px rgba(62,207,142,.55); }
-  100% { box-shadow: 0 20px 48px rgba(0,0,0,.22), 0 0 0 2px var(--gold), 0 0 16px 2px rgba(11,122,85,.35); }
+  0%   { box-shadow: 0 20px 48px rgba(0,0,0,.22), 0 0 0 2px var(--gold), 0 0 16px 2px rgba(20,82,74,.35); }
+  50%  { box-shadow: 0 20px 48px rgba(0,0,0,.26), 0 0 0 2px var(--gold2), 0 0 26px 6px rgba(58,156,136,.55); }
+  100% { box-shadow: 0 20px 48px rgba(0,0,0,.22), 0 0 0 2px var(--gold), 0 0 16px 2px rgba(20,82,74,.35); }
 }
 .pcard-outer { perspective: 900px; }
 .pcard-frame {
@@ -777,8 +777,8 @@ section { padding: 96px 5vw; position: relative; z-index:1; }
   text-transform: uppercase; margin-bottom: 6px;
   padding: 3px 9px; border-radius: 5px;
 }
-.pcard-outer-type.webapp { color: var(--accent); background: rgba(11,122,85,.1); border: 1px solid rgba(11,122,85,.2); }
-.pcard-outer-type.ggsheet { color: #34c759; background: rgba(52,199,89,.1); border: 1px solid rgba(52,199,89,.2); }
+.pcard-outer-type.webapp { color: var(--accent); background: rgba(20,82,74,.1); border: 1px solid rgba(20,82,74,.2); }
+.pcard-outer-type.ggsheet { color: #2E9E7E; background: rgba(46,158,126,.1); border: 1px solid rgba(46,158,126,.2); }
 .pcard-outer-name {
   font-size: 13.5px; font-weight: 700; letter-spacing: -0.2px; line-height: 1.35; margin-bottom: 8px;
   color: var(--text); cursor: pointer;
@@ -786,7 +786,7 @@ section { padding: 96px 5vw; position: relative; z-index:1; }
 }
 .pcard-outer-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
 .pcard-outer-price { font-size: 15px; font-weight: 800; color: var(--gold); letter-spacing: -0.3px; }
-.pcard-outer-price.free { color: #34c759; }
+.pcard-outer-price.free { color: #2E9E7E; }
 .pcard-outer-btn {
   background: var(--gold-pale); border: 1px solid var(--border-gold); color: var(--gold);
   font-size: 11.5px; font-weight: 700; padding: 6px 14px; border-radius: 8px; cursor: pointer;
@@ -801,8 +801,8 @@ section { padding: 96px 5vw; position: relative; z-index:1; }
   text-transform: uppercase; margin-bottom: 8px;
   padding: 3px 9px; border-radius: 5px;
 }
-.pcard-type.webapp { color: var(--accent); background: rgba(11,122,85,.1); border: 1px solid rgba(11,122,85,.2); }
-.pcard-type.ggsheet { color: #34c759; background: rgba(52,199,89,.1); border: 1px solid rgba(52,199,89,.2); }
+.pcard-type.webapp { color: var(--accent); background: rgba(20,82,74,.1); border: 1px solid rgba(20,82,74,.2); }
+.pcard-type.ggsheet { color: #2E9E7E; background: rgba(46,158,126,.1); border: 1px solid rgba(46,158,126,.2); }
 .pcard-name {
   font-size: 15.5px; font-weight: 700; letter-spacing: -0.3px; line-height: 1.35; margin-bottom: 7px;
   display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
@@ -837,7 +837,7 @@ section { padding: 96px 5vw; position: relative; z-index:1; }
   opacity: 0.7; margin-right: 1px;
 }
 .pcard-price.free {
-  font-size: 15px; font-weight: 700; color: #34c759;
+  font-size: 15px; font-weight: 700; color: #2E9E7E;
   letter-spacing: -0.3px; align-items: center; gap: 5px;
 }
 .pcard-price.free i { font-size: 14px; }
@@ -964,7 +964,7 @@ section { padding: 96px 5vw; position: relative; z-index:1; }
 .step-card { background: var(--bg); padding: 28px 24px; transition: background .2s; }
 .step-card:hover { background: var(--surface2); }
 .step-n { font-size: 56px; font-weight: 700; letter-spacing: -2px; color: var(--gold-pale); line-height: 1; margin-bottom: 14px; }
-[data-theme="light"] .step-n { color: rgba(11,122,85,0.12); }
+[data-theme="light"] .step-n { color: rgba(20,82,74,0.12); }
 .step-t { font-size: 16px; font-weight: 600; letter-spacing: -0.3px; margin-bottom: 8px; display:flex; align-items:center; gap:8px; } .step-t i { color: var(--gold); font-size: 18px; }
 .step-d { font-size: 13px; color: var(--text2); line-height: 1.6; }
 
@@ -1136,8 +1136,8 @@ th { font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: upp
 td { font-size: 13.5px; padding: 12px 16px; border-bottom: 1px solid var(--border); color: var(--text); vertical-align: middle; }
 tr:last-child td { border-bottom: none; }
 tr:hover td { background: var(--bg3); }
-.badge-wb { background: rgba(11,122,85,0.12); color: var(--accent); padding: 3px 8px; border-radius: 5px; font-size: 11px; font-weight: 700; }
-.badge-gs { background: rgba(52,199,89,0.12); color: #34c759; padding: 3px 8px; border-radius: 5px; font-size: 11px; font-weight: 700; }
+.badge-wb { background: rgba(20,82,74,0.12); color: var(--accent); padding: 3px 8px; border-radius: 5px; font-size: 11px; font-weight: 700; }
+.badge-gs { background: rgba(46,158,126,0.12); color: #2E9E7E; padding: 3px 8px; border-radius: 5px; font-size: 11px; font-weight: 700; }
 .tact { display: flex; gap: 6px; }
 .tact button { padding: 5px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: var(--font); border: 1px solid var(--border); background: transparent; color: var(--text2); transition: all .15s; }
 .tact button:hover { border-color: var(--gold); color: var(--gold); }
@@ -1164,7 +1164,7 @@ tr:hover td { background: var(--bg3); }
 .btn-asave:hover { filter: brightness(1.1); }
 .btn-acancel { padding: 11px 24px; background: transparent; border: 1px solid var(--border); color: var(--text2); border-radius: 9px; font-weight: 500; font-size: 14px; cursor: pointer; font-family: var(--font); transition: all .2s; }
 .btn-acancel:hover { border-color: var(--gold); color: var(--gold); }
-.success-msg { background: rgba(52,199,89,0.12); border: 1px solid rgba(52,199,89,0.3); color: #34c759; padding: 10px 14px; border-radius: 9px; font-size: 13px; font-weight: 500; margin-bottom: 14px; display: none; }
+.success-msg { background: rgba(46,158,126,0.12); border: 1px solid rgba(46,158,126,0.3); color: #2E9E7E; padding: 10px 14px; border-radius: 9px; font-size: 13px; font-weight: 500; margin-bottom: 14px; display: none; }
 .success-msg.show { display: block; }
 
 @media(max-width:768px){
@@ -1252,7 +1252,7 @@ tr:hover td { background: var(--bg3); }
   border-radius:9px; color:var(--text); font-size:16px; font-family:var(--font);
   transition:border-color .2s;
 }
-.pay-field input:focus { outline:none; border-color:var(--gold); box-shadow:0 0 0 3px rgba(14,159,110,.12); }
+.pay-field input:focus { outline:none; border-color:var(--gold); box-shadow:0 0 0 3px rgba(28,107,92,.12); }
 .pay-field input::placeholder { color:var(--text3); }
 .pay-field.full { grid-column:1/-1; }
 
@@ -1274,7 +1274,7 @@ tr:hover td { background: var(--bg3); }
   border-radius:9px; color:var(--text); font-size:16px; font-family:var(--font);
   transition:border-color .2s;
 }
-#pBuyerEmail:focus, #pBuyerPhone:focus { outline:none; border-color:var(--gold); box-shadow:0 0 0 3px rgba(14,159,110,.12); }
+#pBuyerEmail:focus, #pBuyerPhone:focus { outline:none; border-color:var(--gold); box-shadow:0 0 0 3px rgba(28,107,92,.12); }
 #pBuyerEmail::placeholder, #pBuyerPhone::placeholder { color:var(--text3); }
 .pay-single-right {
   background: var(--bg2);
@@ -1315,7 +1315,7 @@ tr:hover td { background: var(--bg3); }
 }
 .copy-btn:hover { background:var(--gold); color:#FFFFFF; }
 .pay-note {
-  background:rgba(14,159,110,.08); border:1px solid rgba(14,159,110,.2);
+  background:rgba(28,107,92,.08); border:1px solid rgba(28,107,92,.2);
   border-radius:10px; padding:12px 14px; font-size:12.5px; color:var(--text2); line-height:1.65;
 }
 .pay-note strong { color:var(--gold); }
@@ -1379,16 +1379,16 @@ tr:hover td { background: var(--bg3); }
   text-transform:uppercase; letter-spacing:.5px;
 }
 .os-pending { background:rgba(255,165,0,.12); color:#FFA500; border:1px solid rgba(255,165,0,.3); }
-.os-approved { background:rgba(52,199,89,.12); color:#34c759; border:1px solid rgba(52,199,89,.3); }
+.os-approved { background:rgba(46,158,126,.12); color:#2E9E7E; border:1px solid rgba(46,158,126,.3); }
 .os-rejected { background:rgba(232,64,64,.12); color:#E84040; border:1px solid rgba(232,64,64,.3); }
 .download-link {
   display:inline-flex; align-items:center; gap:5px;
   padding:5px 12px; border-radius:7px;
-  background:rgba(52,199,89,.1); border:1px solid rgba(52,199,89,.3);
-  color:#34c759; font-size:12px; font-weight:600; text-decoration:none;
+  background:rgba(46,158,126,.1); border:1px solid rgba(46,158,126,.3);
+  color:#2E9E7E; font-size:12px; font-weight:600; text-decoration:none;
   transition:all .15s; cursor:pointer;
 }
-.download-link:hover { background:rgba(52,199,89,.2); }
+.download-link:hover { background:rgba(46,158,126,.2); }
 
 
 /* ══ EXTRA: Login tabs & register ══ */
@@ -1397,13 +1397,13 @@ tr:hover td { background: var(--bg3); }
 .ltab.active{background:var(--gold);color:#FFFFFF;}
 .remember-row{display:flex;align-items:center;gap:8px;margin-bottom:14px;font-size:13px;color:var(--text2);cursor:pointer;}
 .remember-row input{width:15px;height:15px;accent-color:var(--gold);cursor:pointer;}
-.login-ok{font-size:13px;color:#34c759;text-align:center;margin-bottom:10px;min-height:18px;}
+.login-ok{font-size:13px;color:#2E9E7E;text-align:center;margin-bottom:10px;min-height:18px;}
 /* User nav */
 .nav-user-btn{display:flex;align-items:center;gap:8px;padding:5px 12px 5px 5px;border-radius:980px;background:var(--surface);border:1px solid var(--border);cursor:pointer;font-size:13px;font-weight:600;transition:border-color .2s;color:var(--text);}
 .nav-user-btn:hover{border-color:var(--gold);}
 .nav-avatar{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;font-size:13px;color:#FFFFFF;font-weight:800;}
 .member-badge{font-size:10px;padding:2px 7px;border-radius:4px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;}
-.badge-member{background:rgba(14,159,110,0.15);color:var(--gold);border:1px solid var(--border-gold);}
+.badge-member{background:rgba(28,107,92,0.15);color:var(--gold);border:1px solid var(--border-gold);}
 .badge-free-plan{background:rgba(138,156,192,0.1);color:var(--text2);border:1px solid var(--border);}
 /* User Dropdown */
 .nav-user-wrap{position:relative;}
@@ -1425,7 +1425,7 @@ tr:hover td { background: var(--bg3); }
 .mpi-icon{width:46px;height:46px;border-radius:10px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
 .mpi-info{flex:1;min-width:0;}
 .mpi-name{font-size:14px;font-weight:700;}.mpi-sub{font-size:11px;color:var(--text2);margin-top:2px;}
-.mpi-dl{padding:8px 14px;background:rgba(52,199,89,.1);border:1px solid rgba(52,199,89,.3);color:#34c759;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--font);display:inline-flex;align-items:center;gap:6px;text-decoration:none;white-space:nowrap;}
+.mpi-dl{padding:8px 14px;background:rgba(46,158,126,.1);border:1px solid rgba(46,158,126,.3);color:#2E9E7E;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--font);display:inline-flex;align-items:center;gap:6px;text-decoration:none;white-space:nowrap;}
 .mpi-wait{padding:7px 12px;background:rgba(255,165,0,.1);border:1px solid rgba(255,165,0,.3);color:#FFA500;border-radius:8px;font-size:12px;font-weight:600;white-space:nowrap;}
 /* ═══════════════════════════════════════════════════════
    PRODUCT DETAIL — landing-page style, PC & mobile riêng biệt
@@ -1511,7 +1511,7 @@ tr:hover td { background: var(--bg3); }
 .pd-mobile-bar-inner{ max-width:1080px; margin:0 auto; width:100%; display:flex; align-items:center; gap:16px; }
 .pd-mobile-bar-price{ flex-shrink:0; }
 .pd-mobile-price{ font-size:22px; font-weight:800; letter-spacing:-.6px; color:var(--gold); line-height:1.1; }
-.pd-mobile-price.free{ color:#34c759; }
+.pd-mobile-price.free{ color:#2E9E7E; }
 .pd-mobile-pnote{ font-size:11px; color:var(--text3); margin-top:1px; }
 .pd-mobile-bar-action{ flex:1; max-width:320px; margin-left:auto; }
 .pd-mobile-bar-action .btn-buy-main{ margin-bottom:0; }
@@ -1532,25 +1532,25 @@ tr:hover td { background: var(--bg3); }
 }
 
 .detail-price{font-size:32px;font-weight:800;letter-spacing:-1.5px;color:var(--text);margin-bottom:2px;}
-.detail-price.free{color:#34c759;}
+.detail-price.free{color:#2E9E7E;}
 .detail-price-old{font-size:15px;color:var(--text3);text-decoration:line-through;margin-left:6px;}
 /* Versions grid */
 .detail-versions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 14px;}
 .dver-btn{position:relative;padding:10px 12px;border-radius:10px;border:1.5px solid var(--border);background:var(--bg2);cursor:pointer;font-family:var(--font);text-align:left;transition:all .18s;display:flex;flex-direction:column;gap:3px;}
 .dver-btn:hover{border-color:var(--border-gold);background:var(--gold-pale);}
 .dver-btn.active{border-color:var(--gold);background:var(--gold-pale);}
-.dver-btn.owned{border-color:#34c759;background:rgba(52,199,89,.06);}
-.dver-btn.owned.active{border-color:#34c759;background:rgba(52,199,89,.12);}
+.dver-btn.owned{border-color:#2E9E7E;background:rgba(46,158,126,.06);}
+.dver-btn.owned.active{border-color:#2E9E7E;background:rgba(46,158,126,.12);}
 .dver-name{font-size:13px;font-weight:700;color:var(--text);}
 .dver-status{font-size:10px;font-weight:600;letter-spacing:.3px;}
 .dver-badge{position:absolute;top:-6px;right:8px;font-size:9px;font-weight:700;padding:2px 6px;border-radius:4px;letter-spacing:.3px;}
 .dver-badge.new-badge{background:var(--gold);color:#FFFFFF;}
-.dver-badge.owned-badge{background:#34c759;color:#fff;}
+.dver-badge.owned-badge{background:#2E9E7E;color:#fff;}
 /* Buy button */
 .btn-buy-main{width:100%;padding:14px;border-radius:12px;border:none;cursor:pointer;font-family:var(--font);font-size:15px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s;margin-bottom:8px;}
 .btn-buy-main.buy{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#FFFFFF;}
 .btn-buy-main.buy:hover{filter:brightness(1.08);transform:translateY(-1px);}
-.btn-buy-main.download{background:linear-gradient(135deg,#34c759,#30d158);color:#fff;box-shadow:0 4px 16px rgba(52,199,89,.3);}
+.btn-buy-main.download{background:linear-gradient(135deg,#2E9E7E,#3AAE8D);color:#fff;box-shadow:0 4px 16px rgba(46,158,126,.3);}
 .btn-buy-main.download:hover{filter:brightness(1.05);transform:translateY(-1px);}
 .btn-buy-main.pending{background:rgba(255,165,0,.12);border:1.5px solid rgba(255,165,0,.3);color:#FFA500;cursor:default;}
 .btn-buy-main:disabled{opacity:.7;cursor:default;transform:none;}
@@ -1586,7 +1586,7 @@ tr:hover td { background: var(--bg3); }
 /* Toast */
 .toast{position:fixed;bottom:28px;right:28px;z-index:900;padding:13px 20px;border-radius:12px;font-size:14px;font-weight:600;display:flex;align-items:center;gap:10px;box-shadow:0 8px 32px rgba(0,0,0,.3);transform:translateY(80px);opacity:0;transition:all .35s cubic-bezier(.34,1.56,.64,1);pointer-events:none;}
 .toast.show{transform:translateY(0);opacity:1;}
-.toast.success{background:#1a3a22;border:1px solid rgba(52,199,89,.3);color:#34c759;}
+.toast.success{background:#1A3A34;border:1px solid rgba(46,158,126,.3);color:#2E9E7E;}
 .toast.error{background:#3a1a1a;border:1px solid rgba(232,64,64,.3);color:#e84040;}
 .toast.info{background:var(--surface);border:1px solid var(--border-gold);color:var(--gold);}
 /* Pending badge */
@@ -1604,9 +1604,9 @@ tr:hover td { background: var(--bg3); }
 /* ══════════════════════════════════
    LIGHT MODE POLISH
    ══════════════════════════════════ */
-[data-theme="light"] .toast.success { background: #e8faea; border-color: rgba(52,199,89,.35); color: #1a7a32; }
+[data-theme="light"] .toast.success { background: #E6F4F0; border-color: rgba(46,158,126,.35); color: #1C6B5C; }
 [data-theme="light"] .toast.error   { background: #feeaea; border-color: rgba(232,64,64,.35); color: #c02020; }
-[data-theme="light"] .toast.info    { background: #fff9e8; border-color: rgba(11,122,85,.35); color: var(--gold); }
+[data-theme="light"] .toast.info    { background: #fff9e8; border-color: rgba(20,82,74,.35); color: var(--gold); }
 
 /* Feat bar icons on light */
 [data-theme="light"] .feat-bar { border-color: var(--border); }
@@ -1717,118 +1717,40 @@ select, textarea {
   font-size: 16px !important;
 }
 </style>
+<style>
+.nav-login-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:40px;padding:9px 20px;border:none;border-radius:980px;background:var(--gold);color:#fff;font-family:var(--font);font-size:13.5px;font-weight:700;letter-spacing:-.1px;cursor:pointer;white-space:nowrap;box-shadow:0 4px 14px rgba(28,107,92,.28);transition:filter .2s,transform .2s,box-shadow .2s;-webkit-tap-highlight-color:transparent;}
+.nav-login-btn:hover{filter:brightness(1.08);transform:translateY(-1px);}
+.nav-login-btn:active{transform:translateY(0);}
+.nav-login-btn:focus-visible{outline:3px solid rgba(28,107,92,.35);outline-offset:2px;}
+@media(max-width:600px){.nav-login-btn{padding:8px 14px;font-size:13px;min-height:38px;}}
+</style>
 </head>
 <body>
 
-<!-- ══ SPLASH SCREEN ══ -->
-<div id="splashScreen" style="position:fixed;inset:0;z-index:99999;background:#0B241A;overflow:hidden;transition:opacity 1.5s ease;">
-
-  <!-- Logo full màn hình, mờ làm nền -->
-  <img src="https://lh3.googleusercontent.com/d/1XNTWMdoWg1fNQ4JsjfmpEaGHxMpBcGEw"
-    alt="VDAPP"
-    style="position:absolute;inset:0;width:100%;height:100%;object-fit:contain;
-           filter:brightness(0) invert(1);
-           opacity:0.08;"
+<!-- ══ SPLASH SCREEN (không chặn thao tác, chỉ hiện 1 lần mỗi phiên) ══ -->
+<div id="splashScreen" aria-hidden="true" style="position:fixed;inset:0;z-index:99999;background:#0A2621;overflow:hidden;transition:opacity .6s ease;pointer-events:none;">
+  <img src="https://lh3.googleusercontent.com/d/1XNTWMdoWg1fNQ4JsjfmpEaGHxMpBcGEw" alt=""
+    style="position:absolute;top:50%;left:50%;width:min(60vw,60vh);height:min(60vw,60vh);object-fit:contain;transform:translate(-50%,-58%);filter:brightness(0) invert(1) drop-shadow(0 0 80px rgba(28,107,92,0.35));opacity:0;animation:splashLogoFadeIn .5s .05s ease forwards;"
     onerror="this.style.display='none'">
-
-  <!-- Logo trung tâm to rõ -->
-  <img src="https://lh3.googleusercontent.com/d/1XNTWMdoWg1fNQ4JsjfmpEaGHxMpBcGEw"
-    alt="VDAPP"
-    style="position:absolute;top:50%;left:50%;
-           width:min(75vw,75vh);height:min(75vw,75vh);object-fit:contain;
-           transform:translate(-50%,-55%);
-           filter:brightness(0) invert(1) drop-shadow(0 0 80px rgba(14,159,110,0.25));
-           opacity:0;animation:splashLogoFadeIn .8s .1s ease forwards;"
-    onerror="this.style.display='none'">
-
-  <!-- Text overlay căn giữa, nằm dưới logo -->
-  <div style="position:absolute;top:68%;left:50%;transform:translateX(-50%);
-              width:100%;display:flex;flex-direction:column;align-items:center;gap:12px;
-              opacity:0;animation:splashImgIn .5s .4s ease forwards;">
-
-    <!-- Tên công ty kiểu đánh máy -->
-    <div style="font-size:clamp(36px,7vw,80px);font-weight:900;letter-spacing:-2px;line-height:1;
-                display:flex;align-items:baseline;justify-content:center;gap:0;white-space:nowrap;">
-      <span style="background:linear-gradient(135deg,#0E9F6E,#3ECF8E);
-                   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-                   background-clip:text;" id="splashVD"></span>
-      <span style="color:#f0f4ff;" id="splashAPP"></span>
-      <span style="background:linear-gradient(135deg,#0E9F6E,#3ECF8E);
-                   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-                   background-clip:text;" id="splashDot"></span>
-      <span id="splashCursor" style="color:#0E9F6E;animation:splashBlink .6s step-end infinite;display:none;">|</span>
-    </div>
-
-    <!-- Slogan kiểu đánh máy -->
-    <div style="font-size:clamp(11px,1.6vw,16px);font-weight:500;letter-spacing:3px;
-                text-transform:uppercase;color:rgba(169,223,194,0.9);
-                text-align:center;min-height:1.4em;" id="splashSlogan"></div>
+  <div style="position:absolute;top:68%;left:50%;transform:translateX(-50%);width:100%;display:flex;flex-direction:column;align-items:center;gap:12px;opacity:0;animation:splashImgIn .4s .15s ease forwards;">
+    <div style="font-size:clamp(36px,7vw,80px);font-weight:900;letter-spacing:-2px;line-height:1;white-space:nowrap;color:#f0f4ff;">VD<span style="color:#7FC4B3;">APP.</span></div>
+    <div style="font-size:clamp(11px,1.6vw,16px);font-weight:500;letter-spacing:3px;text-transform:uppercase;color:rgba(160,205,193,0.9);text-align:center;">Bứt phá bắt đầu từ một trang tính</div>
   </div>
 </div>
-
 <style>
-@keyframes splashImgIn {
-  from { opacity:0; }
-  to   { opacity:1; }
-}
-@keyframes splashLogoFadeIn {
-  from { opacity:0; transform:translate(-50%,-55%) scale(.96); }
-  to   { opacity:1; transform:translate(-50%,-55%) scale(1); }
-}
-@keyframes splashBlink { 0%,100%{opacity:1} 50%{opacity:0} }
+@keyframes splashImgIn { from { opacity:0; } to { opacity:1; } }
+@keyframes splashLogoFadeIn { from { opacity:0; transform:translate(-50%,-58%) scale(.96); } to { opacity:1; transform:translate(-50%,-58%) scale(1); } }
 </style>
 <script>
 (function(){
-  var COMPANY  = 'VDAPP.';
-  var SLOGAN   = 'Bứt phá bắt đầu từ một trang tính';
-  var elVD     = document.getElementById('splashVD');
-  var elAPP    = document.getElementById('splashAPP');
-  var elDot    = document.getElementById('splashDot');
-  var elSlogan = document.getElementById('splashSlogan');
-  var cursor   = document.getElementById('splashCursor');
-
-  // Typewriter helper
-  function typeInto(targets, speed, done){
-    // targets = [{el, text}, ...]  typed char-by-char across all targets in sequence
-    var flat = [];
-    targets.forEach(function(t){ t.text.split('').forEach(function(c){ flat.push({el:t.el,c:c}); }); });
-    var i = 0;
-    function next(){
-      if(i >= flat.length){ if(done) done(); return; }
-      flat[i].el.textContent += flat[i].c;
-      i++;
-      setTimeout(next, speed);
-    }
-    next();
-  }
-
-  window.addEventListener('DOMContentLoaded', function(){
-    // Bắt đầu gõ sau 500ms (logo đã hiện)
-    setTimeout(function(){
-      cursor.style.display = 'inline';
-      // Gõ VDAPP. trước
-      typeInto([
-        {el: elVD,  text: 'VD'},
-        {el: elAPP, text: 'APP'},
-        {el: elDot, text: '.'},
-      ], 80, function(){
-        // Xong tên, đổi cursor xuống slogan
-        setTimeout(function(){
-          elSlogan.textContent = '';
-          typeInto([{el: elSlogan, text: SLOGAN}], 35, function(){
-            // Xong hết — ẩn cursor, chờ rồi fade out
-            cursor.style.display = 'none';
-            setTimeout(function(){
-              var s = document.getElementById('splashScreen');
-              if(!s) return;
-              s.style.opacity = '0';
-              setTimeout(function(){ s.style.display='none'; }, 1500);
-            }, 600);
-          });
-        }, 200);
-      });
-    }, 500);
-  });
+  var s = document.getElementById('splashScreen');
+  if(!s) return;
+  var seen = false;
+  try { seen = sessionStorage.getItem('vd_splash') === '1'; sessionStorage.setItem('vd_splash','1'); } catch(e){}
+  function hide(){ s.style.opacity = '0'; setTimeout(function(){ if(s && s.parentNode) s.style.display = 'none'; }, 650); }
+  if(seen){ s.style.display = 'none'; return; }
+  // Hiện tối đa ~1.4s; luôn có pointer-events:none nên không bao giờ chặn nút bấm
+  setTimeout(hide, 1400);
 })();
 </script>
 
@@ -1890,7 +1812,7 @@ select, textarea {
 </nav>
 
 <!-- LOGIN OVERLAY — chỉ Google Sign-In -->
-<div class="overlay" id="loginOverlay">
+<div class="overlay" id="loginOverlay" onclick="if(event.target===this)closeLogin()">
   <div class="login-box">
     <button class="login-close" onclick="closeLogin()" aria-label="Đóng đăng nhập"><i class="bi bi-x-lg"></i></button>
     <div class="login-logo">
@@ -1903,7 +1825,7 @@ select, textarea {
     <p style="font-size:12.5px;color:var(--text2);text-align:center;margin-bottom:18px;line-height:1.6;">
       Đăng nhập bằng đúng Gmail bạn đã dùng lúc mua hàng để xem lại link tải và lịch sử đơn hàng.
     </p>
-    <button onclick="doGoogleLogin()" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;padding:13px 16px;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;font-family:var(--font);color:var(--text);transition:all .2s;" onmouseover="this.style.borderColor='#4285F4';this.style.background='rgba(66,133,244,.06)'" onmouseout="this.style.borderColor='var(--border)';this.style.background='var(--surface)'">
+    <button id="googleLoginBtn" onclick="doGoogleLogin()" style="width:100%;display:flex;align-items:center;justify-content:center;gap:10px;padding:13px 16px;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;font-family:var(--font);color:var(--text);transition:all .2s;" onmouseover="this.style.borderColor='#4285F4';this.style.background='rgba(66,133,244,.06)'" onmouseout="this.style.borderColor='var(--border)';this.style.background='var(--surface)'">
       <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/><path fill="none" d="M0 0h48v48H0z"/></svg>
       Tiếp tục với Google
     </button>
@@ -2051,7 +1973,7 @@ select, textarea {
   </div>
   <div class="feat-item">
     <div class="fi-icon"><i class="bi bi-gem"></i></div>
-    <div><div class="fi-t">Hội viên ưu đãi</div><div class="fi-d">Tiết kiệm đến 70%</div></div>
+    <div><div class="fi-t">Hội viên ưu đãi</div><div class="fi-d">Giảm 30% khi mua app</div></div>
   </div>
 </div>
 
@@ -2065,14 +1987,14 @@ select, textarea {
   <!-- Slide counter -->
   <div id="promoCounter" style="position:absolute;bottom:14px;right:16px;font-size:11px;color:rgba(255,255,255,.5);z-index:3;font-weight:600;letter-spacing:.5px;"></div>
   <!-- Arrows -->
-  <button onclick="promoNav(-1)" aria-label="Ảnh trước" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:3;backdrop-filter:blur(6px);transition:all .2s;" onmouseover="this.style.background='rgba(14,159,110,.6)';this.style.borderColor='var(--gold)'" onmouseout="this.style.background='rgba(0,0,0,.5)';this.style.borderColor='rgba(255,255,255,.18)'"><i class="bi bi-chevron-left"></i></button>
-  <button onclick="promoNav(1)" aria-label="Ảnh tiếp theo"  style="position:absolute;right:14px;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:3;backdrop-filter:blur(6px);transition:all .2s;" onmouseover="this.style.background='rgba(14,159,110,.6)';this.style.borderColor='var(--gold)'" onmouseout="this.style.background='rgba(0,0,0,.5)';this.style.borderColor='rgba(255,255,255,.18)'"><i class="bi bi-chevron-right"></i></button>
+  <button onclick="promoNav(-1)" aria-label="Ảnh trước" style="position:absolute;left:14px;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:3;backdrop-filter:blur(6px);transition:all .2s;" onmouseover="this.style.background='rgba(28,107,92,.6)';this.style.borderColor='var(--gold)'" onmouseout="this.style.background='rgba(0,0,0,.5)';this.style.borderColor='rgba(255,255,255,.18)'"><i class="bi bi-chevron-left"></i></button>
+  <button onclick="promoNav(1)" aria-label="Ảnh tiếp theo"  style="position:absolute;right:14px;top:50%;transform:translateY(-50%);width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,.5);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:17px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:3;backdrop-filter:blur(6px);transition:all .2s;" onmouseover="this.style.background='rgba(28,107,92,.6)';this.style.borderColor='var(--gold)'" onmouseout="this.style.background='rgba(0,0,0,.5)';this.style.borderColor='rgba(255,255,255,.18)'"><i class="bi bi-chevron-right"></i></button>
 </div>
 
 <!-- HOT PRODUCTS ROW -->
 <!-- HOT PRODUCTS — 3D Coverflow Carousel -->
 <div id="hotProdsSection" style="display:none;padding:40px 0 44px;position:relative;z-index:1;background:var(--bg);overflow:hidden;">
-  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 50% 70% at 50% 50%,rgba(14,159,110,.05),transparent 70%);pointer-events:none;"></div>
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 50% 70% at 50% 50%,rgba(28,107,92,.05),transparent 70%);pointer-events:none;"></div>
   <!-- Header -->
   <div style="display:flex;align-items:center;justify-content:space-between;padding:0 5vw;margin-bottom:28px;">
     <div style="display:flex;align-items:center;gap:14px;">
@@ -2162,55 +2084,66 @@ select, textarea {
 <section id="pricing">
   <div style="text-align:center;">
     <div class="s-label">Hội viên</div>
-    <h2 class="s-title">Tiết kiệm tối đa</h2>
-    <p class="s-sub" style="margin:14px auto 0;">Truy cập toàn bộ sản phẩm với giá ưu đãi</p>
+    <h2 class="s-title">Sở hữu app trọn đời, đồng hành trọn gói</h2>
+    <p class="s-sub" style="margin:14px auto 0;">Mua app một lần dùng mãi mãi. Hội viên để được chỉnh sửa, hỗ trợ nhanh và giảm giá khi mua thêm.</p>
   </div>
   <div class="plans-grid">
     <div class="plan-card">
-      <div class="plan-name">Cơ bản</div>
-      <div class="plan-price"><sup>đ</sup>0</div>
-      <div class="plan-period">Miễn phí mãi mãi</div>
+      <div class="plan-name">Mua app</div>
+      <div class="plan-price" style="font-size:30px;letter-spacing:-1px;line-height:1.15;padding:8px 0 2px;">Theo giá trị<br>từng app</div>
+      <div class="plan-period">Trả một lần · sở hữu vĩnh viễn</div>
       <ul class="plan-features">
-        <li><span class="ck"><i class="bi bi-check-circle-fill"></i></span> Sản phẩm miễn phí</li>
-        <li><span class="ck"><i class="bi bi-check-circle-fill"></i></span> Xem demo tất cả</li>
-        <li><span class="cx"><i class="bi bi-x-circle"></i></span> Giảm giá mua lẻ</li>
-        <li><span class="cx"><i class="bi bi-x-circle"></i></span> Hỗ trợ ưu tiên</li>
+        <li><span class="ck"><i class="bi bi-check-circle-fill"></i></span> Sở hữu vĩnh viễn app + database</li>
+        <li><span class="ck"><i class="bi bi-check-circle-fill"></i></span> Nhận link app ngay sau thanh toán</li>
+        <li><span class="ck"><i class="bi bi-check-circle-fill"></i></span> Cấp lại link không giới hạn</li>
+        <li><span class="ck"><i class="bi bi-check-circle-fill"></i></span> Bảo hành lỗi 12 tháng</li>
+        <li><span class="cx"><i class="bi bi-x-circle"></i></span> Chỉnh sửa, bổ sung tính năng</li>
       </ul>
-      <button class="pbtn-o" onclick="openPayment({type:'plan',planId:'free',name:'Gói Cơ Bản',price:0})"><i class="bi bi-person-plus"></i> Đăng ký miễn phí</button>
+      <button class="pbtn-o" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})"><i class="bi bi-grid-fill"></i> Chọn app để mua</button>
     </div>
     <div class="plan-card featured">
       <div class="plan-badge"><i class="bi bi-fire"></i> Phổ biến nhất</div>
-      <div class="plan-name">Hội viên năm</div>
-      <div class="plan-price"><sup>đ</sup>499.000</div>
-      <div class="plan-period">/ năm — tiết kiệm 60%</div>
+      <div class="plan-name">Hội viên Vàng</div>
+      <div class="plan-price"><sup>đ</sup>699.000</div>
+      <div class="plan-period">/ tháng · hủy bất cứ lúc nào</div>
       <ul class="plan-features">
-        <li><span class="ck"><i class="bi bi-check-circle-fill"></i></span> Toàn bộ webapp & sheets</li>
-        <li><span class="ck"><i class="bi bi-check-circle-fill"></i></span> Giảm 40% khi mua mới</li>
-        <li><span class="ck"><i class="bi bi-check-circle-fill"></i></span> Hỗ trợ kỹ thuật ưu tiên</li>
-        <li><span class="ck"><i class="bi bi-check-circle-fill"></i></span> Tải không giới hạn</li>
+        <li><span class="ck"><i class="bi bi-check-circle-fill"></i></span> Yêu cầu chỉnh sửa, bổ sung tính năng đã có (tối đa 3 yêu cầu/tháng)</li>
+        <li><span class="ck"><i class="bi bi-check-circle-fill"></i></span> Hỗ trợ kỹ thuật nhanh, phản hồi trong 24 giờ làm việc</li>
+        <li><span class="ck"><i class="bi bi-check-circle-fill"></i></span> Giảm 30% khi mua các app khác</li>
+        <li><span class="ck"><i class="bi bi-check-circle-fill"></i></span> Sở hữu vĩnh viễn app đã mua + cấp lại link không giới hạn</li>
+        <li><span class="cx"><i class="bi bi-x-circle"></i></span> Tính năng hoàn toàn mới, source code</li>
       </ul>
-      <button class="pbtn-g" onclick="openPayment({type:'plan',planId:'year',name:'Hội viên Năm',price:499000})"><i class="bi bi-lightning-charge-fill"></i> Đăng ký ngay</button>
+      <button class="pbtn-g" onclick="openPayment({type:'plan',planId:'gold',name:'Hội viên Vàng',price:699000})"><i class="bi bi-lightning-charge-fill"></i> Đăng ký Vàng</button>
     </div>
     <div class="plan-card">
-      <div class="plan-name">Vĩnh viễn</div>
-      <div class="plan-price"><sup>đ</sup>999.000</div>
-      <div class="plan-period">Một lần, dùng mãi mãi</div>
+      <div class="plan-badge" style="background:linear-gradient(135deg,#14524A,#1C6B5C);"><i class="bi bi-gem"></i> Cao cấp</div>
+      <div class="plan-name">Hội viên Kim cương</div>
+      <div class="plan-price"><sup>đ</sup>1.250.000</div>
+      <div class="plan-period">/ tháng · cam kết tối thiểu 6 tháng để nhận source code</div>
       <ul class="plan-features">
-        <li><span class="ck"><i class="bi bi-check-circle-fill"></i></span> Toàn bộ sản phẩm hiện tại</li>
-        <li><span class="ck"><i class="bi bi-check-circle-fill"></i></span> Cập nhật suốt đời</li>
-        <li><span class="ck"><i class="bi bi-check-circle-fill"></i></span> Hỗ trợ VIP</li>
-        <li><span class="ck"><i class="bi bi-check-circle-fill"></i></span> Tải + Source code</li>
+        <li><span class="ck"><i class="bi bi-check-circle-fill"></i></span> Toàn bộ quyền lợi gói Vàng (tối đa 6 yêu cầu/tháng)</li>
+        <li><span class="ck"><i class="bi bi-check-circle-fill"></i></span> Hỗ trợ 1:1 riêng, phản hồi trong 4 giờ làm việc</li>
+        <li><span class="ck"><i class="bi bi-check-circle-fill"></i></span> Phát triển thêm 2 tính năng hoàn toàn mới</li>
+        <li><span class="ck"><i class="bi bi-check-circle-fill"></i></span> Được giao source code app đã mua</li>
       </ul>
-      <button class="pbtn-o" onclick="openPayment({type:'plan',planId:'lifetime',name:'Hội viên Vĩnh Viễn',price:999000})"><i class="bi bi-infinity"></i> Mua vĩnh viễn</button>
+      <button class="pbtn-o" onclick="openPayment({type:'plan',planId:'diamond',name:'Hội viên Kim cương',price:1250000})"><i class="bi bi-gem"></i> Đăng ký Kim cương</button>
     </div>
+  </div>
+  <div style="max-width:1100px;margin:28px auto 0;padding:16px 20px;border:1px solid var(--border-gold);background:var(--gold-pale);border-radius:14px;font-size:13px;line-height:1.75;color:var(--text2);">
+    <strong style="color:var(--text);"><i class="bi bi-info-circle-fill" style="color:var(--gold);"></i> Lưu ý về database:</strong>
+    Database Google Sheets thuộc quyền sở hữu của bạn, nên <strong>nghiêm cấm thêm, xóa, sửa định dạng, cấu trúc hoặc dữ liệu trực tiếp trong sheet</strong>. Mọi thao tác thực hiện trên link app được cung cấp. Nếu vi phạm, chúng tôi không chịu trách nhiệm về bảo mật hoặc bảo hành.
+    Dừng hội viên không làm mất app đã mua. Tính năng bổ sung là hoàn thiện hoặc tinh chỉnh tính năng đã có, không gồm tính năng hoàn toàn mới.
+    Xem chi tiết tại <a href="#policy-terms" onclick="event.preventDefault();openPolicy('terms')" style="color:var(--gold);font-weight:700;">Điều khoản sử dụng</a>,
+    <a href="#policy-pricing" onclick="event.preventDefault();openPolicy('pricing')" style="color:var(--gold);font-weight:700;">Chính sách giá</a> và
+    <a href="#policy-refund" onclick="event.preventDefault();openPolicy('refund')" style="color:var(--gold);font-weight:700;">Đổi trả, hoàn tiền</a>.
   </div>
 </section>
 
 <!-- CUSTOM APP CONSULTING SECTION -->
 <section id="custom-app" style="background:var(--bg2); padding: 96px 5vw; position:relative; z-index:1; overflow:hidden;">
   <!-- Background glow -->
-  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(14,159,110,.07),transparent 70%);pointer-events:none;"></div>
-  <div style="position:absolute;top:-80px;right:-80px;width:400px;height:400px;border-radius:50%;background:rgba(11,122,85,.04);pointer-events:none;"></div>
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(28,107,92,.07),transparent 70%);pointer-events:none;"></div>
+  <div style="position:absolute;top:-80px;right:-80px;width:400px;height:400px;border-radius:50%;background:rgba(20,82,74,.04);pointer-events:none;"></div>
 
   <!-- Header -->
   <div style="text-align:center; max-width:700px; margin:0 auto 64px;">
@@ -2230,28 +2163,28 @@ select, textarea {
     <!-- Benefit 1 -->
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:28px 24px;transition:all .25s;position:relative;overflow:hidden;" onmouseover="this.style.borderColor='var(--border-gold)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
       <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:20px 20px 0 0;"></div>
-      <div style="width:50px;height:50px;border-radius:14px;background:rgba(14,159,110,.12);border:1px solid var(--border-gold);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:18px;color:var(--gold);"><i class="bi bi-lightning-charge-fill"></i></div>
+      <div style="width:50px;height:50px;border-radius:14px;background:rgba(28,107,92,.12);border:1px solid var(--border-gold);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:18px;color:var(--gold);"><i class="bi bi-lightning-charge-fill"></i></div>
       <h3 style="font-size:16px;font-weight:700;letter-spacing:-.3px;margin-bottom:10px;">Triển khai trong 3–7 ngày</h3>
       <p style="font-size:13px;color:var(--text2);line-height:1.7;">Không cần thuê server, domain riêng hay đội ngũ lập trình phức tạp. App chạy ngay trên hạ tầng Google, sẵn sàng sử dụng sau vài ngày.</p>
     </div>
     <!-- Benefit 2 -->
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:28px 24px;transition:all .25s;position:relative;overflow:hidden;" onmouseover="this.style.borderColor='var(--border-gold)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
-      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#34c759,#30d158);border-radius:20px 20px 0 0;"></div>
-      <div style="width:50px;height:50px;border-radius:14px;background:rgba(52,199,89,.1);border:1px solid rgba(52,199,89,.25);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:18px;color:#34c759;"><i class="bi bi-cash-coin"></i></div>
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#2E9E7E,#3AAE8D);border-radius:20px 20px 0 0;"></div>
+      <div style="width:50px;height:50px;border-radius:14px;background:rgba(46,158,126,.1);border:1px solid rgba(46,158,126,.25);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:18px;color:#2E9E7E;"><i class="bi bi-cash-coin"></i></div>
       <h3 style="font-size:16px;font-weight:700;letter-spacing:-.3px;margin-bottom:10px;">Chi phí tiết kiệm 80–95%</h3>
       <p style="font-size:13px;color:var(--text2);line-height:1.7;">So với phần mềm ERP truyền thống hàng trăm triệu, giải pháp AppScript + GG Sheets chỉ từ vài triệu đồng, phù hợp SME và startup.</p>
     </div>
     <!-- Benefit 3 -->
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:28px 24px;transition:all .25s;position:relative;overflow:hidden;" onmouseover="this.style.borderColor='var(--border-gold)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
-      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#0B7A55,#7ab3e8);border-radius:20px 20px 0 0;"></div>
-      <div style="width:50px;height:50px;border-radius:14px;background:rgba(11,122,85,.1);border:1px solid rgba(11,122,85,.25);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:18px;color:var(--accent);"><i class="bi bi-bullseye"></i></div>
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#14524A,#7ab3e8);border-radius:20px 20px 0 0;"></div>
+      <div style="width:50px;height:50px;border-radius:14px;background:rgba(20,82,74,.1);border:1px solid rgba(20,82,74,.25);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:18px;color:var(--accent);"><i class="bi bi-bullseye"></i></div>
       <h3 style="font-size:16px;font-weight:700;letter-spacing:-.3px;margin-bottom:10px;">100% đúng theo nghiệp vụ</h3>
       <p style="font-size:13px;color:var(--text2);line-height:1.7;">Thiết kế từ đầu theo quy trình thực tế của doanh nghiệp bạn. Không phải mua tính năng thừa, không cần học phần mềm phức tạp.</p>
     </div>
     <!-- Benefit 4 -->
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:28px 24px;transition:all .25s;position:relative;overflow:hidden;" onmouseover="this.style.borderColor='var(--border-gold)';this.style.transform='translateY(-4px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform='none'">
-      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#7ED3A8,#c084fc);border-radius:20px 20px 0 0;"></div>
-      <div style="width:50px;height:50px;border-radius:14px;background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.25);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:18px;color:#7ED3A8;"><i class="bi bi-link-45deg"></i></div>
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#8CC7B8,#c084fc);border-radius:20px 20px 0 0;"></div>
+      <div style="width:50px;height:50px;border-radius:14px;background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.25);display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:18px;color:#8CC7B8;"><i class="bi bi-link-45deg"></i></div>
       <h3 style="font-size:16px;font-weight:700;letter-spacing:-.3px;margin-bottom:10px;">Kết nối Google Sheets thời gian thực</h3>
       <p style="font-size:13px;color:var(--text2);line-height:1.7;">Dữ liệu lưu trực tiếp trên Google Sheets — dễ xem, dễ xuất báo cáo, dễ chia sẻ. Không sợ mất dữ liệu, không cần backup thủ công.</p>
     </div>
@@ -2288,7 +2221,7 @@ select, textarea {
           <div style="font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);margin-bottom:4px;">App Web truyền thống</div>
           <div style="font-size:20px;">🌐</div>
         </div>
-        <div style="padding:18px 20px;text-align:center;background:linear-gradient(180deg,rgba(14,159,110,.08),transparent);">
+        <div style="padding:18px 20px;text-align:center;background:linear-gradient(180deg,rgba(28,107,92,.08),transparent);">
           <div style="font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:4px;">AppScript / Appsheet</div>
           <div style="font-size:20px;">✦</div>
         </div>
@@ -2303,8 +2236,8 @@ select, textarea {
           <div style="font-size:13px;font-weight:700;color:#e84040;">50 – 500 triệu+</div>
           <div style="font-size:11px;color:var(--text3);margin-top:3px;">Tùy độ phức tạp</div>
         </div>
-        <div style="padding:16px 20px;text-align:center;background:rgba(14,159,110,.03);">
-          <div style="font-size:13px;font-weight:700;color:#34c759;">3 – 20 triệu</div>
+        <div style="padding:16px 20px;text-align:center;background:rgba(28,107,92,.03);">
+          <div style="font-size:13px;font-weight:700;color:#2E9E7E;">3 – 20 triệu</div>
           <div style="font-size:11px;color:var(--text3);margin-top:3px;">Tiết kiệm 80–95%</div>
         </div>
       </div>
@@ -2318,8 +2251,8 @@ select, textarea {
           <div style="font-size:13px;font-weight:700;color:#e84040;">3 – 12 tháng</div>
           <div style="font-size:11px;color:var(--text3);margin-top:3px;">Cần thiết kế, dev, test</div>
         </div>
-        <div style="padding:16px 20px;text-align:center;background:rgba(14,159,110,.03);">
-          <div style="font-size:13px;font-weight:700;color:#34c759;">3 – 14 ngày</div>
+        <div style="padding:16px 20px;text-align:center;background:rgba(28,107,92,.03);">
+          <div style="font-size:13px;font-weight:700;color:#2E9E7E;">3 – 14 ngày</div>
           <div style="font-size:11px;color:var(--text3);margin-top:3px;">Dùng ngay sau nghiệm thu</div>
         </div>
       </div>
@@ -2333,8 +2266,8 @@ select, textarea {
           <div style="font-size:13px;font-weight:700;color:#e84040;">Cần mua riêng</div>
           <div style="font-size:11px;color:var(--text3);margin-top:3px;">2–20 triệu/năm, gia hạn định kỳ</div>
         </div>
-        <div style="padding:16px 20px;text-align:center;background:rgba(14,159,110,.03);">
-          <div style="font-size:13px;font-weight:700;color:#34c759;">Miễn phí hoàn toàn</div>
+        <div style="padding:16px 20px;text-align:center;background:rgba(28,107,92,.03);">
+          <div style="font-size:13px;font-weight:700;color:#2E9E7E;">Miễn phí hoàn toàn</div>
           <div style="font-size:11px;color:var(--text3);margin-top:3px;">Dùng hạ tầng Google</div>
         </div>
       </div>
@@ -2348,8 +2281,8 @@ select, textarea {
           <div style="font-size:13px;font-weight:700;color:#e84040;">Cần IT quản trị</div>
           <div style="font-size:11px;color:var(--text3);margin-top:3px;">Dev/sysadmin thường trực</div>
         </div>
-        <div style="padding:16px 20px;text-align:center;background:rgba(14,159,110,.03);">
-          <div style="font-size:13px;font-weight:700;color:#34c759;">Không cần IT</div>
+        <div style="padding:16px 20px;text-align:center;background:rgba(28,107,92,.03);">
+          <div style="font-size:13px;font-weight:700;color:#2E9E7E;">Không cần IT</div>
           <div style="font-size:11px;color:var(--text3);margin-top:3px;">Admin tự quản lý qua Sheets</div>
         </div>
       </div>
@@ -2363,8 +2296,8 @@ select, textarea {
           <div style="font-size:13px;font-weight:700;color:#e84040;">Tốn chi phí & thời gian</div>
           <div style="font-size:11px;color:var(--text3);margin-top:3px;">Phải thuê dev chỉnh sửa</div>
         </div>
-        <div style="padding:16px 20px;text-align:center;background:rgba(14,159,110,.03);">
-          <div style="font-size:13px;font-weight:700;color:#34c759;">Linh hoạt, nhanh chóng</div>
+        <div style="padding:16px 20px;text-align:center;background:rgba(28,107,92,.03);">
+          <div style="font-size:13px;font-weight:700;color:#2E9E7E;">Linh hoạt, nhanh chóng</div>
           <div style="font-size:11px;color:var(--text3);margin-top:3px;">Cập nhật trong vài giờ</div>
         </div>
       </div>
@@ -2378,8 +2311,8 @@ select, textarea {
           <div style="font-size:13px;font-weight:700;color:#FFA500;">Cần module riêng</div>
           <div style="font-size:11px;color:var(--text3);margin-top:3px;">Chi phí thêm để xuất Excel</div>
         </div>
-        <div style="padding:16px 20px;text-align:center;background:rgba(14,159,110,.03);">
-          <div style="font-size:13px;font-weight:700;color:#34c759;">Google Sheets sẵn có</div>
+        <div style="padding:16px 20px;text-align:center;background:rgba(28,107,92,.03);">
+          <div style="font-size:13px;font-weight:700;color:#2E9E7E;">Google Sheets sẵn có</div>
           <div style="font-size:11px;color:var(--text3);margin-top:3px;">Xuất Excel, PDF tức thì</div>
         </div>
       </div>
@@ -2393,8 +2326,8 @@ select, textarea {
           <div style="font-size:13px;font-weight:700;color:#FFA500;">Phức tạp</div>
           <div style="font-size:11px;color:var(--text3);margin-top:3px;">Cần cấu hình kỹ thuật cao</div>
         </div>
-        <div style="padding:16px 20px;text-align:center;background:rgba(14,159,110,.03);">
-          <div style="font-size:13px;font-weight:700;color:#34c759;">Google xử lý tất cả</div>
+        <div style="padding:16px 20px;text-align:center;background:rgba(28,107,92,.03);">
+          <div style="font-size:13px;font-weight:700;color:#2E9E7E;">Google xử lý tất cả</div>
           <div style="font-size:11px;color:var(--text3);margin-top:3px;">Phân quyền bằng Gmail</div>
         </div>
       </div>
@@ -2407,7 +2340,7 @@ select, textarea {
         <div style="padding:18px 20px;text-align:center;border-right:1px solid var(--border);">
           <div style="font-size:12px;color:var(--text2);line-height:1.6;">Tập đoàn lớn, có ngân sách lớn, yêu cầu tích hợp phức tạp</div>
         </div>
-        <div style="padding:18px 20px;text-align:center;background:linear-gradient(180deg,rgba(14,159,110,.06),transparent);">
+        <div style="padding:18px 20px;text-align:center;background:linear-gradient(180deg,rgba(28,107,92,.06),transparent);">
           <div style="font-size:12px;font-weight:700;color:var(--gold);line-height:1.6;">SME, Startup, Hộ kinh doanh, Đại lý, Shop online — mọi quy mô</div>
         </div>
       </div>
@@ -2417,13 +2350,13 @@ select, textarea {
   <!-- CTA Section -->
   <div style="max-width:700px;margin:0 auto;text-align:center;">
     <div style="background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 100%);border:1px solid var(--border-gold);border-radius:24px;padding:48px 40px;position:relative;overflow:hidden;">
-      <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(14,159,110,.1),transparent 70%);pointer-events:none;"></div>
+      <div style="position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(28,107,92,.1),transparent 70%);pointer-events:none;"></div>
       <div style="font-size:36px;margin-bottom:16px;color:var(--gold);"><i class="bi bi-rocket-takeoff-fill"></i></div>
       <h3 style="font-size:clamp(22px,3vw,32px);font-weight:800;letter-spacing:-1px;margin-bottom:14px;">Bắt đầu từ một buổi tư vấn miễn phí</h3>
       <p style="font-size:15px;color:var(--text2);line-height:1.7;margin-bottom:32px;">Mô tả quy trình làm việc của bạn, chúng tôi sẽ tư vấn giải pháp tối ưu nhất — hoàn toàn không mất phí tư vấn ban đầu.</p>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
         <a href="https://zalo.me/0946770648" target="_blank"
-          style="display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#FFFFFF;border-radius:980px;font-weight:700;font-size:15px;text-decoration:none;letter-spacing:-.2px;transition:all .2s;box-shadow:0 8px 24px rgba(14,159,110,.35);"
+          style="display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#FFFFFF;border-radius:980px;font-weight:700;font-size:15px;text-decoration:none;letter-spacing:-.2px;transition:all .2s;box-shadow:0 8px 24px rgba(28,107,92,.35);"
           onmouseover="this.style.filter='brightness(1.1)';this.style.transform='translateY(-2px)'"
           onmouseout="this.style.filter='';this.style.transform=''">
           <svg width="18" height="18" viewBox="0 0 48 48" fill="none"><rect width="48" height="48" rx="10" fill="#0068FF"/><text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="26" font-weight="bold" font-family="Arial">Z</text></svg>
@@ -2436,7 +2369,7 @@ select, textarea {
           <i class="bi bi-envelope-fill"></i> Gửi yêu cầu
         </a>
       </div>
-      <p style="font-size:12px;color:var(--text3);margin-top:20px;"><i class="bi bi-check-circle-fill" style="color:#34c759;margin-right:5px;"></i>Tư vấn miễn phí &nbsp;·&nbsp; <i class="bi bi-check-circle-fill" style="color:#34c759;margin-right:5px;"></i>Báo giá trong 24h &nbsp;·&nbsp; <i class="bi bi-check-circle-fill" style="color:#34c759;margin-right:5px;"></i>Cam kết đúng tiến độ</p>
+      <p style="font-size:12px;color:var(--text3);margin-top:20px;"><i class="bi bi-check-circle-fill" style="color:#2E9E7E;margin-right:5px;"></i>Tư vấn miễn phí &nbsp;·&nbsp; <i class="bi bi-check-circle-fill" style="color:#2E9E7E;margin-right:5px;"></i>Báo giá trong 24h &nbsp;·&nbsp; <i class="bi bi-check-circle-fill" style="color:#2E9E7E;margin-right:5px;"></i>Cam kết đúng tiến độ</p>
     </div>
   </div>
 </section>
@@ -2450,9 +2383,9 @@ select, textarea {
   </div>
   <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; max-width: 900px; margin: 0 auto;">
     <!-- Bank Card -->
-    <div id="bankCard" style="background: linear-gradient(135deg, #06231A 0%, #0B4A34 50%, #083626 100%); border: 1px solid rgba(14,159,110,0.3); border-radius: 22px; padding: 32px 28px; position: relative; overflow: hidden;">
-      <div style="position:absolute; top:-40px; right:-40px; width:180px; height:180px; border-radius:50%; background: rgba(14,159,110,0.06); pointer-events:none;"></div>
-      <div style="position:absolute; bottom:-60px; left:-30px; width:160px; height:160px; border-radius:50%; background: rgba(11,122,85,0.05); pointer-events:none;"></div>
+    <div id="bankCard" style="background: linear-gradient(135deg, #08231F 0%, #12463D 50%, #0D3A33 100%); border: 1px solid rgba(28,107,92,0.3); border-radius: 22px; padding: 32px 28px; position: relative; overflow: hidden;">
+      <div style="position:absolute; top:-40px; right:-40px; width:180px; height:180px; border-radius:50%; background: rgba(28,107,92,0.06); pointer-events:none;"></div>
+      <div style="position:absolute; bottom:-60px; left:-30px; width:160px; height:160px; border-radius:50%; background: rgba(20,82,74,0.05); pointer-events:none;"></div>
       <div style="display:flex; align-items:center; gap:12px; margin-bottom:28px;">
         <div style="background: linear-gradient(135deg, #c8102e, #e63950); width:44px; height:44px; border-radius:10px; display:flex; align-items:center; justify-content:center;">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M3 6h18v2H3V6zm0 4h18v2H3v-2zm0 4h12v2H3v-2z"/></svg>
@@ -2465,20 +2398,20 @@ select, textarea {
       <div style="margin-bottom:20px;">
         <div style="font-size:11px; color:rgba(255,255,255,.4); letter-spacing:1.2px; text-transform:uppercase; margin-bottom:6px; font-weight:600;">Số tài khoản</div>
         <div style="display:flex; align-items:center; gap:12px;">
-          <div style="font-size:26px; font-weight:900; color:#A9DFC2; letter-spacing:2px; font-variant-numeric: tabular-nums;">25088888999999</div>
-          <button onclick="copyBank()" style="background:rgba(169,223,194,.15); border:1px solid rgba(169,223,194,.3); color:#A9DFC2; width:34px; height:34px; border-radius:8px; cursor:pointer; font-size:14px; display:flex; align-items:center; justify-content:center;" title="Copy số tài khoản" aria-label="Copy số tài khoản">
+          <div style="font-size:26px; font-weight:900; color:#A0CDC1; letter-spacing:2px; font-variant-numeric: tabular-nums;">25088888999999</div>
+          <button onclick="copyBank()" style="background:rgba(160,205,193,.15); border:1px solid rgba(160,205,193,.3); color:#A0CDC1; width:34px; height:34px; border-radius:8px; cursor:pointer; font-size:14px; display:flex; align-items:center; justify-content:center;" title="Copy số tài khoản" aria-label="Copy số tài khoản">
             <i class="bi bi-copy"></i>
           </button>
         </div>
-        <div id="copyMsg" style="font-size:12px; color:#34c759; margin-top:4px; opacity:0; transition:opacity .3s; display:flex; align-items:center; gap:4px;"><i class="bi bi-check-circle-fill"></i> Đã sao chép!</div>
+        <div id="copyMsg" style="font-size:12px; color:#2E9E7E; margin-top:4px; opacity:0; transition:opacity .3s; display:flex; align-items:center; gap:4px;"><i class="bi bi-check-circle-fill"></i> Đã sao chép!</div>
       </div>
       <div style="padding-top:18px; border-top:1px solid rgba(255,255,255,.08);">
         <div style="font-size:11px; color:rgba(255,255,255,.4); letter-spacing:1.2px; text-transform:uppercase; margin-bottom:5px; font-weight:600;">Chủ tài khoản</div>
         <div style="font-size:16px; font-weight:700; color:#fff; letter-spacing:-0.2px;">NGUYEN VAN DAM</div>
       </div>
-      <div style="margin-top:16px; background:rgba(14,159,110,.08); border:1px solid rgba(14,159,110,.2); border-radius:10px; padding:12px 14px; font-size:12px; color:rgba(255,255,255,.6); line-height:1.6;">
-        <i class="bi bi-info-circle-fill" style="color:#A9DFC2;"></i>
-        Nội dung CK: <strong style="color:#A9DFC2;">Tên + SĐT + Tên sản phẩm</strong>
+      <div style="margin-top:16px; background:rgba(28,107,92,.08); border:1px solid rgba(28,107,92,.2); border-radius:10px; padding:12px 14px; font-size:12px; color:rgba(255,255,255,.6); line-height:1.6;">
+        <i class="bi bi-info-circle-fill" style="color:#A0CDC1;"></i>
+        Nội dung CK: <strong style="color:#A0CDC1;">Tên + SĐT + Tên sản phẩm</strong>
       </div>
     </div>
     <!-- QR Code -->
@@ -2556,7 +2489,7 @@ select, textarea {
         <img src="https://lh3.googleusercontent.com/d/1XNTWMdoWg1fNQ4JsjfmpEaGHxMpBcGEw" alt="VDAPP Logo"
           class="footer-logo-img"
           style="height:64px;width:auto;border-radius:10px;
-                 filter:brightness(0) invert(1) drop-shadow(0 2px 10px rgba(14,159,110,0.45));
+                 filter:brightness(0) invert(1) drop-shadow(0 2px 10px rgba(28,107,92,0.45));
                  flex-shrink:0;"
           onerror="this.style.display='none'">
         <div style="display:flex;flex-direction:column;gap:2px;">
@@ -2614,15 +2547,24 @@ select, textarea {
       </address>
     </div>
   </div>
+  <!-- Policy links -->
+  <div role="navigation" aria-label="Chính sách và điều khoản" style="max-width:1200px;margin:22px auto 0;display:flex;flex-wrap:wrap;justify-content:center;gap:8px 20px;padding-bottom:18px;border-bottom:1px solid var(--border);">
+    <a class="pol-link" href="#policy-info" onclick="event.preventDefault();openPolicy('info')">Thông tin chủ quản</a>
+    <a class="pol-link" href="#policy-terms" onclick="event.preventDefault();openPolicy('terms')">Điều khoản sử dụng</a>
+    <a class="pol-link" href="#policy-rights" onclick="event.preventDefault();openPolicy('rights')">Quyền và nghĩa vụ</a>
+    <a class="pol-link" href="#policy-pricing" onclick="event.preventDefault();openPolicy('pricing')">Chính sách giá</a>
+    <a class="pol-link" href="#policy-payment" onclick="event.preventDefault();openPolicy('payment')">Thanh toán</a>
+    <a class="pol-link" href="#policy-delivery" onclick="event.preventDefault();openPolicy('delivery')">Giao hàng</a>
+    <a class="pol-link" href="#policy-refund" onclick="event.preventDefault();openPolicy('refund')">Đổi trả, hoàn tiền</a>
+    <a class="pol-link" href="#policy-termination" onclick="event.preventDefault();openPolicy('termination')">Chấm dứt dịch vụ</a>
+    <a class="pol-link" href="#policy-privacy" onclick="event.preventDefault();openPolicy('privacy')">Bảo mật</a>
+    <a class="pol-link" href="#policy-complaint" onclick="event.preventDefault();openPolicy('complaint')">Khiếu nại</a>
+    <a class="pol-link" href="#policy-support" onclick="event.preventDefault();openPolicy('support')">Hỗ trợ</a>
+  </div>
   <!-- Bottom bar -->
-  <div style="max-width:1200px;margin:20px auto 0;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+  <div style="max-width:1200px;margin:18px auto 0;text-align:center;">
     <div style="font-size:12px;color:var(--text3);">
-      © 2025 <strong style="color:var(--text2);">VDAPP</strong> – Nguyễn Văn Đảm. Mã số kinh doanh: <em>Hộ kinh doanh cá thể</em>.
-    </div>
-    <div style="display:flex;gap:18px;">
-      <a href="#" style="font-size:12px;color:var(--text3);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text3)'">Chính sách bảo mật</a>
-      <a href="#" style="font-size:12px;color:var(--text3);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text3)'">Điều khoản dịch vụ</a>
-      <a href="#" style="font-size:12px;color:var(--text3);text-decoration:none;transition:color .2s;" onmouseover="this.style.color='var(--gold)'" onmouseout="this.style.color='var(--text3)'">Sitemap</a>
+      © 2026 <strong style="color:var(--text2);">VDAPP</strong> – Nguyễn Văn Đảm. Hộ kinh doanh cá thể.
     </div>
   </div>
 </footer>
@@ -2666,7 +2608,7 @@ select, textarea {
     <div style="padding:8px 10px;border-bottom:1px solid var(--border);">
       <button onclick="document.getElementById('adminPanel').classList.remove('open');document.body.style.overflow='';"
         style="width:100%;padding:8px 12px;border-radius:9px;background:var(--gold-pale);border:1px solid var(--border-gold);color:var(--gold);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);display:flex;align-items:center;gap:7px;transition:all .2s;"
-        onmouseover="this.style.background='rgba(14,159,110,.15)'" onmouseout="this.style.background='var(--gold-pale)'">
+        onmouseover="this.style.background='rgba(28,107,92,.15)'" onmouseout="this.style.background='var(--gold-pale)'">
         <i class="bi bi-arrow-left-circle-fill"></i> Về trang khách
       </button>
     </div>
@@ -2923,6 +2865,9 @@ select, textarea {
             <div><label>YouTube</label><input type="text" id="prYt" value="https://www.youtube.com/@changtraivietsub25"></div>
             <div><label>Zalo</label><input type="text" id="prZalo" value="0946770648"></div>
             <div><label>Tên website</label><input type="text" id="prSite" value="vdapp.vn"></div>
+            <div><label>Email liên hệ</label><input type="text" id="prEmail" value="vdapp.vn@gmail.com"></div>
+            <div><label>Mã số thuế / mã số kinh doanh</label><input type="text" id="prTax" placeholder="Hiện trên trang Thông tin chủ quản"></div>
+            <div class="aform-full"><label>Giờ làm việc</label><input type="text" id="prHours" value="8:00 – 18:00, Thứ Hai đến Thứ Bảy (trừ ngày lễ)"></div>
             <div class="aform-full"><label>Địa chỉ</label><input type="text" id="prAddr" value="TP. Hồ Chí Minh, Việt Nam"></div>
             <div class="aform-full"><label>Mô tả website</label><textarea id="prDesc">Template Webapp & Google Sheets chuyên nghiệp, sẵn dùng ngay.</textarea></div>
             <div>
@@ -3066,7 +3011,7 @@ select, textarea {
               <button onclick="emSelectAll()" style="padding:6px 14px;background:var(--gold-pale);border:1px solid var(--border-gold);color:var(--gold);border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--font);">
                 <i class="bi bi-check2-all"></i> Chọn tất cả
               </button>
-              <button onclick="emSelectBuyers()" style="padding:6px 14px;background:rgba(52,199,89,.08);border:1px solid rgba(52,199,89,.25);color:#34c759;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--font);">
+              <button onclick="emSelectBuyers()" style="padding:6px 14px;background:rgba(46,158,126,.08);border:1px solid rgba(46,158,126,.25);color:#2E9E7E;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--font);">
                 <i class="bi bi-bag-check-fill"></i> Khách đã mua
               </button>
               <button onclick="emClearAll()" style="padding:6px 14px;background:transparent;border:1px solid var(--border);color:var(--text3);border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--font);">
@@ -3117,6 +3062,12 @@ select, textarea {
           <div class="ver-grid" id="payVersionGrid"></div>
         </div>
 
+        <div id="payPlanBox" style="display:none;margin-bottom:16px;">
+          <label style="font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text2);display:block;margin-bottom:8px;">Thời hạn đăng ký</label>
+          <div class="ver-grid" id="payPlanGrid"></div>
+          <div id="payPlanNote" style="font-size:12px;color:var(--text3);margin-top:8px;line-height:1.6;"></div>
+        </div>
+
         <div class="pay-field full" style="margin-bottom:14px;">
           <label style="font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--text2);display:block;margin-bottom:6px;">Giá tiền</label>
           <input id="paySinglePrice" readonly style="font-weight:800;color:var(--gold);font-size:18px;background:var(--bg2);">
@@ -3139,6 +3090,11 @@ select, textarea {
           <i class="bi bi-info-circle-fill" style="color:var(--gold);"></i>
           Sau khi chuyển khoản, nhấn <strong>"Xác nhận đã chuyển khoản"</strong> để gửi đơn hàng. Admin sẽ duyệt và gửi file trong <strong>15–30 phút</strong> (hoặc tự động duyệt nếu hệ thống nhận diện được giao dịch).
         </div>
+
+        <label style="display:flex;align-items:flex-start;gap:9px;font-size:12.5px;color:var(--text2);line-height:1.6;margin-bottom:14px;cursor:pointer;">
+          <input type="checkbox" id="payAgree" style="margin-top:3px;width:16px;height:16px;accent-color:#1C6B5C;flex-shrink:0;">
+          <span>Tôi đã đọc và đồng ý với <a href="#policy-terms" onclick="event.preventDefault();openPolicy('terms')" style="color:var(--gold);font-weight:700;">Điều khoản sử dụng</a>, <a href="#policy-refund" onclick="event.preventDefault();openPolicy('refund')" style="color:var(--gold);font-weight:700;">Chính sách đổi trả, hoàn tiền</a> và <a href="#policy-privacy" onclick="event.preventDefault();openPolicy('privacy')" style="color:var(--gold);font-weight:700;">Chính sách bảo mật</a>.</span>
+        </label>
 
         <button class="btn-pay-next" id="paySingleSubmitBtn" onclick="submitSingleOrder()" style="width:100%;justify-content:center;">
           <i class="bi bi-check-circle-fill"></i> Xác nhận đăng ký
@@ -3203,7 +3159,7 @@ const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
 // ── Đánh dấu phiên bản build — kiểm tra nhanh xem đang chạy bản Supabase mới hay bản Google Sheet cũ ──
 const BUILD_VERSION = 'supabase-v1 · ' + new Date().toISOString().slice(0,10);
-console.log('%c⚡ VDAPP build: ' + BUILD_VERSION, 'color:#0E9F6E;font-weight:bold;font-size:12px;');
+console.log('%c⚡ VDAPP build: ' + BUILD_VERSION, 'color:#1C6B5C;font-weight:bold;font-size:12px;');
 window.addEventListener('DOMContentLoaded', () => {
   const tag = document.createElement('div');
   tag.textContent = BUILD_VERSION;
@@ -3320,6 +3276,7 @@ const API = {
       } else if(action === 'updateAccount'){
         const row = {};
         if(data.memberType!==undefined) row.member_type = data.memberType;
+        if(data.memberExpiry!==undefined) row.member_expiry = data.memberExpiry;
         if(data.password!==undefined) row.password = String(data.password);
         if(data.purchases!==undefined){
           row.purchases = (typeof data.purchases === 'string') ? JSON.parse(data.purchases) : data.purchases;
@@ -3395,6 +3352,84 @@ let pFilter = 'all';
 let sortOrder = 'newest';
 let searchQuery = '';
 let _activeProdId = null;
+
+// ═══ HỘI VIÊN: gói, hạng, giảm giá ═══
+const PLANS = {
+  gold:    { name:'Hội viên Vàng',      monthly:699000,  label:'🥇 Vàng' },
+  diamond: { name:'Hội viên Kim cương', monthly:1250000, label:'💎 Kim cương' }
+};
+const PLAN_PERIODS = [1,3,6,12];
+const MEMBER_DISCOUNT = 0.30;
+function planPrice(id, months){
+  const pl = PLANS[id]; if(!pl) return 0;
+  const years = Math.floor(months/12), rest = months%12;
+  return pl.monthly*10*years + pl.monthly*rest;  // 12 tháng = trả 10 tháng
+}
+function todayISO(){ const d=new Date(); d.setMinutes(d.getMinutes()-d.getTimezoneOffset()); return d.toISOString().slice(0,10); }
+function addMonthsISO(baseISO, months){
+  const d = new Date(baseISO+'T00:00:00'); const day = d.getDate();
+  d.setMonth(d.getMonth()+months); if(d.getDate()!==day) d.setDate(0);
+  d.setMinutes(d.getMinutes()-d.getTimezoneOffset());
+  return d.toISOString().slice(0,10);
+}
+function memberTier(acc){
+  if(!acc) return 'free';
+  const t = acc.memberType || 'free';
+  if(t==='free') return 'free';
+  if(t==='premium') return 'legacy';            // hội viên gói cũ: giữ ưu đãi
+  if(!PLANS[t]) return 'free';
+  if(acc.memberExpiry && acc.memberExpiry < todayISO()) return 'free';   // hết hạn
+  return t;
+}
+function memberLabel(acc){ const t=memberTier(acc); return t==='free'?'Free':t==='legacy'?'⭐ Premium':PLANS[t].label; }
+function memberDiscountRate(){ return memberTier(currentUser)==='free' ? 0 : MEMBER_DISCOUNT; }
+// App flagship mới ra (tag "flagship", dưới 60 ngày) không áp dụng giảm giá hội viên
+function _isFlagshipNew(p){
+  if(!/flagship/i.test(p.tags||'')) return false;
+  const t = Date.parse(p.createdAt||''); if(!t) return true;
+  return (Date.now()-t) < 60*86400000;
+}
+function effPrice(p){
+  if(!p || p.free) return 0;
+  const r = memberDiscountRate();
+  if(!r || _isFlagshipNew(p)) return p.price;
+  return Math.round(p.price*(1-r)/1000)*1000;
+}
+function priceHtml(p){
+  if(p.free) return 'Miễn phí';
+  const e = effPrice(p);
+  return e<p.price ? `${formatVND(e)} <s style="font-size:.6em;font-weight:500;color:var(--text3);">${formatVND(p.price)}</s>` : formatVND(p.price);
+}
+function renderPlanBox(){
+  const box = document.getElementById('payPlanBox'); if(!box) return;
+  if(PAY.type!=='plan' || !PLANS[PAY.planId]){ box.style.display='none'; return; }
+  box.style.display='';
+  if(!PAY.months) PAY.months = 1;
+  PAY.price = planPrice(PAY.planId, PAY.months);
+  PAY.selectedVer = PAY.months+' tháng';
+  document.getElementById('payPlanGrid').innerHTML = PLAN_PERIODS.map(m=>{
+    const pr = planPrice(PAY.planId, m);
+    return `<div class="ver-card ${m===PAY.months?'selected':''}" onclick="selectPlanMonths(${m})"><div class="ver-name">${m} tháng</div><div style="font-size:11px;color:var(--text3);margin-top:2px;">${formatVND(pr)}${m===12?' · tặng 2 tháng':''}</div></div>`;
+  }).join('');
+  document.getElementById('payPlanNote').textContent = PAY.planId==='diamond'
+    ? 'Source code được giao sau khi đủ 6 tháng liên tục. 2 tính năng mới tính trong 12 tháng liên tục.'
+    : 'Tối đa 3 yêu cầu chỉnh sửa mỗi tháng. Hủy bất cứ lúc nào, quyền lợi giữ đến hết kỳ đã thanh toán.';
+}
+function selectPlanMonths(m){
+  PAY.months = m;
+  renderPlanBox(); updatePaySinglePrice(); buildPaySingleQR();
+}
+function _applyPlanToAccount(acc, o){
+  const nm = String(o.name||'');
+  let tier = /kim\s*cương/i.test(nm) ? 'diamond' : /vàng/i.test(nm) ? 'gold' : null;
+  if(!tier){ acc.memberType = 'premium'; return; }   // đơn gói cũ (Năm/Vĩnh viễn)
+  const months = parseInt(String(o.version||'').replace(/\D/g,''),10) || 1;
+  const t0 = todayISO();
+  const active = acc.memberExpiry && acc.memberExpiry >= t0 && (acc.memberType===tier || acc.memberType==='gold' && tier==='diamond');
+  acc.memberType = tier;
+  acc.memberExpiry = addMonthsISO(active ? acc.memberExpiry : t0, months);
+}
+
 let _activeVer = '';
 let quillEditorInst = null;
 
@@ -3593,6 +3628,8 @@ function uiConfirm(msg){
 // ═══ AUTH ═══
 function openLogin(){
   document.getElementById('loginOverlay').classList.add('open');
+  const e=document.getElementById('loginErr'); if(e) e.textContent='';
+  if(typeof _isInAppBrowser==='function' && _isInAppBrowser()) _showInAppBrowserHelp();
 }
 function closeLogin(){ document.getElementById('loginOverlay').classList.remove('open'); document.getElementById('loginErr').textContent=''; document.getElementById('loginOk').textContent=''; }
 // loginOverlay listener — element exists in DOM above
@@ -3627,19 +3664,19 @@ function renderNavUser(){
     wrap.innerHTML='<button class="nav-login-btn" onclick="openLogin()" id="navLoginBtn"><i class="bi bi-person-fill"></i> Đăng nhập</button>';
   } else {
     const initial=currentUser.name.charAt(0).toUpperCase();
-    const isMember=currentUser.memberType==='premium';
+    const isMember=memberTier(currentUser)!=='free'; const _mLabel=memberLabel(currentUser); const _mExp=(currentUser.memberExpiry&&isMember)?(' · hết hạn '+currentUser.memberExpiry.split('-').reverse().join('/')):'';
     wrap.innerHTML=`
       <div style="position:relative;">
         <button class="nav-user-btn" onclick="toggleUserDropdown()">
           <div class="nav-avatar">${escHtml(initial)}</div>
           <span>${escHtml(currentUser.name.split(' ').pop())}</span>
-          <span class="member-badge ${isMember?'badge-member':'badge-free-plan'}">${isMember?'⭐ Premium':'Free'}</span>
+          <span class="member-badge ${isMember?'badge-member':'badge-free-plan'}">${_mLabel}</span>
           <i class="bi bi-chevron-down" style="font-size:10px;color:var(--text3);"></i>
         </button>
         <div class="user-dropdown" id="userDropdown">
           <div class="ud-header">
             <div class="ud-name">${escHtml(currentUser.name)}</div>
-            <div class="ud-email">${escHtml(currentUser.email||('@'+currentUser.username))} ${isMember?'· ⭐ Premium':'· Free'}</div>
+            <div class="ud-email">${escHtml(currentUser.email||('@'+currentUser.username))} · ${_mLabel}${_mExp}</div>
           </div>
           <button class="ud-item" onclick="openMyProds()"><i class="bi bi-collection-fill"></i> Sản phẩm của tôi</button>
           ${currentUser.role==='admin'?'<button class="ud-item" onclick="hideUserDropdown();openAdmin()"><i class="bi bi-speedometer2"></i> Trang quản trị</button>':''}
@@ -3704,13 +3741,13 @@ function renderProducts(){
     const owned=isOwned(p.id); const pendingP=!owned&&hasPendingOrder(p.id);
     // tags preview for back face
     const tagsPreview = (tags[p.type]||[]).slice(0,3).map(t=>`<span style="background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);padding:3px 9px;border-radius:20px;font-size:10px;color:rgba(255,255,255,.7);">${t}</span>`).join('');
-    const priceBack = p.free ? '<span style="color:#34c759;font-size:22px;font-weight:900;">Miễn phí</span>' : `<span style="font-size:11px;color:rgba(255,255,255,.5);text-decoration:line-through;display:block;margin-bottom:2px;">${formatVND(p.price)}</span><span style="color:var(--gold);font-size:26px;font-weight:900;letter-spacing:-1px;">${(p.price/1000).toFixed(0)}<span style="font-size:13px;font-weight:600">K đ</span></span>`;
-    const ownedBack = owned ? `<div style="padding:7px 16px;background:rgba(52,199,89,.15);border:1px solid rgba(52,199,89,.4);border-radius:10px;color:#34c759;font-size:13px;font-weight:700;"><i class="bi bi-check-circle-fill"></i> Đã sở hữu</div>` :
+    const priceBack = p.free ? '<span style="color:#2E9E7E;font-size:22px;font-weight:900;">Miễn phí</span>' : `<span style="font-size:11px;color:rgba(255,255,255,.5);text-decoration:line-through;display:block;margin-bottom:2px;">${formatVND(p.price)}</span><span style="color:var(--gold);font-size:26px;font-weight:900;letter-spacing:-1px;">${(p.price/1000).toFixed(0)}<span style="font-size:13px;font-weight:600">K đ</span></span>`;
+    const ownedBack = owned ? `<div style="padding:7px 16px;background:rgba(46,158,126,.15);border:1px solid rgba(46,158,126,.4);border-radius:10px;color:#2E9E7E;font-size:13px;font-weight:700;"><i class="bi bi-check-circle-fill"></i> Đã sở hữu</div>` :
       pendingP ? `<div style="padding:7px 16px;background:rgba(255,165,0,.12);border:1px solid rgba(255,165,0,.35);border-radius:10px;color:#FFA500;font-size:13px;font-weight:700;"><i class="bi bi-hourglass-split"></i> Đang chờ duyệt</div>` :
-      `<button onclick="event.stopPropagation();_pcardOpen(event,'${p.id}')" style="width:100%;padding:11px;background:linear-gradient(135deg,var(--gold),#3ECF8E);border:none;border-radius:11px;font-weight:800;font-size:14px;color:#FFFFFF;cursor:pointer;font-family:var(--font);display:flex;align-items:center;justify-content:center;gap:7px;box-shadow:0 4px 20px rgba(14,159,110,.5);letter-spacing:-.2px;transition:filter .2s;" onmouseover="this.style.filter='brightness(1.1)'" onmouseout="this.style.filter=''">
+      `<button onclick="event.stopPropagation();_pcardOpen(event,'${p.id}')" style="width:100%;padding:11px;background:linear-gradient(135deg,var(--gold),#3A9C88);border:none;border-radius:11px;font-weight:800;font-size:14px;color:#FFFFFF;cursor:pointer;font-family:var(--font);display:flex;align-items:center;justify-content:center;gap:7px;box-shadow:0 4px 20px rgba(28,107,92,.5);letter-spacing:-.2px;transition:filter .2s;" onmouseover="this.style.filter='brightness(1.1)'" onmouseout="this.style.filter=''">
         <i class="bi bi-cart-plus-fill"></i> ${p.free?'Lấy miễn phí':'Mua ngay'}
       </button>
-      <button onclick="event.stopPropagation();openProdNew('${p.id}')" style="width:100%;padding:9px;background:transparent;border:1px solid rgba(255,255,255,.2);border-radius:10px;color:rgba(255,255,255,.75);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;" onmouseover="this.style.borderColor='rgba(14,159,110,.5)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='rgba(255,255,255,.2)';this.style.color='rgba(255,255,255,.75)'">
+      <button onclick="event.stopPropagation();openProdNew('${p.id}')" style="width:100%;padding:9px;background:transparent;border:1px solid rgba(255,255,255,.2);border-radius:10px;color:rgba(255,255,255,.75);font-size:13px;font-weight:600;cursor:pointer;font-family:var(--font);display:flex;align-items:center;justify-content:center;gap:6px;transition:all .2s;" onmouseover="this.style.borderColor='rgba(28,107,92,.5)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='rgba(255,255,255,.2)';this.style.color='rgba(255,255,255,.75)'">
         <i class="bi bi-eye-fill"></i> Xem chi tiết
       </button>`;
     return `
@@ -3720,7 +3757,7 @@ function renderProducts(){
           ${thumbHtml}
           <div class="badge-row">
             <div>${leftBadge}</div>
-            <div>${rightBadge}${owned?'<div class="badge-new" style="background:linear-gradient(90deg,#34c759,#30d158)"><i class="bi bi-check-circle-fill"></i> Đã mua</div>':pendingP?'<div class="badge-new" style="background:linear-gradient(90deg,#FFA500,#ffb733)"><i class="bi bi-hourglass-split"></i> Chờ duyệt</div>':''}</div>
+            <div>${rightBadge}${owned?'<div class="badge-new" style="background:linear-gradient(90deg,#2E9E7E,#3AAE8D)"><i class="bi bi-check-circle-fill"></i> Đã mua</div>':pendingP?'<div class="badge-new" style="background:linear-gradient(90deg,#FFA500,#ffb733)"><i class="bi bi-hourglass-split"></i> Chờ duyệt</div>':''}</div>
           </div>
           ${ver?`<div class="pcard-vchip">${ver}</div>`:''}
         </div>
@@ -3729,7 +3766,7 @@ function renderProducts(){
         <div class="pcard-outer-type ${p.type}"><i class="bi ${p.type==='webapp'?'bi-lightning-charge-fill':'bi-file-earmark-spreadsheet-fill'}"></i> ${p.type==='webapp'?'Webapp':'Google Sheets'}</div>
         <div class="pcard-outer-name" onclick="openProdNew('${p.id}')">${shortName}</div>
         <div class="pcard-outer-foot">
-          <div class="pcard-outer-price ${p.free?'free':''}">${p.free?'Miễn phí':formatVND(p.price)}</div>
+          <div class="pcard-outer-price ${p.free?'free':''}">${priceHtml(p)}</div>
           <button class="pcard-outer-btn" onclick="event.stopPropagation();openProdNew('${p.id}')"><i class="bi bi-eye-fill"></i> Xem</button>
         </div>
       </div>
@@ -3767,18 +3804,18 @@ function _renderHotProds(){
 
   // Rank badges
   const RANK_BADGES = [
-    {icon:'👑', label:'TOP 1', bg:'linear-gradient(135deg,#FFD700,#FFA500)', color:'#0B241A', shadow:'rgba(255,215,0,.6)'},
-    {icon:'🥈', label:'TOP 2', bg:'linear-gradient(135deg,#C0C0C0,#A0A0A0)', color:'#0B241A', shadow:'rgba(192,192,192,.5)'},
+    {icon:'👑', label:'TOP 1', bg:'linear-gradient(135deg,#FFD700,#FFA500)', color:'#0A2621', shadow:'rgba(255,215,0,.6)'},
+    {icon:'🥈', label:'TOP 2', bg:'linear-gradient(135deg,#C0C0C0,#A0A0A0)', color:'#0A2621', shadow:'rgba(192,192,192,.5)'},
     {icon:'🥉', label:'TOP 3', bg:'linear-gradient(135deg,#CD7F32,#A0522D)', color:'#fff',     shadow:'rgba(205,127,50,.5)'},
-    {icon:'④',  label:'TOP 4', bg:'linear-gradient(135deg,#0B7A55,#2c6fad)', color:'#fff',     shadow:'rgba(11,122,85,.4)'},
-    {icon:'⑤',  label:'TOP 5', bg:'linear-gradient(135deg,#7ED3A8,#7c3aed)', color:'#fff',     shadow:'rgba(168,85,247,.4)'},
+    {icon:'④',  label:'TOP 4', bg:'linear-gradient(135deg,#14524A,#2c6fad)', color:'#fff',     shadow:'rgba(20,82,74,.4)'},
+    {icon:'⑤',  label:'TOP 5', bg:'linear-gradient(135deg,#8CC7B8,#7c3aed)', color:'#fff',     shadow:'rgba(168,85,247,.4)'},
   ];
 
   stage.innerHTML = hotList.map((p, i) => {
     const sn  = p.name.includes('|') ? p.name.split('|')[1].trim() : p.name;
     const img = p.imgUrl || '';
     const sold = ORDERS.filter(o=>String(o.productId)===String(p.id)&&o.status==='approved').length;
-    const tc = p.type==='webapp' ? 'var(--accent)' : '#34c759';
+    const tc = p.type==='webapp' ? 'var(--accent)' : '#2E9E7E';
     const rank = i < RANK_BADGES.length ? RANK_BADGES[i] : null;
     return `<div class="hcv-card" data-idx="${i}" onclick="_hotCoverClick(${i})"
       style="position:absolute;width:230px;height:290px;border-radius:18px;overflow:hidden;
@@ -3802,7 +3839,7 @@ function _renderHotProds(){
         }
         <div style="position:absolute;top:8px;left:8px;display:flex;gap:4px;">
           ${p.badge==='hot'?'<span style="background:linear-gradient(90deg,#e84040,#ff4747);color:#fff;font-size:9px;font-weight:800;padding:3px 7px;border-radius:5px;">🔥 HOT</span>':''}
-          ${p.badge==='new'?'<span style="background:linear-gradient(90deg,var(--gold),#3ECF8E);color:#FFFFFF;font-size:9px;font-weight:800;padding:3px 7px;border-radius:5px;">✨ MỚI</span>':''}
+          ${p.badge==='new'?'<span style="background:linear-gradient(90deg,var(--gold),#3A9C88);color:#FFFFFF;font-size:9px;font-weight:800;padding:3px 7px;border-radius:5px;">✨ MỚI</span>':''}
         </div>
         <div style="position:absolute;bottom:6px;right:8px;background:rgba(0,0,0,.55);backdrop-filter:blur(4px);padding:2px 7px;border-radius:5px;font-size:9px;font-weight:700;color:${tc};">
           ${p.type==='webapp'?'⚡ Webapp':'📊 Sheets'}
@@ -3814,12 +3851,12 @@ function _renderHotProds(){
           display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${sn}</div>
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
           <div style="font-size:20px;font-weight:900;color:var(--gold);letter-spacing:-.5px;">
-            ${p.free?'<span style="color:#34c759;font-size:13px;font-weight:700;">🎁 Miễn phí</span>':`${formatVND(p.price)}`}
+            ${p.free?'<span style="color:#2E9E7E;font-size:13px;font-weight:700;">🎁 Miễn phí</span>':priceHtml(p)}
           </div>
           ${sold?`<span style="font-size:10px;color:var(--text3);"><i class="bi bi-bag-check-fill" style="color:var(--gold);"></i> ${sold}</span>`:''}
         </div>
         <button onclick="event.stopPropagation();_pcardOpen(event,'${p.id}')"
-          style="width:100%;padding:8px;background:linear-gradient(135deg,var(--gold),#3ECF8E);border:none;border-radius:9px;color:#FFFFFF;font-size:12px;font-weight:800;cursor:pointer;font-family:var(--font);">
+          style="width:100%;padding:8px;background:linear-gradient(135deg,var(--gold),#3A9C88);border:none;border-radius:9px;color:#FFFFFF;font-size:12px;font-weight:800;cursor:pointer;font-family:var(--font);">
           Xem ngay →
         </button>
       </div>
@@ -3870,9 +3907,9 @@ function _hotCoverRender(){
     card.style.filter        = '';
     card.style.pointerEvents = 'all';
     card.style.boxShadow     = isCenter
-      ? '0 28px 70px rgba(0,0,0,.45), 0 0 0 2px rgba(14,159,110,.5)'
+      ? '0 28px 70px rgba(0,0,0,.45), 0 0 0 2px rgba(28,107,92,.5)'
       : '0 8px 28px rgba(0,0,0,.2)';
-    card.style.borderColor   = isCenter ? 'rgba(14,159,110,.6)' : 'var(--border)';
+    card.style.borderColor   = isCenter ? 'rgba(28,107,92,.6)' : 'var(--border)';
   });
 
   // Dots
@@ -3922,11 +3959,11 @@ function renderPromoSlider(){
       ${promo.img
         ? `<img src="${promo.img}" alt="${promo.title||''}" style="width:100%;height:260px;object-fit:cover;display:block;">`
         : `<div style="width:100%;height:260px;background:linear-gradient(135deg,${promo.bg1||'#0c1e3c'} 0%,${promo.bg2||'#1a3a70'} 60%,#0e2448 100%);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;padding:20px;text-align:center;position:relative;overflow:hidden;">
-            <div style="position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:rgba(14,159,110,.06);pointer-events:none;"></div>
-            <div style="font-size:40px;filter:drop-shadow(0 4px 16px rgba(14,159,110,.5));">${promo.icon||'🎉'}</div>
+            <div style="position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;background:rgba(28,107,92,.06);pointer-events:none;"></div>
+            <div style="font-size:40px;filter:drop-shadow(0 4px 16px rgba(28,107,92,.5));">${promo.icon||'🎉'}</div>
             <div style="font-size:clamp(18px,3vw,26px);font-weight:900;color:#fff;letter-spacing:-.5px;line-height:1.15;">${promo.title||''}</div>
             <div style="font-size:14px;color:rgba(255,255,255,.7);max-width:480px;line-height:1.6;">${promo.desc||''}</div>
-            ${promo.btn?`<div style="margin-top:4px;"><a href="${promo.link||'#products'}" onclick="event.stopPropagation()" style="display:inline-flex;align-items:center;gap:7px;padding:11px 26px;background:linear-gradient(135deg,var(--gold),#3ECF8E);color:#FFFFFF;border-radius:10px;font-weight:800;font-size:14px;text-decoration:none;box-shadow:0 4px 20px rgba(14,159,110,.4);">${promo.btn} <i class="bi bi-arrow-right"></i></a></div>`:''}
+            ${promo.btn?`<div style="margin-top:4px;"><a href="${promo.link||'#products'}" onclick="event.stopPropagation()" style="display:inline-flex;align-items:center;gap:7px;padding:11px 26px;background:linear-gradient(135deg,var(--gold),#3A9C88);color:#FFFFFF;border-radius:10px;font-weight:800;font-size:14px;text-decoration:none;box-shadow:0 4px 20px rgba(28,107,92,.4);">${promo.btn} <i class="bi bi-arrow-right"></i></a></div>`:''}
            </div>`
       }
     </div>`).join('');
@@ -4057,13 +4094,13 @@ function openProdNew(id){
 
   document.getElementById('pmTypeTag').textContent=p.type==='webapp'?'⚡ Webapp':'📊 Google Sheets';
   document.getElementById('pmTitleNew').textContent=p.name.includes('|')?p.name.split('|')[1].trim():p.name;
-  document.getElementById('pmPriceNew').textContent=p.free?'Miễn phí':formatVND(p.price);
+  document.getElementById('pmPriceNew').textContent=p.free?'Miễn phí':formatVND(effPrice(p));
   document.getElementById('pmPriceNew').className='detail-price'+(p.free?' free':'');
-  document.getElementById('pmPNote').textContent=p.free?'Không cần thanh toán':'Sử dụng vĩnh viễn · Không phí ẩn';
+  document.getElementById('pmPNote').textContent=p.free?'Không cần thanh toán':(effPrice(p)<p.price?('Giá hội viên −30% (giá gốc '+formatVND(p.price)+') · Sở hữu vĩnh viễn'):'Sở hữu vĩnh viễn · Hội viên giảm 30%');
   // Đồng bộ thanh mua ngay dính đáy trên mobile
   const pmMob=document.getElementById('pmPriceMobile'), pnMob=document.getElementById('pmPNoteMobile');
-  if(pmMob){ pmMob.textContent=p.free?'Miễn phí':formatVND(p.price); pmMob.className='pd-mobile-price'+(p.free?' free':''); }
-  if(pnMob){ pnMob.textContent=p.free?'Không cần thanh toán':'Vĩnh viễn · Không phí ẩn'; }
+  if(pmMob){ pmMob.textContent=p.free?'Miễn phí':formatVND(effPrice(p)); pmMob.className='pd-mobile-price'+(p.free?' free':''); }
+  if(pnMob){ pnMob.textContent=p.free?'Không cần thanh toán':(effPrice(p)<p.price?'Giá hội viên −30%':'Sở hữu vĩnh viễn'); }
 
   // ── Media: video trước, rồi các ảnh mô tả ──
   const mediaEl=document.getElementById('pmMedia');
@@ -4132,7 +4169,7 @@ function openProdNew(id){
     if(isOwned) badgeHtml = `<span class="dver-badge owned-badge">✓ ĐÃ MUA</span>`;
     else if(isLatest && isActive) badgeHtml = `<span class="dver-badge new-badge">NEW</span>`;
     let statusText = '';
-    if(isOwned) statusText = `<span class="dver-status" style="color:#34c759;">Đã tải về</span>`;
+    if(isOwned) statusText = `<span class="dver-status" style="color:#2E9E7E;">Đã tải về</span>`;
     else if(isActive && !boughtVer) statusText = `<span class="dver-status" style="color:var(--gold);">Mới nhất</span>`;
     return `<button class="dver-btn ${isOwned?'owned':''} ${isActive?'active':''}" onclick="selectPmVer('${v}',this)">
       ${badgeHtml}
@@ -4154,7 +4191,7 @@ function openProdNew(id){
         const sn=rp.name.includes('|')?rp.name.split('|')[1].trim():rp.name;
         const rim=rp.images&&rp.images[0]?rp.images[0]:(rp.imgUrl||'');
         const typeLabel=rp.type==='webapp'?'Webapp':'Google Sheets';
-        const typeColor=rp.type==='webapp'?'var(--accent)':'#34c759';
+        const typeColor=rp.type==='webapp'?'var(--accent)':'#2E9E7E';
         return `<div onclick="openProdNew('${rp.id}')" style="cursor:pointer;border-radius:12px;overflow:hidden;border:1px solid var(--border);background:var(--surface);transition:all .2s;" onmouseover="this.style.borderColor='var(--border-gold)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='var(--border)';this.style.transform=''">
           <div style="aspect-ratio:16/9;background:var(--bg3);overflow:hidden;position:relative;">
             ${rim?`<img src="${rim}" alt="${sn}" style="width:100%;height:100%;object-fit:cover;">`:`<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:36px;">${rp.icon||'📦'}</div>`}
@@ -4163,7 +4200,7 @@ function openProdNew(id){
           <div style="padding:12px 14px;">
             <div style="font-size:10px;font-weight:700;color:${typeColor};margin-bottom:4px;">${typeLabel} | ${sn.split('(')[0].trim()}</div>
             <div style="font-size:13px;font-weight:600;color:var(--text);line-height:1.4;margin-bottom:8px;">${sn}</div>
-            <div style="font-size:16px;font-weight:700;color:var(--text);">${rp.free?`<span style="color:#34c759;">Miễn phí</span>`:formatVND(rp.price)}</div>
+            <div style="font-size:16px;font-weight:700;color:var(--text);">${rp.free?`<span style="color:#2E9E7E;">Miễn phí</span>`:formatVND(rp.price)}</div>
           </div>
         </div>`;
       }).join('');
@@ -4284,17 +4321,17 @@ function closeProdModal(e){ if(e&&e.target!==document.getElementById('prodModalO
 function closeProdModalDirect(){ closeProdModalNew(); }
 
 // ═══ PAYMENT STATE — 1 màn hình duy nhất ═══
-let PAY = {type:'plan',planId:'year',name:'',price:0,selectedVer:'',productId:null,versions:[],free:false,_orderCreated:false,_orderId:null,_orderCode:''};
+let PAY = {type:'plan',planId:'gold',months:1,name:'',price:0,selectedVer:'',productId:null,versions:[],free:false,_orderCreated:false,_orderId:null,_orderCode:''};
 
 function startProductPayment(){
   const p=PRODUCTS.find(x=>String(x.id)===String(_activeProdId)); if(!p) return;
   closeProdModalNew();
-  openPayment({type:'product',productId:p.id,name:p.name.includes('|')?p.name.split('|')[1].trim():p.name,price:p.price,versions:p.versions,free:p.free,selectedVer:_activeVer||p.versions[0]||''});
+  openPayment({type:'product',productId:p.id,name:p.name.includes('|')?p.name.split('|')[1].trim():p.name,price:effPrice(p),versions:p.versions,free:p.free,selectedVer:_activeVer||p.versions[0]||''});
 }
 function openProductPayment(){ startProductPayment(); }
 
 function openPayment(opts){
-  PAY={type:'plan',planId:'year',name:'',price:0,selectedVer:'',productId:null,versions:[],free:false,_orderCreated:false,_orderId:null,_orderCode:'', ...opts};
+  PAY={type:'plan',planId:'gold',months:1,name:'',price:0,selectedVer:'',productId:null,versions:[],free:false,_orderCreated:false,_orderId:null,_orderCode:'', ...opts};
   // Sinh sẵn mã đơn ngay khi mở modal, để QR hiện ngay — đơn thật chỉ ghi xuống DB khi khách bấm xác nhận
   PAY._orderId = Date.now();
   PAY._orderCode = 'DH'+String(PAY._orderId).slice(-6);
@@ -4314,7 +4351,7 @@ function renderPaySingle(){
   document.getElementById('pBuyerPhone').value = currentUser?.phone || '';
   document.getElementById('emailNotice').style.display = 'none';
   document.getElementById('paySingleWait').style.display = 'none';
-  document.querySelector('.pay-single-left > *:not(#paySingleWait)').style.display = '';
+  document.querySelectorAll('.pay-single-left > *:not(#paySingleWait)').forEach(function(el){el.style.display='';});
   document.getElementById('paySingleSubmitBtn').style.display = 'flex';
   document.getElementById('paySingleSubmitBtn').disabled = false;
   document.getElementById('paySingleSubmitBtn').innerHTML = '<i class="bi bi-check-circle-fill"></i> Xác nhận đăng ký';
@@ -4333,6 +4370,8 @@ function renderPaySingle(){
     vBox.style.display = 'none';
   }
 
+  renderPlanBox();
+  const _ag=document.getElementById('payAgree'); if(_ag) _ag.checked=false;
   updatePaySinglePrice();
   buildPaySingleQR();
 }
@@ -4383,6 +4422,7 @@ function updateEmailNotice(){
 function submitSingleOrder(){
   if(PAY._orderCreated) return;
   const em = document.getElementById('pBuyerEmail').value.trim();
+  if(!document.getElementById('payAgree').checked){ showToast('Vui lòng tích đồng ý Điều khoản trước khi tiếp tục','error'); return; }
   const ph = document.getElementById('pBuyerPhone').value.trim();
   if(!em || !em.includes('@')){ showToast('Vui lòng nhập Gmail hợp lệ','error'); return; }
   if(!ph){ showToast('Vui lòng nhập số điện thoại','error'); return; }
@@ -4568,7 +4608,7 @@ function _renderMyProds(){
       action=`<a class="mpi-dl" href="${escHtml(finalUrl)}" target="_blank"><i class="bi bi-cloud-arrow-down-fill"></i> ${isGSheetLink?'Tạo bản sao':'Tải xuống'}</a>`;
     }
     else if(status==='approved')
-      action=`<span class="mpi-dl" style="background:rgba(52,199,89,.1);cursor:default;"><i class="bi bi-check-circle-fill"></i> Đã duyệt</span>`;
+      action=`<span class="mpi-dl" style="background:rgba(46,158,126,.1);cursor:default;"><i class="bi bi-check-circle-fill"></i> Đã duyệt</span>`;
     else if(status==='rejected')
       action=`<span class="mpi-wait" style="color:#e84040;border-color:rgba(232,64,64,.3);background:rgba(232,64,64,.1);"><i class="bi bi-x-circle-fill"></i> Từ chối</span>`;
     else
@@ -4783,7 +4823,7 @@ function renderAdminOrders(){
       <td>
         <div style="display:flex;flex-direction:column;gap:6px;">
           ${o.status==='pending'?`<div style="display:flex;gap:5px;">
-            <button onclick="approveOrder('${oidFull}')" style="padding:5px 10px;border-radius:6px;background:rgba(52,199,89,.1);border:1px solid rgba(52,199,89,.3);color:#34c759;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--font);display:flex;align-items:center;gap:4px;"><i class="bi bi-check-circle-fill"></i>Duyệt</button>
+            <button onclick="approveOrder('${oidFull}')" style="padding:5px 10px;border-radius:6px;background:rgba(46,158,126,.1);border:1px solid rgba(46,158,126,.3);color:#2E9E7E;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--font);display:flex;align-items:center;gap:4px;"><i class="bi bi-check-circle-fill"></i>Duyệt</button>
             <button onclick="rejectOrder('${oidFull}')" style="padding:5px 10px;border-radius:6px;background:rgba(232,64,64,.1);border:1px solid rgba(232,64,64,.3);color:#e84040;font-size:12px;font-weight:600;cursor:pointer;font-family:var(--font);display:flex;align-items:center;gap:4px;"><i class="bi bi-x-circle-fill"></i>Từ chối</button>
           </div>`:''}
           ${o.status==='approved'?`<div>
@@ -4813,11 +4853,11 @@ async function approveOrder(id){
   if(o.type==='plan'){
     const acc = ACCOUNTS.find(a=>a.username===o._userId);
     if(acc){
-      acc.memberType='premium';
+      _applyPlanToAccount(acc, o);
       LS.set('accounts', ACCOUNTS);
       if(API_URL&&!API_URL.includes('PASTE_YOUR')){
         API.post({action:'updateAccount', username:acc.username,
-          data:{memberType:acc.memberType}}).catch(()=>{});
+          data:{memberType:acc.memberType, memberExpiry:acc.memberExpiry||null}}).catch(()=>{});
       }
     }
   }
@@ -4861,11 +4901,11 @@ function renderAccTable(){
         <input type="text" value="${escHtml(a.password||'')}" id="pw_${escHtml(a.username)}"
           style="width:110px;padding:5px 8px;background:var(--input-bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:16px;font-family:var(--font);">
         <button onclick="resetUserPass('${escHtml(a.username)}')" title="Cấp lại mật khẩu ngẫu nhiên"
-          style="padding:5px 8px;background:rgba(11,122,85,.1);border:1px solid rgba(11,122,85,.3);color:var(--accent);border-radius:6px;font-size:11px;cursor:pointer;font-family:var(--font);white-space:nowrap;">
+          style="padding:5px 8px;background:rgba(20,82,74,.1);border:1px solid rgba(20,82,74,.3);color:var(--accent);border-radius:6px;font-size:11px;cursor:pointer;font-family:var(--font);white-space:nowrap;">
           <i class="bi bi-arrow-repeat"></i> Cấp lại
         </button>
         <button onclick="saveUserPass('${escHtml(a.username)}')" title="Lưu mật khẩu"
-          style="padding:5px 8px;background:rgba(52,199,89,.1);border:1px solid rgba(52,199,89,.3);color:#34c759;border-radius:6px;font-size:11px;cursor:pointer;font-family:var(--font);">
+          style="padding:5px 8px;background:rgba(46,158,126,.1);border:1px solid rgba(46,158,126,.3);color:#2E9E7E;border-radius:6px;font-size:11px;cursor:pointer;font-family:var(--font);">
           <i class="bi bi-floppy-fill"></i>
         </button>
       </div>
@@ -4875,8 +4915,11 @@ function renderAccTable(){
       <select onchange="setUserMember('${escHtml(a.username)}',this.value)"
         style="padding:5px 8px;background:var(--input-bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-size:12px;font-family:var(--font);">
         <option value="free" ${(a.memberType||'free')==='free'?'selected':''}>Free</option>
-        <option value="premium" ${a.memberType==='premium'?'selected':''}>⭐ Premium</option>
+        <option value="gold" ${a.memberType==='gold'?'selected':''}>🥇 Vàng</option>
+        <option value="diamond" ${a.memberType==='diamond'?'selected':''}>💎 Kim cương</option>
+        <option value="premium" ${a.memberType==='premium'?'selected':''}>⭐ Premium (gói cũ)</option>
       </select>
+      ${(a.memberType==='gold'||a.memberType==='diamond')?`<div style="margin-top:6px;font-size:11px;color:var(--text3);">Hạn: <input type="date" value="${escHtml(a.memberExpiry||'')}" onchange="setUserExpiry('${escHtml(a.username)}',this.value)" style="padding:3px 6px;font-size:11px;background:var(--input-bg);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:var(--font);"></div>`:''}
     </td>
     <td><div class="tact">
       <button class="del" onclick="deleteAcc('${escHtml(a.username)}')"><i class="bi bi-trash3-fill"></i> Xoá</button>
@@ -4911,11 +4954,19 @@ async function setUserMember(username, memberType){
   const acc = ACCOUNTS.find(a=>a.username===username);
   if(!acc) return;
   acc.memberType = memberType;
+  if(memberType==='gold'||memberType==='diamond'){ if(!acc.memberExpiry || acc.memberExpiry<todayISO()) acc.memberExpiry = addMonthsISO(todayISO(),1); }
+  else acc.memberExpiry = null;
   LS.set('accounts',ACCOUNTS);
-  if(API_URL&&!API_URL.includes('PASTE_YOUR')){
-    try{ await API.post({action:'updateAccount',username,data:{memberType}}); }catch(e){}
-  }
-  showToast((memberType==='premium'?'⭐ Đã nâng cấp':'Đã hạ về Free')+' cho '+username,'success');
+  try{ await API.post({action:'updateAccount',username,data:{memberType, memberExpiry:acc.memberExpiry||null}}); }catch(e){}
+  showToast((memberType==='free'?'Đã hạ về Free':'Đã nâng hạng '+memberLabel(acc))+' cho '+username,'success');
+  if(typeof renderAccTable==='function') renderAccTable();
+}
+async function setUserExpiry(username, iso){
+  const acc = ACCOUNTS.find(a=>a.username===username); if(!acc) return;
+  acc.memberExpiry = iso||null;
+  LS.set('accounts',ACCOUNTS);
+  try{ await API.post({action:'updateAccount',username,data:{memberExpiry:acc.memberExpiry}}); }catch(e){}
+  showToast('Đã cập nhật hạn hội viên của '+username,'success');
 }
 
 function saveAccount(){
@@ -4957,6 +5008,8 @@ async function saveProfile(){
     document.getElementById('prNewPass').value=''; document.getElementById('prNewPass2').value='';
     const api=document.getElementById('adminPassInput'); if(api) api.value=np;
   }
+  const _pf = {prName:'prName', prPhone:'prPhone', prFb:'prFb', prYt:'prYt', prZalo:'prZalo', prSite:'prSite', prAddr:'prAddr', prEmail:'prEmail', taxCode:'prTax', workHours:'prHours'};
+  Object.keys(_pf).forEach(k=>{ const el=document.getElementById(_pf[k]); if(el) SETTINGS[k]=el.value.trim(); });
   await saveSettings();
   m.classList.add('show'); setTimeout(()=>m.classList.remove('show'),3000);
   showToast('Đã lưu thông tin','success');
@@ -4972,6 +5025,8 @@ function loadSettingsToForm(){
   const qr=document.getElementById('qrDriveLink'); if(qr){ qr.value=SETTINGS.qrUrl||''; previewQR(qr.value); }
   const ap=document.getElementById('adminPassInput'); if(ap) ap.value=SETTINGS.adminPass||'';
   const lu=document.getElementById('logoUrl'); if(lu) lu.value=SETTINGS.logoUrl||'';
+  const _pf = {prName:'prName', prPhone:'prPhone', prFb:'prFb', prYt:'prYt', prZalo:'prZalo', prSite:'prSite', prAddr:'prAddr', prEmail:'prEmail', taxCode:'prTax', workHours:'prHours'};
+  Object.keys(_pf).forEach(k=>{ const el=document.getElementById(_pf[k]); if(el && SETTINGS[k]!==undefined) el.value=SETTINGS[k]; });
   // Load promos
   try{ PROMOS=(typeof SETTINGS.promos==='string')?JSON.parse(SETTINGS.promos):(SETTINGS.promos||[]); }catch(e){ PROMOS=[]; }
   renderPromoAdminList();
@@ -4985,7 +5040,7 @@ function renderPromoAdminList(){
   }
   list.innerHTML=PROMOS.map((p,i)=>`
     <div style="background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;">
-      <div style="height:60px;position:relative;background:${p.img?'var(--bg3)':`linear-gradient(135deg,${escHtml(p.bg1||'#06231A')},${escHtml(p.bg2||'#0B4A34')})`};overflow:hidden;display:flex;align-items:center;justify-content:center;">
+      <div style="height:60px;position:relative;background:${p.img?'var(--bg3)':`linear-gradient(135deg,${escHtml(p.bg1||'#08231F')},${escHtml(p.bg2||'#12463D')})`};overflow:hidden;display:flex;align-items:center;justify-content:center;">
         ${p.img?`<img src="${escHtml(p.img)}" style="width:100%;height:100%;object-fit:cover;">`:`<span style="font-size:20px;">${p.icon||'🎉'}</span><span style="color:#fff;font-weight:700;margin-left:8px;font-size:13px;">${escHtml(p.title||'Slide '+(i+1))}</span>`}
         <span style="position:absolute;top:4px;left:8px;background:rgba(0,0,0,.55);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px;">Slide ${i+1}</span>
         <button onclick="PROMOS.splice(${i},1);renderPromoAdminList()" style="position:absolute;top:4px;right:6px;width:24px;height:24px;background:rgba(232,64,64,.85);border:none;border-radius:50%;color:#fff;font-size:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;">×</button>
@@ -5252,7 +5307,7 @@ async function renderAnalytics(){
     hourChart.innerHTML=hourly.map((v,h)=>`
       <div title="${h}:00 — ${v} lượt" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;cursor:default;">
         <span style="font-size:9px;color:${v>0?'var(--gold)':'transparent'};font-weight:700;">${v||''}</span>
-        <div style="width:100%;background:${h===curH?'var(--gold)':'rgba(11,122,85,.55)'};border-radius:3px 3px 0 0;height:${Math.max(Math.round(v/maxH*90),v>0?4:0)}px;transition:height .5s ease;"></div>
+        <div style="width:100%;background:${h===curH?'var(--gold)':'rgba(20,82,74,.55)'};border-radius:3px 3px 0 0;height:${Math.max(Math.round(v/maxH*90),v>0?4:0)}px;transition:height .5s ease;"></div>
         ${h%6===0?`<span style="font-size:8px;color:var(--text3);">${h}h</span>`:'<span style="height:11px;"></span>'}
       </div>`).join('');
   }
@@ -5264,7 +5319,7 @@ async function renderAnalytics(){
     dayChart.innerHTML=daily14.map(d=>`
       <div title="${d.key} — ${d.views} lượt" style="flex:0 0 calc(100%/14 - 4px);min-width:28px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:default;">
         <span style="font-size:9px;color:${d.views>0?(d.key===todayKey?'var(--gold)':'var(--accent)'):'transparent'};font-weight:600;">${d.views||''}</span>
-        <div style="width:100%;background:${d.key===todayKey?'var(--gold)':'rgba(11,122,85,.55)'};border-radius:3px 3px 0 0;height:${Math.max(Math.round(d.views/maxD*90),d.views>0?4:0)}px;transition:height .5s ease;"></div>
+        <div style="width:100%;background:${d.key===todayKey?'var(--gold)':'rgba(20,82,74,.55)'};border-radius:3px 3px 0 0;height:${Math.max(Math.round(d.views/maxD*90),d.views>0?4:0)}px;transition:height .5s ease;"></div>
         <span style="font-size:9px;color:var(--text3);white-space:nowrap;">${d.label}</span>
       </div>`).join('');
   }
@@ -5431,19 +5486,19 @@ function _showCropModal(file) {
       ov.style.cssText = 'position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,.85);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;';
       ov.innerHTML = `
         <div style="color:#fff;font-size:15px;font-weight:600;">Cắt ảnh trước khi upload</div>
-        <div style="position:relative;display:inline-block;max-width:90vw;max-height:60vh;overflow:hidden;border-radius:10px;border:2px solid var(--gold,#0E9F6E);">
+        <div style="position:relative;display:inline-block;max-width:90vw;max-height:60vh;overflow:hidden;border-radius:10px;border:2px solid var(--gold,#1C6B5C);">
           <img id="cropImg" style="display:block;max-width:90vw;max-height:60vh;user-select:none;">
-          <div id="cropBox" style="position:absolute;border:2px dashed #0E9F6E;cursor:move;box-shadow:0 0 0 9999px rgba(0,0,0,.45);"></div>
+          <div id="cropBox" style="position:absolute;border:2px dashed #1C6B5C;cursor:move;box-shadow:0 0 0 9999px rgba(0,0,0,.45);"></div>
         </div>
         <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;">
-          <select id="cropRatio" style="padding:8px 12px;border-radius:8px;background:#0B241A;border:1px solid #0E9F6E;color:#fff;font-size:13px;cursor:pointer;">
+          <select id="cropRatio" style="padding:8px 12px;border-radius:8px;background:#0A2621;border:1px solid #1C6B5C;color:#fff;font-size:13px;cursor:pointer;">
             <option value="free">Tự do</option>
             <option value="16:9" selected>16:9 (card ngang)</option>
             <option value="4:3">4:3</option>
             <option value="1:1">1:1 (vuông)</option>
             <option value="3:4">3:4 (dọc)</option>
           </select>
-          <button id="cropOk" style="padding:10px 28px;background:#0E9F6E;color:#FFFFFF;border:none;border-radius:8px;font-weight:700;font-size:14px;cursor:pointer;">✓ Xong</button>
+          <button id="cropOk" style="padding:10px 28px;background:#1C6B5C;color:#FFFFFF;border:none;border-radius:8px;font-weight:700;font-size:14px;cursor:pointer;">✓ Xong</button>
           <button id="cropSkip" style="padding:10px 20px;background:transparent;border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:8px;font-size:13px;cursor:pointer;">Bỏ qua cắt</button>
           <button id="cropCancel" style="padding:10px 20px;background:rgba(232,64,64,.15);border:1px solid rgba(232,64,64,.4);color:#e84040;border-radius:8px;font-size:13px;cursor:pointer;">Huỷ</button>
         </div>`;
@@ -5649,7 +5704,7 @@ function _convertToCopyLink(btn){
     return;
   }
   input.value = converted;
-  input.style.borderColor = '#34c759';
+  input.style.borderColor = '#2E9E7E';
   setTimeout(()=>{ input.style.borderColor = 'var(--border)'; }, 1200);
   showToast('✅ Đã chuyển thành link "Tạo bản sao"','success');
 }
@@ -5701,7 +5756,7 @@ function notifyAdminNewOrder(order){
       <h2 style="margin:0 0 8px;font-size:18px;font-weight:800;color:#0a0a0a;">🔔 Đơn hàng mới cần duyệt</h2>
       <p style="margin:0 0 20px;color:#777777;">Thời gian: ${order.createdAt}</p>
       <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f9f9f9;border-radius:10px;overflow:hidden;">
-        <tr><td style="padding:12px 18px;border-bottom:1px solid #ececec;font-size:12px;font-weight:700;color:#777777;width:38%;">Mã đơn</td><td style="padding:12px 18px;border-bottom:1px solid #ececec;font-weight:700;color:#0B7A55;font-family:monospace;">#${String(order.id).slice(-6)}</td></tr>
+        <tr><td style="padding:12px 18px;border-bottom:1px solid #ececec;font-size:12px;font-weight:700;color:#777777;width:38%;">Mã đơn</td><td style="padding:12px 18px;border-bottom:1px solid #ececec;font-weight:700;color:#14524A;font-family:monospace;">#${String(order.id).slice(-6)}</td></tr>
         <tr><td style="padding:12px 18px;border-bottom:1px solid #ececec;font-size:12px;font-weight:700;color:#777777;">Sản phẩm</td><td style="padding:12px 18px;border-bottom:1px solid #ececec;">${escHtml(order.name)}</td></tr>
         <tr><td style="padding:12px 18px;border-bottom:1px solid #ececec;font-size:12px;font-weight:700;color:#777777;">Người mua</td><td style="padding:12px 18px;border-bottom:1px solid #ececec;">${escHtml(order.buyer)}</td></tr>
         <tr><td style="padding:12px 18px;border-bottom:1px solid #ececec;font-size:12px;font-weight:700;color:#777777;">SĐT / Zalo</td><td style="padding:12px 18px;border-bottom:1px solid #ececec;">${escHtml(order.phone)}</td></tr>
@@ -5718,7 +5773,7 @@ function sendApprovalEmailToCustomer(order){
   const dlUrl = order.downloadUrl || '';
   const htmlBody = `
     <div style="text-align:center;margin:0 0 24px;">
-      <div style="width:56px;height:56px;border-radius:50%;background:rgba(52,199,89,.12);display:inline-flex;align-items:center;justify-content:center;font-size:28px;">✅</div>
+      <div style="width:56px;height:56px;border-radius:50%;background:rgba(46,158,126,.12);display:inline-flex;align-items:center;justify-content:center;font-size:28px;">✅</div>
     </div>
     <h2 style="margin:0 0 8px;font-size:20px;font-weight:800;color:#0a0a0a;text-align:center;">Đơn hàng đã được duyệt!</h2>
     <p style="margin:0 0 24px;text-align:center;color:#777777;">Cảm ơn bạn đã mua hàng tại VDAPP 🎉</p>
@@ -5735,16 +5790,16 @@ function sendApprovalEmailToCustomer(order){
       </tr>
       <tr>
         <td style="padding:14px 20px;font-size:12px;font-weight:700;color:#777777;">Mã đơn</td>
-        <td style="padding:14px 20px;font-size:14px;font-weight:700;text-align:right;color:#0B7A55;font-family:monospace;">#${String(order.id).slice(-6)}</td>
+        <td style="padding:14px 20px;font-size:14px;font-weight:700;text-align:right;color:#14524A;font-family:monospace;">#${String(order.id).slice(-6)}</td>
       </tr>
     </table>
     ${prod&&prod.desc?`<p style="font-size:13px;color:#777777;background:#f9f9f9;padding:14px 16px;border-radius:10px;margin:0 0 20px;">${prod.desc}</p>`:''}
     ${dlUrl?`
     <div style="text-align:center;margin:28px 0;">
-      <a href="${toGSheetCopyLink(dlUrl)}" style="display:inline-block;padding:14px 36px;background:linear-gradient(135deg,#34c759,#30d158);color:#ffffff;border-radius:980px;font-weight:700;font-size:14px;text-decoration:none;">📥 ${toGSheetCopyLink(dlUrl)!==dlUrl?'Tạo bản sao ngay':'Tải xuống ngay'}</a>
+      <a href="${toGSheetCopyLink(dlUrl)}" style="display:inline-block;padding:14px 36px;background:linear-gradient(135deg,#2E9E7E,#3AAE8D);color:#ffffff;border-radius:980px;font-weight:700;font-size:14px;text-decoration:none;">📥 ${toGSheetCopyLink(dlUrl)!==dlUrl?'Tạo bản sao ngay':'Tải xuống ngay'}</a>
     </div>
     ` : `<p style="text-align:center;color:#777777;font-size:13px;">Link tải sẽ được cập nhật trong ít phút, vui lòng kiểm tra lại trong mục "Sản phẩm của tôi" trên web.</p>`}
-    <p style="margin:24px 0 0;font-size:13px;color:#777777;">Nếu cần hỗ trợ thêm, liên hệ Zalo <a href="https://zalo.me/0946770648" style="color:#0B7A55;font-weight:600;text-decoration:none;">0946 770 648</a></p>
+    <p style="margin:24px 0 0;font-size:13px;color:#777777;">Nếu cần hỗ trợ thêm, liên hệ Zalo <a href="https://zalo.me/0946770648" style="color:#14524A;font-weight:600;text-decoration:none;">0946 770 648</a></p>
   `;
   API.post({
     action:'sendEmail',
@@ -5758,7 +5813,7 @@ function sendUpdateEmail(emails, prod, isNew){
   const subject = isNew
     ? `[VDAPP] 🚀 Sản phẩm mới: ${prod.name.split('|').pop().trim()}`
     : `[VDAPP] 🔄 Cập nhật mới: ${prod.name.split('|').pop().trim()} — ${prod.versions&&prod.versions[0]?prod.versions[0]:''}`;
-  const bodyColor = isNew ? '#0E9F6E' : '#0B7A55';
+  const bodyColor = isNew ? '#1C6B5C' : '#14524A';
   const bodyLabel = isNew ? 'Ra mắt sản phẩm mới!' : 'Sản phẩm vừa có bản cập nhật!';
   emails.forEach(email=>{
     if(!email) return;
@@ -5770,7 +5825,7 @@ function sendUpdateEmail(emails, prod, isNew){
           ${prod.versions&&prod.versions[0]?`<div style="font-size:12px;color:#888;margin-bottom:10px;">Phiên bản: <strong>${prod.versions[0]}</strong></div>`:''}
           ${prod.desc?`<p style="font-size:13px;color:#555;line-height:1.6;">${prod.desc}</p>`:''}
           ${prod.changelog&&prod.changelog.length?`<div style="margin-top:10px;"><strong style="font-size:12px;color:#666;">Thay đổi:</strong><ul style="margin:8px 0;padding-left:18px;">${prod.changelog.slice(0,5).map(c=>`<li style="font-size:13px;color:#555;margin-bottom:4px;">${c}</li>`).join('')}</ul></div>`:''}
-          <a href="https://vdapp.vn" style="display:inline-block;margin-top:14px;padding:10px 22px;background:linear-gradient(135deg,#0E9F6E,#3ECF8E);color:#FFFFFF;border-radius:8px;font-weight:700;text-decoration:none;">Xem ngay →</a>
+          <a href="https://vdapp.vn" style="display:inline-block;margin-top:14px;padding:10px 22px;background:linear-gradient(135deg,#1C6B5C,#3A9C88);color:#FFFFFF;border-radius:8px;font-weight:700;text-decoration:none;">Xem ngay →</a>
         </div>
         <p style="color:#aaa;font-size:11px;margin-top:16px;">Bạn nhận email này vì đã từng mua sản phẩm tại VDAPP. <br>— VDAPP Team</p>
       </div>`;
@@ -5887,12 +5942,12 @@ function _onOrderApproved(order) {
       waitStatus.innerHTML = `
         <div style="text-align:center;padding:20px 0;">
           <div style="font-size:44px;margin-bottom:10px;">🎉</div>
-          <div style="font-size:18px;font-weight:700;color:#34c759;margin-bottom:6px;">Đơn hàng đã được duyệt!</div>
+          <div style="font-size:18px;font-weight:700;color:#2E9E7E;margin-bottom:6px;">Đơn hàng đã được duyệt!</div>
           ${dlUrl
             ? `<a href="${dlUrl}" target="_blank"
                 style="display:inline-flex;align-items:center;gap:8px;margin-top:14px;padding:14px 28px;
-                  background:linear-gradient(135deg,#34c759,#30d158);border-radius:12px;color:#fff;
-                  font-weight:700;font-size:15px;text-decoration:none;box-shadow:0 4px 20px rgba(52,199,89,.4);">
+                  background:linear-gradient(135deg,#2E9E7E,#3AAE8D);border-radius:12px;color:#fff;
+                  font-weight:700;font-size:15px;text-decoration:none;box-shadow:0 4px 20px rgba(46,158,126,.4);">
                 <i class="bi bi-cloud-arrow-down-fill"></i> Tải xuống ngay
               </a>`
             : `<div style="color:var(--text2);font-size:13px;margin-top:8px;">Admin đang chuẩn bị link — vui lòng đợi...</div>`
@@ -5943,16 +5998,16 @@ function startAdminGhostPoll(){ /* handled by SyncEngine */ }
   const canvas = document.getElementById('particles-canvas');
   const ctx = canvas.getContext('2d');
   let W, H;
-  // Màu theo Theme 3 - Xanh La Tuoi Mat
+  // Màu theo thương hiệu #1C6B5C
   const COLORS = [
-    [14,  159, 110],
-    [62,  207, 142],
-    [11,  122, 85],
-    [169, 223, 194],
-    [52,  199, 89],
-    [120, 215, 170],
+    [28,  107, 92],
+    [58,  156, 136],
+    [20,  82,  74],
+    [160, 205, 193],
+    [46,  158, 126],
+    [140, 199, 184],
     [245, 158, 11],
-    [110, 138, 118]
+    [111, 140, 133]
   ];
   const COUNT = 75;   // số lượng chấm
   let dots = [];
@@ -6121,8 +6176,8 @@ function _openLightbox(src){
     lb.innerHTML = `
       <img id="lbImg" style="max-width:92vw;max-height:88vh;border-radius:10px;box-shadow:0 24px 80px rgba(0,0,0,.7);object-fit:contain;user-select:none;">
       <button id="lbClose" style="position:absolute;top:16px;right:16px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px);transition:background .2s;" onmouseover="this.style.background='rgba(232,64,64,.7)'" onmouseout="this.style.background='rgba(255,255,255,.12)'">×</button>
-      <button id="lbPrev" aria-label="Ảnh trước" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:20px;cursor:pointer;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px);transition:all .2s;" onmouseover="this.style.background='rgba(14,159,110,.5)'" onmouseout="this.style.background='rgba(255,255,255,.1)'"><i class="bi bi-chevron-left"></i></button>
-      <button id="lbNext" aria-label="Ảnh tiếp theo" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:20px;cursor:pointer;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px);transition:all .2s;" onmouseover="this.style.background='rgba(14,159,110,.5)'" onmouseout="this.style.background='rgba(255,255,255,.1)'"><i class="bi bi-chevron-right"></i></button>
+      <button id="lbPrev" aria-label="Ảnh trước" style="position:absolute;left:16px;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:20px;cursor:pointer;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px);transition:all .2s;" onmouseover="this.style.background='rgba(28,107,92,.5)'" onmouseout="this.style.background='rgba(255,255,255,.1)'"><i class="bi bi-chevron-left"></i></button>
+      <button id="lbNext" aria-label="Ảnh tiếp theo" style="position:absolute;right:16px;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:20px;cursor:pointer;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px);transition:all .2s;" onmouseover="this.style.background='rgba(28,107,92,.5)'" onmouseout="this.style.background='rgba(255,255,255,.1)'"><i class="bi bi-chevron-right"></i></button>
       <div id="lbCounter" style="position:absolute;bottom:16px;left:50%;transform:translateX(-50%);font-size:12px;color:rgba(255,255,255,.6);font-weight:600;letter-spacing:.5px;"></div>`;
     lb.onclick = e => { if(e.target===lb) _closeLightbox(); };
     lb.querySelector('#lbClose').onclick = _closeLightbox;
@@ -6197,7 +6252,7 @@ function renderEmailMarketing(){
         style="width:15px;height:15px;accent-color:var(--gold);cursor:pointer;" onchange="emUpdateCount()">
       <div style="flex:1;">
         <div style="font-size:13px;font-weight:600;color:var(--text);">${escHtml(a.name||a.username)}</div>
-        <div style="font-size:11px;color:var(--text2);">${escHtml(a.email)}${hasBought?'  <span style="color:#34c759;font-weight:600;">✓ Đã mua</span>':''}</div>
+        <div style="font-size:11px;color:var(--text2);">${escHtml(a.email)}${hasBought?'  <span style="color:#2E9E7E;font-weight:600;">✓ Đã mua</span>':''}</div>
       </div>
     </label>`;
   }).join('') : '<div style="padding:16px;text-align:center;color:var(--text3);font-size:13px;">Không có tài khoản nào có email.<br>Khách cần điền email khi đăng ký.</div>';
@@ -6263,7 +6318,7 @@ async function doSendEmailMarketing(){
     const res = document.getElementById('emResult');
     if(res){
       res.style.display='block';
-      res.innerHTML=`<div style="background:rgba(52,199,89,.1);border:1px solid rgba(52,199,89,.3);border-radius:10px;padding:12px 16px;color:#34c759;font-size:13px;font-weight:600;">
+      res.innerHTML=`<div style="background:rgba(46,158,126,.1);border:1px solid rgba(46,158,126,.3);border-radius:10px;padding:12px 16px;color:#2E9E7E;font-size:13px;font-weight:600;">
         <i class="bi bi-check-circle-fill"></i> Đã gửi đến ${emails.length} địa chỉ email!
         <div style="font-size:11px;font-weight:400;color:var(--text2);margin-top:4px;">Lưu ý: email được gửi qua Google Apps Script, có thể mất vài phút đến hộp thư người nhận.</div>
       </div>`;
@@ -6281,35 +6336,81 @@ async function doSendEmailMarketing(){
 // Paste Client ID vào đây:
 const GOOGLE_CLIENT_ID = '889814175818-okg3mcr93l1qg00i9fnp5g7npb28eqjr.apps.googleusercontent.com';
 
-function doGoogleLogin(){
-  if(!GOOGLE_CLIENT_ID || GOOGLE_CLIENT_ID.includes('YOUR_GOOGLE')){
-    // Fallback nếu chưa cấu hình: chuyển sang tab đăng ký bằng email
-    showToast('Tính năng đăng nhập Google đang được cấu hình. Vui lòng dùng email.','info');
-    return;
-  }
-  // Dùng Google Identity Services popup
-  if(typeof google === 'undefined' || !google.accounts){
-    showToast('Đang tải Google Sign-In...','info');
-    return;
-  }
-  const client = google.accounts.oauth2.initTokenClient({
-    client_id: GOOGLE_CLIENT_ID,
-    scope: 'email profile',
-    callback: async (tokenResp) => {
-      if(!tokenResp.access_token) return;
-      try {
-        // Lấy thông tin user từ Google
-        const res = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
-          headers: {Authorization: 'Bearer '+tokenResp.access_token}
-        });
-        const info = await res.json();
-        _handleGoogleUser(info);
-      } catch(e){
-        showToast('Đăng nhập Google thất bại','error');
-      }
-    }
+// Trình duyệt nhúng (Zalo, Facebook, Messenger, Instagram, TikTok…) bị Google chặn đăng nhập OAuth (lỗi 403 disallowed_useragent)
+function _isInAppBrowser(){
+  const ua = navigator.userAgent || '';
+  return /(Zalo|FBAN|FBAV|FB_IAB|Messenger|Instagram|Line\/|TikTok|musical_ly|Snapchat|KAKAOTALK|; wv\))/i.test(ua);
+}
+function _showInAppBrowserHelp(){
+  const err = document.getElementById('loginErr');
+  if(err) err.innerHTML = 'Trình duyệt trong ứng dụng (Zalo, Facebook…) không cho đăng nhập Google. Hãy bấm <b>⋯</b> rồi chọn <b>Mở bằng Chrome/Safari</b>, hoặc <a href="#" onclick="event.preventDefault();_copyPageLink()" style="color:var(--gold);font-weight:700;">sao chép liên kết</a> để dán vào trình duyệt.';
+}
+function _copyPageLink(){
+  try{ navigator.clipboard.writeText(location.href).then(()=>showToast('Đã sao chép liên kết, hãy dán vào Chrome/Safari','success')); }catch(e){ showToast('Hãy copy địa chỉ trang trên thanh địa chỉ','info'); }
+}
+let _googleLoginBusy = false;
+function _setGoogleBtnBusy(b){
+  _googleLoginBusy = b;
+  const btn = document.getElementById('googleLoginBtn');
+  if(btn){ btn.disabled = b; btn.style.opacity = b ? '.6' : '1'; btn.style.cursor = b ? 'wait' : 'pointer'; }
+}
+function _waitForGoogle(ms){
+  return new Promise(res=>{
+    const t0 = Date.now();
+    (function chk(){
+      if(typeof google!=='undefined' && google.accounts && google.accounts.oauth2) return res(true);
+      if(Date.now()-t0 > ms) return res(false);
+      setTimeout(chk, 120);
+    })();
   });
-  client.requestAccessToken();
+}
+async function doGoogleLogin(){
+  if(_googleLoginBusy) return;
+  const err = document.getElementById('loginErr'); if(err) err.textContent='';
+  if(_isInAppBrowser()){ _showInAppBrowserHelp(); return; }
+  if(!GOOGLE_CLIENT_ID || GOOGLE_CLIENT_ID.includes('YOUR_GOOGLE')){
+    if(err) err.textContent='Đăng nhập Google chưa được cấu hình. Vui lòng liên hệ Zalo hỗ trợ.';
+    return;
+  }
+  _setGoogleBtnBusy(true);
+  const ok = await _waitForGoogle(4000);
+  if(!ok){
+    _setGoogleBtnBusy(false);
+    if(err) err.textContent='Không tải được Google Sign-In (mạng chậm hoặc bị chặn). Hãy tải lại trang và thử lại.';
+    return;
+  }
+  try{
+    const client = google.accounts.oauth2.initTokenClient({
+      client_id: GOOGLE_CLIENT_ID,
+      scope: 'email profile',
+      callback: async (tokenResp) => {
+        if(!tokenResp || tokenResp.error || !tokenResp.access_token){
+          _setGoogleBtnBusy(false);
+          if(err) err.textContent='Đăng nhập Google bị huỷ hoặc không thành công. Vui lòng thử lại.';
+          return;
+        }
+        try {
+          const res = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', { headers: {Authorization: 'Bearer '+tokenResp.access_token} });
+          if(!res.ok) throw new Error('HTTP '+res.status);
+          const info = await res.json();
+          _handleGoogleUser(info);
+        } catch(e){
+          if(err) err.textContent='Không lấy được thông tin tài khoản Google. Vui lòng thử lại.';
+          showToast('Đăng nhập Google thất bại','error');
+        } finally { _setGoogleBtnBusy(false); }
+      },
+      error_callback: (e) => {
+        _setGoogleBtnBusy(false);
+        const t = e && e.type;
+        if(err) err.textContent = (t==='popup_failed_to_open') ? 'Trình duyệt đang chặn cửa sổ đăng nhập. Hãy cho phép cửa sổ bật lên (popup) cho trang này rồi thử lại.'
+                               : (t==='popup_closed') ? 'Bạn đã đóng cửa sổ đăng nhập Google.' : 'Đăng nhập Google không thành công. Vui lòng thử lại.';
+      }
+    });
+    client.requestAccessToken({prompt:'select_account'});
+  }catch(e){
+    _setGoogleBtnBusy(false);
+    if(err) err.textContent='Không mở được đăng nhập Google. Vui lòng tải lại trang.';
+  }
 }
 
 function _handleGoogleUser(info){
@@ -6369,6 +6470,284 @@ window.addEventListener('DOMContentLoaded',()=>{
 });
 
 </script>
+<!-- ══ CHÍNH SÁCH & ĐIỀU KHOẢN ══ -->
+<style>
+.pol-link{font-size:12.5px;color:var(--text2);text-decoration:none;transition:color .2s;}
+.pol-link:hover{color:var(--gold);}
+.policy-ov{position:fixed;inset:0;z-index:960;background:rgba(10,38,33,.55);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;padding:20px;}
+.policy-ov.open{display:flex;}
+.policy-box{background:var(--surface);border:1px solid var(--border);border-radius:18px;width:min(1020px,100%);height:min(86vh,760px);display:flex;overflow:hidden;box-shadow:var(--shadow);position:relative;}
+.policy-nav{width:250px;flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);overflow-y:auto;padding:16px 10px;}
+.policy-nav-title{font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text3);padding:4px 12px 10px;}
+.policy-nav button{display:block;width:100%;text-align:left;padding:10px 12px;margin-bottom:2px;border:none;border-radius:9px;background:transparent;color:var(--text2);font-size:13.5px;font-weight:500;font-family:var(--font);cursor:pointer;}
+.policy-nav button:hover{background:var(--bg3);}
+.policy-nav button.active{background:var(--gold);color:#fff;font-weight:700;}
+.policy-main{flex:1;overflow-y:auto;padding:30px 36px 36px;color:var(--text2);font-size:14px;line-height:1.75;}
+.policy-main h2{font-size:22px;font-weight:800;color:var(--text);letter-spacing:-.4px;margin:0 0 6px;}
+.policy-main .pol-lead{font-size:14px;color:var(--text2);margin:0 0 18px;padding-bottom:16px;border-bottom:1px solid var(--border);}
+.policy-main h3{font-size:14.5px;font-weight:700;color:var(--text);margin:20px 0 6px;}
+.policy-main p{margin:0 0 10px;}
+.policy-main ul,.policy-main ol{margin:0 0 12px;padding-left:22px;}
+.policy-main li{margin-bottom:5px;}
+.policy-main table{width:100%;border-collapse:collapse;margin:8px 0 14px;font-size:13px;}
+.policy-main th,.policy-main td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top;}
+.policy-main th{background:var(--bg2);color:var(--text);font-weight:700;}
+.policy-main a{color:var(--gold);font-weight:600;}
+.policy-main .pol-note{background:var(--gold-pale);border:1px solid var(--border-gold);border-radius:10px;padding:12px 14px;margin:12px 0;font-size:13px;}
+.policy-close{position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:9px;background:var(--bg3);border:1px solid var(--border);color:var(--text2);font-size:16px;cursor:pointer;z-index:2;display:flex;align-items:center;justify-content:center;}
+@media(max-width:760px){
+  .policy-ov{padding:0;align-items:stretch;}
+  .policy-box{width:100%;height:100%;border-radius:0;flex-direction:column;}
+  .policy-nav{width:100%;display:flex;gap:6px;overflow-x:auto;overflow-y:hidden;padding:54px 10px 10px;border-right:none;border-bottom:1px solid var(--border);}
+  .policy-nav-title{display:none;}
+  .policy-nav button{white-space:nowrap;width:auto;margin:0;flex-shrink:0;padding:8px 12px;}
+  .policy-main{padding:20px 18px 40px;}
+}
+</style>
+<div class="policy-ov" id="policyOv" role="dialog" aria-modal="true" aria-label="Chính sách và điều khoản" onclick="if(event.target===this)closePolicy()">
+  <div class="policy-box">
+    <button class="policy-close" onclick="closePolicy()" aria-label="Đóng"><i class="bi bi-x-lg"></i></button>
+    <div class="policy-nav" id="policyNav"></div>
+    <div class="policy-main" id="policyMain"></div>
+  </div>
+</div>
+<script>
+(function(){
+  const ORDER = [
+    ['info','Thông tin chủ quản'],['terms','Điều khoản sử dụng'],['rights','Quyền và nghĩa vụ'],['pricing','Chính sách giá'],
+    ['payment','Thanh toán'],['delivery','Giao hàng'],['refund','Đổi trả, hoàn tiền'],['termination','Chấm dứt dịch vụ'],
+    ['privacy','Bảo mật'],['complaint','Khiếu nại'],['support','Hỗ trợ']
+  ];
+  const e = s => (typeof escHtml==='function') ? escHtml(String(s)) : String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  function B(){
+    const S = (typeof SETTINGS!=='undefined' && SETTINGS) ? SETTINGS : {};
+    return {
+      owner: S.prName || 'Nguyễn Văn Đảm',
+      phone: S.prPhone || '0946770648',
+      email: S.prEmail || 'vdapp.vn@gmail.com',
+      addr:  S.prAddr  || 'TP. Hồ Chí Minh, Việt Nam',
+      site:  S.prSite  || 'vdapp.vn',
+      tax:   S.taxCode || '',
+      hours: S.workHours || '8:00 – 18:00, Thứ Hai đến Thứ Bảy (trừ ngày lễ)',
+      bankAcc: S.bankAcc || '25088888999999', bankName: S.bankName || 'MB Bank – Quân Đội', bankOwner: S.bankOwner || 'NGUYEN VAN DAM'
+    };
+  }
+  const ul = a => '<ul>'+a.map(x=>'<li>'+x+'</li>').join('')+'</ul>';
+  const ol = a => '<ol>'+a.map(x=>'<li>'+x+'</li>').join('')+'</ol>';
+  const tbl = (head, rows) => '<table><thead><tr>'+head.map(h=>'<th>'+h+'</th>').join('')+'</tr></thead><tbody>'+rows.map(r=>'<tr>'+r.map(c=>'<td>'+c+'</td>').join('')+'</tr>').join('')+'</tbody></table>';
+  const note = t => '<div class="pol-note">'+t+'</div>';
+
+  const DOCS = {
+    info: b => ({ title:'Thông tin chủ quản', lead:'Website '+e(b.site)+' do '+e(b.owner)+' (hộ kinh doanh cá thể) sở hữu và vận hành.',
+      html: ul([
+        '<b>Thương hiệu:</b> VDAPP – Bứt phá bắt đầu từ một trang tính',
+        '<b>Đơn vị chủ quản:</b> '+e(b.owner)+', hộ kinh doanh cá thể',
+        b.tax ? '<b>Mã số thuế / mã số kinh doanh:</b> '+e(b.tax) : '',
+        '<b>Địa chỉ:</b> '+e(b.addr),
+        '<b>Điện thoại, Zalo:</b> <a href="tel:'+e(b.phone)+'">'+e(b.phone)+'</a>',
+        '<b>Email:</b> <a href="mailto:'+e(b.email)+'">'+e(b.email)+'</a>',
+        '<b>Giờ làm việc:</b> '+e(b.hours),
+        '<b>Lĩnh vực:</b> thiết kế và cung cấp template Google Sheets, ứng dụng Google Apps Script, web app, website và dịch vụ hỗ trợ kỹ thuật liên quan.'
+      ].filter(Boolean)) +
+      '<p>Chúng tôi chỉ nhận thanh toán vào tài khoản <b>'+e(b.bankAcc)+'</b> ('+e(b.bankName)+') mang tên <b>'+e(b.bankOwner)+'</b>. Mọi tài khoản khác không thuộc chúng tôi.</p>' }),
+
+    terms: b => ({ title:'Điều khoản sử dụng', lead:'Khi truy cập website, mua app hoặc đăng ký hội viên, bạn xác nhận đã đọc, hiểu và đồng ý với toàn bộ điều khoản dưới đây.',
+      html:
+      '<h3>1. Giải thích từ ngữ</h3>' + ul([
+        '<b>App:</b> template, ứng dụng Google Apps Script, web app hoặc website do chúng tôi phát triển và bán.',
+        '<b>Database:</b> file Google Sheets lưu dữ liệu của app, thuộc quyền sở hữu của khách hàng.',
+        '<b>Link app:</b> đường dẫn truy cập app do chúng tôi cung cấp.',
+        '<b>Hội viên:</b> gói dịch vụ trả theo tháng (Vàng hoặc Kim cương).'
+      ]) +
+      '<h3>2. Phạm vi "sở hữu vĩnh viễn"</h3>' + ul([
+        'Khách hàng được sử dụng app đã mua không thời hạn và sở hữu database chứa dữ liệu của mình, không phải trả phí duy trì cho chúng tôi.',
+        'Quyền sở hữu trí tuệ đối với mã nguồn, giao diện và thiết kế app thuộc về chúng tôi và không chuyển giao, trừ gói Kim cương được giao source code theo giấy phép sử dụng nội bộ.',
+        'App chạy trên nền tảng Google. Nếu Google thay đổi hoặc ngừng dịch vụ gây ảnh hưởng, chúng tôi hỗ trợ điều chỉnh trong khả năng hợp lý và không chịu trách nhiệm về thay đổi nằm ngoài tầm kiểm soát.'
+      ]) +
+      note('<b>Quy định về database:</b> Database Google Sheets thuộc quyền sở hữu của bạn, nhưng <b>nghiêm cấm thêm, xóa, sửa định dạng, cấu trúc hoặc dữ liệu trong sheet</b>. Mọi thao tác thực hiện trên link app được cung cấp, không thao tác bất cứ gì trực tiếp dưới database. Nếu vi phạm, chúng tôi không chịu trách nhiệm về bảo mật hoặc bảo hành.') +
+      '<h3>3. Hành vi bị cấm</h3>' + ul([
+        'Can thiệp trực tiếp vào database như mục 2.',
+        'Bán lại, cho thuê, phân phối, đăng công khai hoặc chia sẻ link app, app, source code cho bên thứ ba khi chưa được chúng tôi đồng ý bằng văn bản.',
+        'Dịch ngược, sao chép, gỡ bảo vệ hoặc khai thác trái phép mã nguồn và thiết kế app.',
+        'Dùng app cho mục đích vi phạm pháp luật, tấn công hoặc gây quá tải hệ thống.'
+      ]) +
+      '<h3>4. Giới hạn trách nhiệm</h3>' + ul([
+        'Chúng tôi không chịu trách nhiệm về bảo mật hoặc bảo hành nếu khách hàng vi phạm mục 3, để lộ link app hoặc tài khoản Google.',
+        'Trách nhiệm bồi thường tối đa không vượt quá số tiền khách hàng đã thanh toán cho app, hoặc cho 3 tháng hội viên gần nhất gây ra tranh chấp, trừ trường hợp pháp luật có quy định khác.'
+      ]) +
+      '<h3>5. Thay đổi điều khoản và luật áp dụng</h3>' + ul([
+        'Chúng tôi có thể cập nhật điều khoản và thông báo trên website ít nhất 7 ngày trước khi áp dụng; điều khoản mới không áp dụng ngược cho đơn đã thanh toán.',
+        'Pháp luật Việt Nam được áp dụng. Tranh chấp ưu tiên thương lượng; nếu không được, do Tòa án có thẩm quyền tại Việt Nam giải quyết.'
+      ]) }),
+
+    rights: b => ({ title:'Quyền và nghĩa vụ', lead:'Quyền và nghĩa vụ của khách hàng và của chúng tôi trong mỗi giao dịch.',
+      html:
+      '<h3>Khách hàng</h3><p><b>Quyền:</b></p>' + ul([
+        'Sử dụng app đã mua không thời hạn và sở hữu database của mình.',
+        'Được cấp lại link không giới hạn số lần.',
+        'Được hỗ trợ và bảo hành theo gói đã chọn.',
+        'Được yêu cầu truy cập, chỉnh sửa, xóa dữ liệu cá nhân; được khiếu nại khi quyền lợi bị ảnh hưởng.'
+      ]) + '<p><b>Nghĩa vụ:</b></p>' + ul([
+        'Cung cấp thông tin chính xác và thanh toán đúng hạn.',
+        'Chỉ thao tác qua link app, không can thiệp database.',
+        'Bảo mật link app và tài khoản Google; tự sao lưu dữ liệu quan trọng.',
+        'Không bán lại, chia sẻ app và source code; tuân thủ pháp luật khi sử dụng.'
+      ]) +
+      '<h3>VDAPP</h3><p><b>Quyền:</b></p>' + ul([
+        'Nhận thanh toán đầy đủ; bảo lưu quyền sở hữu trí tuệ.',
+        'Từ chối hoặc chấm dứt dịch vụ khi khách hàng vi phạm; tạm ngừng để bảo trì có thông báo trước.'
+      ]) + '<p><b>Nghĩa vụ:</b></p>' + ul([
+        'Giao app đúng cam kết, cấp lại link, hỗ trợ và bảo hành đúng phạm vi đã công bố.',
+        'Bảo vệ dữ liệu cá nhân của khách hàng.',
+        'Công khai giá và điều khoản rõ ràng trước khi thanh toán; tiếp nhận và giải quyết khiếu nại.'
+      ]) }),
+
+    pricing: b => ({ title:'Chính sách giá', lead:'Giá hiển thị trên website là giá bán bằng VNĐ. Giá trên đơn đã thanh toán không thay đổi khi bảng giá điều chỉnh.',
+      html: tbl(['Gói','Giá','Cách tính'],[
+        ['Mua app','Theo giá trị từng app, niêm yết trên trang sản phẩm','Trả một lần, sở hữu vĩnh viễn'],
+        ['Hội viên Vàng','699.000đ/tháng','Trả theo tháng'],
+        ['Hội viên Kim cương','1.250.000đ/tháng, cam kết tối thiểu 6 tháng để nhận source code','Trả theo tháng']
+      ]) + ul([
+        '<b>Giá hội viên:</b> giữ nguyên trong kỳ đã thanh toán; nếu đổi giá, chúng tôi thông báo ít nhất 30 ngày trước kỳ gia hạn tiếp theo.',
+        '<b>Giảm 30% khi mua app khác:</b> áp dụng cho hội viên còn hiệu lực, không cộng dồn khuyến mãi khác, không áp dụng cho app flagship mới ra trong 60 ngày đầu.',
+        '<b>Trả trước 12 tháng:</b> tặng 2 tháng (Vàng 6.990.000đ, Kim cương 12.500.000đ).',
+        '<b>Phí ẩn:</b> không có. Tính năng hoàn toàn mới ngoài gói Kim cương, dịch vụ cài đặt hộ và source code mua riêng được báo giá trước và chỉ thực hiện sau khi bạn xác nhận.'
+      ]) +
+      '<h3>Phạm vi từng gói hội viên</h3>' + tbl(['Quyền lợi','Vàng','Kim cương'],[
+        ['Yêu cầu chỉnh sửa, bổ sung tính năng đã có','Tối đa 3 yêu cầu/tháng','Tối đa 6 yêu cầu/tháng'],
+        ['Phản hồi hỗ trợ kỹ thuật','Trong 24 giờ làm việc','Trong 4 giờ làm việc'],
+        ['Hỗ trợ 1:1 riêng','Không','Có'],
+        ['Phát triển tính năng hoàn toàn mới','Không','2 tính năng trong 12 tháng liên tục'],
+        ['Giao source code','Không','Có, sau 6 tháng liên tục, chỉ với app đã mua']
+      ]) +
+      note('<b>Tính năng bổ sung</b> là hoàn thiện hoặc tinh chỉnh tính năng đã có trong app (thêm cột lọc, đổi mẫu phiếu in, thêm trường vào biểu mẫu có sẵn). <b>Tính năng hoàn toàn mới</b> là chức năng chưa từng có trong app. Đội kỹ thuật xác nhận phạm vi trước khi thực hiện.') }),
+
+    payment: b => ({ title:'Thanh toán', lead:'Thanh toán trước khi nhận app hoặc kích hoạt hội viên. Chúng tôi không tự động trừ tiền gia hạn mà nhắc trước 7 ngày.',
+      html: ol([
+        '<b>Hình thức:</b> chuyển khoản ngân hàng hoặc quét mã VietQR vào tài khoản <b>'+e(b.bankAcc)+'</b> ('+e(b.bankName)+') – chủ tài khoản <b>'+e(b.bankOwner)+'</b>.',
+        '<b>Nội dung chuyển khoản:</b> ghi đúng mã đơn hàng hiển thị khi đặt hàng để đối soát nhanh.',
+        '<b>Xác nhận:</b> sau khi nhận được tiền, chúng tôi xác nhận trong 2 giờ làm việc. Nếu chưa thấy giao dịch, hãy gửi biên lai cho bộ phận hỗ trợ.',
+        '<b>Hóa đơn:</b> xuất hóa đơn điện tử theo quy định khi bạn cung cấp đủ thông tin xuất hóa đơn trong ngày thanh toán.',
+        '<b>Chuyển nhầm, chuyển thiếu:</b> chuyển thiếu thì bù phần còn lại để được giao; chuyển thừa hoặc nhầm thì hoàn lại phần dư trong 5 ngày làm việc.',
+        '<b>An toàn:</b> chúng tôi không lưu số thẻ, mã OTP hay mật khẩu ngân hàng của bạn và không bao giờ yêu cầu cung cấp những thông tin này.'
+      ]) }),
+
+    delivery: b => ({ title:'Giao hàng', lead:'Sản phẩm là sản phẩm số, không giao vật lý và không tính phí vận chuyển. Chúng tôi giao link app và database qua Gmail hoặc Zalo bạn đã đăng ký.',
+      html: tbl(['Hạng mục','Thời gian giao (kể từ khi xác nhận thanh toán)'],[
+        ['App có sẵn','Trong 24 giờ làm việc'],
+        ['App cần cài đặt hoặc cấu hình riêng','Tối đa 3 ngày làm việc, thông báo cụ thể khi đặt hàng'],
+        ['Source code (gói Kim cương)','Sau khi đủ 6 tháng liên tục, giao trong 5 ngày làm việc qua kênh riêng, có ghi nhận bàn giao']
+      ]) + ul([
+        '<b>Kiểm tra sau giao:</b> bạn kiểm tra app trong 7 ngày kể từ ngày nhận và báo lỗi nếu app không đúng mô tả. Quá hạn mà không phản hồi thì xem là đã nhận đúng, bạn vẫn được bảo hành lỗi theo mục Đổi trả và bảo hành.',
+        '<b>Giao trễ:</b> nếu chúng tôi giao trễ so với cam kết mà không có lý do bất khả kháng, bạn được chọn nhận app muộn hoặc hoàn 100% tiền.',
+        '<b>Gmail hoặc Zalo sai:</b> bạn chịu trách nhiệm về thông tin đã cung cấp; chúng tôi sẵn sàng cấp lại link sang kênh đúng sau khi xác minh chủ đơn hàng.',
+        '<b>Cấp lại link:</b> không giới hạn số lần, sau khi xác minh chủ đơn hàng. Link cũ có thể bị vô hiệu để bảo mật. Bạn cũng xem lại link tại mục "Sản phẩm của tôi" sau khi đăng nhập.'
+      ]) }),
+
+    refund: b => ({ title:'Đổi trả, hoàn tiền và bảo hành', lead:'Vì là sản phẩm số đã giao link, chúng tôi không nhận đổi trả vì lý do chủ quan, nhưng hoàn tiền đầy đủ khi lỗi do chúng tôi và không sửa được. Chính sách này không hạn chế quyền của người tiêu dùng theo pháp luật.',
+      html: tbl(['Tình huống','Xử lý'],[
+        ['Chưa giao app, khách hàng muốn hủy','Hoàn 100%'],
+        ['App giao sai mô tả hoặc lỗi nghiêm trọng, chúng tôi không khắc phục được trong 7 ngày làm việc','Hoàn 100% hoặc đổi app tương đương theo lựa chọn của khách hàng'],
+        ['Đã giao app, khách hàng đổi ý','Không hoàn tiền'],
+        ['Hội viên chưa gửi yêu cầu nào trong 7 ngày đầu','Hoàn 100% phí tháng đầu'],
+        ['Hội viên hủy giữa kỳ','Không hoàn phần còn lại, quyền lợi duy trì đến hết kỳ đã trả'],
+        ['Khách vi phạm điều khoản (can thiệp database, chia sẻ app)','Không hoàn tiền và không bảo hành']
+      ]) +
+      '<h3>Bảo hành</h3><p>Sửa lỗi miễn phí trong <b>12 tháng</b> kể từ ngày giao. Lỗi là app chạy sai so với tính năng đã công bố; thay đổi theo nhu cầu riêng không phải lỗi. Bảo hành không áp dụng khi khách can thiệp database, sửa mã nguồn sau khi nhận source code, hoặc lỗi do Google thay đổi nền tảng.</p>' +
+      '<h3>Cách yêu cầu hoàn tiền</h3><p>Gửi mã đơn hàng, lý do và bằng chứng lỗi (ảnh chụp, video) qua Zalo <a href="tel:'+e(b.phone)+'">'+e(b.phone)+'</a> hoặc email <a href="mailto:'+e(b.email)+'">'+e(b.email)+'</a>. Chúng tôi phản hồi trong 2 ngày làm việc và hoàn tiền trong 5 đến 10 ngày làm việc về đúng phương thức đã thanh toán.</p>' }),
+
+    termination: b => ({ title:'Chấm dứt dịch vụ', lead:'App đã mua không mất khi hội viên kết thúc; chỉ dịch vụ hội viên (chỉnh sửa, hỗ trợ nhanh, giảm giá) chấm dứt.',
+      html:
+      '<h3>Khách hàng chủ động chấm dứt</h3>' + ul([
+        'Hủy hội viên bất cứ lúc nào qua Zalo hoặc email; quyền lợi duy trì đến hết tháng đã thanh toán, không tự gia hạn.',
+        'Gói Kim cương cam kết tối thiểu 6 tháng liên tục; hủy trước thời hạn này thì không được giao source code và không hoàn phí đã trả.'
+      ]) +
+      '<h3>Chúng tôi chấm dứt hoặc tạm ngừng</h3>' + ul([
+        'Khi khách can thiệp database, bán lại hoặc chia sẻ app, source code, dùng app vi phạm pháp luật hoặc có dấu hiệu lừa đảo thanh toán.',
+        'Chúng tôi thông báo bằng email nêu rõ lý do và cho 7 ngày để giải trình trước khi thu hồi link; vi phạm nghiêm trọng thì tạm khóa link ngay và thông báo sau.',
+        'Khi bị chấm dứt vì vi phạm, khách hàng không được hoàn tiền.'
+      ]) +
+      '<h3>Sau khi chấm dứt</h3>' + ul([
+        'Dữ liệu nằm trong Google Sheets của khách hàng; khách tự xuất và sao lưu. Chúng tôi không giữ bản sao dữ liệu nghiệp vụ của khách.',
+        'Thông tin tài khoản và giao dịch được lưu hoặc xóa theo chính sách Bảo mật.'
+      ]) +
+      '<p><b>Khi chúng tôi ngừng kinh doanh:</b> thông báo trước ít nhất 60 ngày, hoàn phí hội viên chưa sử dụng và bàn giao hướng dẫn để bạn tiếp tục dùng app đã mua.</p>' }),
+
+    privacy: b => ({ title:'Chính sách bảo mật', lead:'Chúng tôi chỉ thu thập dữ liệu cá nhân cần thiết để giao app và hỗ trợ, không mua bán dữ liệu, và xử lý theo Luật Bảo vệ dữ liệu cá nhân 2025 (hiệu lực từ 01/01/2026) cùng văn bản hướng dẫn.',
+      html:
+      '<h3>1. Dữ liệu chúng tôi thu thập và mục đích</h3>' + tbl(['Dữ liệu','Mục đích','Thời gian lưu'],[
+        ['Họ tên, email, số điện thoại, Zalo','Giao app, cấp lại link, hỗ trợ, nhắc gia hạn','Trong thời gian sử dụng dịch vụ và 12 tháng sau khi chấm dứt'],
+        ['Tên công ty, mã số thuế, địa chỉ xuất hóa đơn','Xuất hóa đơn điện tử','Theo thời hạn lưu trữ chứng từ kế toán, thuế'],
+        ['Lịch sử đơn hàng, thanh toán, yêu cầu hỗ trợ','Đối soát, bảo hành, giải quyết khiếu nại','Theo thời hạn lưu trữ chứng từ kế toán, thuế'],
+        ['Nhật ký truy cập kỹ thuật (thời gian, địa chỉ IP, lỗi)','Chẩn đoán lỗi, chống lạm dụng','90 ngày']
+      ]) +
+      '<h3>2. Dữ liệu nghiệp vụ trong database</h3>' + ul([
+        'Database là Google Sheets thuộc quyền sở hữu của khách hàng. Khách hàng là bên quyết định mục đích và cách dùng dữ liệu trong đó, kể cả dữ liệu cá nhân của nhân viên hoặc khách hàng của khách hàng.',
+        'Chúng tôi chỉ truy cập dữ liệu này khi khách hàng yêu cầu hỗ trợ và cho phép, chỉ để xử lý yêu cầu đó, không sao chép ra ngoài.'
+      ]) +
+      '<h3>3. Chia sẻ dữ liệu</h3>' + ul([
+        'Chỉ chia sẻ dữ liệu cần thiết cho đối tác kỹ thuật: Google (nền tảng chạy app), dịch vụ gửi email, ngân hàng hoặc cổng thanh toán, phần mềm hóa đơn điện tử.',
+        'Chia sẻ cho cơ quan nhà nước khi có yêu cầu hợp pháp. Không bán, trao đổi dữ liệu cá nhân và không dùng cho quảng cáo của bên thứ ba.'
+      ]) +
+      '<h3>4. Quyền của chủ thể dữ liệu</h3><p>Bạn có quyền được biết về việc xử lý dữ liệu; đồng ý, không đồng ý hoặc rút lại sự đồng ý; xem, chỉnh sửa hoặc yêu cầu chỉnh sửa; yêu cầu xóa dữ liệu; và khiếu nại. Gửi yêu cầu đến <a href="mailto:'+e(b.email)+'">'+e(b.email)+'</a>; chúng tôi xác minh chủ yêu cầu và xử lý trong thời hạn luật định. Rút đồng ý hoặc xóa dữ liệu có thể khiến chúng tôi không thể tiếp tục cung cấp dịch vụ; dữ liệu phải lưu theo luật kế toán, thuế sẽ được giữ đến hết thời hạn đó.</p>' +
+      '<h3>5. Biện pháp bảo vệ và giới hạn trách nhiệm</h3>' + ul([
+        'Kết nối mã hóa HTTPS, phân quyền truy cập nội bộ, xác thực hai lớp cho tài khoản quản trị, ghi nhật ký truy cập.',
+        'Khi xảy ra sự cố lộ dữ liệu cá nhân, chúng tôi thông báo cho khách hàng bị ảnh hưởng và cơ quan có thẩm quyền theo thời hạn pháp luật quy định.',
+        'Chúng tôi không chịu trách nhiệm về rò rỉ do khách hàng can thiệp database, để lộ link app, chia sẻ tài khoản Google, hoặc do sự cố của Google.',
+        'Website dùng cookie cần thiết cho đăng nhập và thống kê; bạn có thể tắt cookie trong trình duyệt. Dịch vụ không hướng đến người dưới 18 tuổi.'
+      ]) }),
+
+    complaint: b => ({ title:'Khiếu nại', lead:'Gửi khiếu nại trong vòng 30 ngày kể từ khi phát sinh vấn đề; chúng tôi cam kết phản hồi trong 1 ngày làm việc.',
+      html: ol([
+        '<b>Gửi khiếu nại:</b> qua email <a href="mailto:'+e(b.email)+'">'+e(b.email)+'</a> hoặc Zalo/điện thoại <a href="tel:'+e(b.phone)+'">'+e(b.phone)+'</a>, kèm mã đơn hàng, mô tả vấn đề, bằng chứng và mong muốn xử lý.',
+        '<b>Tiếp nhận:</b> trong 1 ngày làm việc, chúng tôi xác nhận đã nhận và gửi mã theo dõi.',
+        '<b>Xử lý:</b> phản hồi phương án trong 7 ngày làm việc; vụ phức tạp kéo dài đến 15 ngày làm việc và được thông báo lý do.',
+        '<b>Thương lượng:</b> hai bên trao đổi để đạt thỏa thuận, kể cả sửa lỗi, đổi app hoặc hoàn tiền theo chính sách Đổi trả, hoàn tiền.',
+        '<b>Không đạt thỏa thuận:</b> bạn có thể đề nghị hòa giải, gửi đơn tới cơ quan quản lý về bảo vệ người tiêu dùng hoặc khởi kiện tại Tòa án có thẩm quyền.'
+      ]) + '<p>Khiếu nại liên quan dữ liệu cá nhân gửi đến <a href="mailto:'+e(b.email)+'">'+e(b.email)+'</a> và được xử lý theo chính sách Bảo mật.</p>' }),
+
+    support: b => ({ title:'Hỗ trợ', lead:'Hỗ trợ hoạt động trong giờ làm việc ('+e(b.hours)+') qua Zalo '+e(b.phone)+' và email '+e(b.email)+'. Mức ưu tiên phản hồi tăng theo gói.',
+      html: tbl(['','Mua app','Hội viên Vàng','Hội viên Kim cương'],[
+        ['Thời gian phản hồi','Trong 48 giờ làm việc','Trong 24 giờ làm việc','Trong 4 giờ làm việc'],
+        ['Cấp lại link','Không giới hạn','Không giới hạn','Không giới hạn'],
+        ['Sửa lỗi, bảo hành','Có','Có, ưu tiên','Có, ưu tiên cao nhất'],
+        ['Yêu cầu chỉnh sửa, bổ sung tính năng','Không','Tối đa 3 yêu cầu/tháng','Tối đa 6 yêu cầu/tháng'],
+        ['Hỗ trợ 1:1 riêng','Không','Không','Có']
+      ]) +
+      '<h3>Khi gửi yêu cầu, bạn nên kèm</h3><p>Mã đơn hàng hoặc Gmail đăng ký, tên app, mô tả lỗi, ảnh chụp hoặc video màn hình và thời điểm xảy ra.</p>' +
+      '<h3>Chúng tôi hỗ trợ</h3>' + ul(['Hướng dẫn sử dụng app, sửa lỗi, cấp lại link, điều chỉnh nhỏ theo gói hội viên.']) +
+      '<h3>Không thuộc phạm vi hỗ trợ</h3>' + ul(['Nhập liệu hộ; khôi phục dữ liệu do khách tự xóa hoặc sửa database; tư vấn nghiệp vụ ngoài app; thao tác can thiệp trực tiếp vào database.']) })
+  };
+
+  let current = 'info';
+  function renderNav(){
+    const nav = document.getElementById('policyNav');
+    nav.innerHTML = '<div class="policy-nav-title">Chính sách &amp; điều khoản</div>' + ORDER.map(([id,t])=>
+      '<button class="'+(id===current?'active':'')+'" onclick="openPolicy(\''+id+'\')">'+t+'</button>').join('');
+  }
+  window.openPolicy = function(id){
+    if(!DOCS[id]) id = 'info';
+    current = id;
+    const d = DOCS[id](B());
+    document.getElementById('policyMain').innerHTML = '<h2>'+d.title+'</h2><p class="pol-lead">'+d.lead+'</p>'+d.html;
+    renderNav();
+    document.getElementById('policyMain').scrollTop = 0;
+    document.getElementById('policyOv').classList.add('open');
+    document.body.style.overflow = 'hidden';
+    try{ history.replaceState(null,'','#policy-'+id); }catch(_){}
+  };
+  window.closePolicy = function(){
+    document.getElementById('policyOv').classList.remove('open');
+    document.body.style.overflow = '';
+    try{ if(location.hash.indexOf('#policy-')===0) history.replaceState(null,'',location.pathname+location.search); }catch(_){}
+  };
+  document.addEventListener('keydown', ev=>{ if(ev.key==='Escape' && document.getElementById('policyOv').classList.contains('open')) closePolicy(); });
+  function fromHash(){ const m=/^#policy-(\w+)/.exec(location.hash); if(m) openPolicy(m[1]); }
+  window.addEventListener('hashchange', fromHash);
+  window.addEventListener('load', ()=>setTimeout(fromHash, 300));
+})();
+</script>
+
 <!-- CONFIRM MODAL (hop thoai xac nhan trong trang) -->
 <div class="overlay" id="confirmOv" style="z-index:950;">
   <div class="login-box" style="max-width:360px;text-align:center;">
