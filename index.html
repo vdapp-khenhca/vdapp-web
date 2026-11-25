@@ -1724,6 +1724,7 @@ select, textarea {
 .nav-login-btn:focus-visible{outline:3px solid rgba(28,107,92,.35);outline-offset:2px;}
 @media(max-width:600px){.nav-login-btn{padding:8px 14px;font-size:13px;min-height:38px;}}
 </style>
+<style>.nav-search-inline input[type=search],#searchInput{-webkit-appearance:none;appearance:none}.nav-search-inline input[type=search]::-webkit-search-cancel-button,#searchInput::-webkit-search-cancel-button{-webkit-appearance:none;display:none}</style>
 </head>
 <body>
 
@@ -1801,7 +1802,7 @@ select, textarea {
   <!-- NAV INLINE SEARCH -->
   <div class="nav-search-inline">
     <i class="bi bi-search nsi"></i>
-    <input type="text" id="navSearchInput" placeholder="Tìm sản phẩm..." autocomplete="off"
+    <input type="search" name="vd_nav_q" id="navSearchInput" placeholder="Tìm sản phẩm..." autocomplete="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-form-type="other"
       oninput="navSearch(this.value)" onfocus="showNavResults()" onblur="setTimeout(hideNavResults,180)">
     <button class="nsc" onclick="clearNavSearch()" aria-label="Xoá tìm kiếm"><i class="bi bi-x-circle-fill"></i></button>
     <div class="nav-search-results" id="navSearchResults"></div>
@@ -2035,7 +2036,7 @@ select, textarea {
   <div class="search-wrap" style="margin-bottom:24px;">
     <div class="search-box">
       <i class="bi bi-search si"></i>
-      <input type="text" id="searchInput" placeholder="Tìm kiếm sản phẩm..." oninput="onSearch(this.value)">
+      <input type="search" name="vd_grid_q" id="searchInput" autocomplete="off" data-lpignore="true" placeholder="Tìm kiếm sản phẩm..." oninput="onSearch(this.value)">
       <button class="sc" onclick="clearSearch()" aria-label="Xoá tìm kiếm"><i class="bi bi-x-circle-fill"></i></button>
     </div>
   </div>
@@ -2096,7 +2097,7 @@ select, textarea {
         <li><span class="ck"><i class="bi bi-check-circle-fill"></i></span> Sở hữu vĩnh viễn app + database</li>
         <li><span class="ck"><i class="bi bi-check-circle-fill"></i></span> Nhận link app ngay sau thanh toán</li>
         <li><span class="ck"><i class="bi bi-check-circle-fill"></i></span> Cấp lại link không giới hạn</li>
-        <li><span class="ck"><i class="bi bi-check-circle-fill"></i></span> Bảo hành lỗi 12 tháng</li>
+        <li><span class="ck"><i class="bi bi-check-circle-fill"></i></span> Bảo hành lỗi 6 tháng kể từ ngày mua</li>
         <li><span class="cx"><i class="bi bi-x-circle"></i></span> Chỉnh sửa, bổ sung tính năng</li>
       </ul>
       <button class="pbtn-o" onclick="document.getElementById('products').scrollIntoView({behavior:'smooth'})"><i class="bi bi-grid-fill"></i> Chọn app để mua</button>
@@ -6649,11 +6650,10 @@ window.addEventListener('DOMContentLoaded',()=>{
         ['Chưa giao app, khách hàng muốn hủy','Hoàn 100%'],
         ['App giao sai mô tả hoặc lỗi nghiêm trọng, chúng tôi không khắc phục được trong 7 ngày làm việc','Hoàn 100% hoặc đổi app tương đương theo lựa chọn của khách hàng'],
         ['Đã giao app, khách hàng đổi ý','Không hoàn tiền'],
-        ['Hội viên chưa gửi yêu cầu nào trong 7 ngày đầu','Hoàn 100% phí tháng đầu'],
         ['Hội viên hủy giữa kỳ','Không hoàn phần còn lại, quyền lợi duy trì đến hết kỳ đã trả'],
         ['Khách vi phạm điều khoản (can thiệp database, chia sẻ app)','Không hoàn tiền và không bảo hành']
       ]) +
-      '<h3>Bảo hành</h3><p>Sửa lỗi miễn phí trong <b>12 tháng</b> kể từ ngày giao. Lỗi là app chạy sai so với tính năng đã công bố; thay đổi theo nhu cầu riêng không phải lỗi. Bảo hành không áp dụng khi khách can thiệp database, sửa mã nguồn sau khi nhận source code, hoặc lỗi do Google thay đổi nền tảng.</p>' +
+      '<h3>Bảo hành</h3><p>Sửa lỗi miễn phí trong <b>6 tháng</b> kể từ ngày mua. Lỗi là app chạy sai so với tính năng đã công bố; thay đổi theo nhu cầu riêng không phải lỗi. Bảo hành không áp dụng khi khách can thiệp database, sửa mã nguồn sau khi nhận source code, hoặc lỗi do Google thay đổi nền tảng.</p>' +
       '<h3>Cách yêu cầu hoàn tiền</h3><p>Gửi mã đơn hàng, lý do và bằng chứng lỗi (ảnh chụp, video) qua Zalo <a href="tel:'+e(b.phone)+'">'+e(b.phone)+'</a> hoặc email <a href="mailto:'+e(b.email)+'">'+e(b.email)+'</a>. Chúng tôi phản hồi trong 2 ngày làm việc và hoàn tiền trong 5 đến 10 ngày làm việc về đúng phương thức đã thanh toán.</p>' }),
 
     termination: b => ({ title:'Chấm dứt dịch vụ', lead:'App đã mua không mất khi hội viên kết thúc; chỉ dịch vụ hội viên (chỉnh sửa, hỗ trợ nhanh, giảm giá) chấm dứt.',
