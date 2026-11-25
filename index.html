@@ -1725,6 +1725,16 @@ select, textarea {
 @media(max-width:600px){.nav-login-btn{padding:8px 14px;font-size:13px;min-height:38px;}}
 </style>
 <style>.nav-search-inline input[type=search],#searchInput{-webkit-appearance:none;appearance:none}.nav-search-inline input[type=search]::-webkit-search-cancel-button,#searchInput::-webkit-search-cancel-button{-webkit-appearance:none;display:none}</style>
+<style>
+footer{display:block !important;}
+.pol-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;}
+.pol-chip{display:flex;align-items:center;gap:10px;padding:11px 14px;border:1px solid var(--border);background:var(--surface);border-radius:12px;color:var(--text2);text-decoration:none;font-size:13px;font-weight:500;transition:all .2s;}
+.pol-chip i{color:var(--gold);font-size:15px;flex-shrink:0;}
+.pol-chip:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-1px);box-shadow:0 4px 14px rgba(28,107,92,.12);}
+.foot-bottom{max-width:1200px;margin:26px auto 0;padding-top:18px;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px 20px;font-size:12.5px;color:var(--text3);}
+.foot-bottom strong{color:var(--text2);}
+@media(max-width:600px){.pol-grid{grid-template-columns:1fr 1fr;gap:8px;}.pol-chip{padding:10px 11px;font-size:12.5px;}.foot-bottom{justify-content:center;text-align:center;}}
+</style>
 </head>
 <body>
 
@@ -2565,24 +2575,14 @@ select, textarea {
     </div>
   </div>
   <!-- Policy links -->
-  <div role="navigation" aria-label="Chính sách và điều khoản" style="max-width:1200px;margin:22px auto 0;display:flex;flex-wrap:wrap;justify-content:center;gap:8px 20px;padding-bottom:18px;border-bottom:1px solid var(--border);">
-    <a class="pol-link" href="#policy-info" onclick="event.preventDefault();openPolicy('info')">Thông tin chủ quản</a>
-    <a class="pol-link" href="#policy-terms" onclick="event.preventDefault();openPolicy('terms')">Điều khoản sử dụng</a>
-    <a class="pol-link" href="#policy-rights" onclick="event.preventDefault();openPolicy('rights')">Quyền và nghĩa vụ</a>
-    <a class="pol-link" href="#policy-pricing" onclick="event.preventDefault();openPolicy('pricing')">Chính sách giá</a>
-    <a class="pol-link" href="#policy-payment" onclick="event.preventDefault();openPolicy('payment')">Thanh toán</a>
-    <a class="pol-link" href="#policy-delivery" onclick="event.preventDefault();openPolicy('delivery')">Giao hàng</a>
-    <a class="pol-link" href="#policy-refund" onclick="event.preventDefault();openPolicy('refund')">Đổi trả, hoàn tiền</a>
-    <a class="pol-link" href="#policy-termination" onclick="event.preventDefault();openPolicy('termination')">Chấm dứt dịch vụ</a>
-    <a class="pol-link" href="#policy-privacy" onclick="event.preventDefault();openPolicy('privacy')">Bảo mật</a>
-    <a class="pol-link" href="#policy-complaint" onclick="event.preventDefault();openPolicy('complaint')">Khiếu nại</a>
-    <a class="pol-link" href="#policy-support" onclick="event.preventDefault();openPolicy('support')">Hỗ trợ</a>
+  <div style="max-width:1200px;margin:28px auto 0;">
+    <div style="font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text2);margin-bottom:14px;">Chính sách &amp; điều khoản</div>
+    <div role="navigation" aria-label="Chính sách và điều khoản" class="pol-grid"><a class="pol-chip" href="#policy-info" onclick="event.preventDefault();openPolicy('info')"><i class="bi bi-building"></i><span>Thông tin chủ quản</span></a><a class="pol-chip" href="#policy-terms" onclick="event.preventDefault();openPolicy('terms')"><i class="bi bi-file-earmark-text"></i><span>Điều khoản sử dụng</span></a><a class="pol-chip" href="#policy-rights" onclick="event.preventDefault();openPolicy('rights')"><i class="bi bi-people"></i><span>Quyền và nghĩa vụ</span></a><a class="pol-chip" href="#policy-pricing" onclick="event.preventDefault();openPolicy('pricing')"><i class="bi bi-tag"></i><span>Chính sách giá</span></a><a class="pol-chip" href="#policy-payment" onclick="event.preventDefault();openPolicy('payment')"><i class="bi bi-credit-card"></i><span>Thanh toán</span></a><a class="pol-chip" href="#policy-delivery" onclick="event.preventDefault();openPolicy('delivery')"><i class="bi bi-box-seam"></i><span>Giao hàng</span></a><a class="pol-chip" href="#policy-refund" onclick="event.preventDefault();openPolicy('refund')"><i class="bi bi-arrow-repeat"></i><span>Đổi trả, hoàn tiền</span></a><a class="pol-chip" href="#policy-termination" onclick="event.preventDefault();openPolicy('termination')"><i class="bi bi-door-open"></i><span>Chấm dứt dịch vụ</span></a><a class="pol-chip" href="#policy-privacy" onclick="event.preventDefault();openPolicy('privacy')"><i class="bi bi-shield-lock"></i><span>Bảo mật</span></a><a class="pol-chip" href="#policy-complaint" onclick="event.preventDefault();openPolicy('complaint')"><i class="bi bi-chat-left-text"></i><span>Khiếu nại</span></a><a class="pol-chip" href="#policy-support" onclick="event.preventDefault();openPolicy('support')"><i class="bi bi-headset"></i><span>Hỗ trợ</span></a></div>
   </div>
   <!-- Bottom bar -->
-  <div style="max-width:1200px;margin:18px auto 0;text-align:center;">
-    <div style="font-size:12px;color:var(--text3);">
-      © 2026 <strong style="color:var(--text2);">VDAPP</strong> – Nguyễn Văn Đảm. Hộ kinh doanh cá thể.
-    </div>
+  <div class="foot-bottom">
+    <div>© 2026 <strong>VDAPP</strong> · Nguyễn Văn Đảm · Hộ kinh doanh cá thể</div>
+    <div class="foot-bottom-r">Bứt phá bắt đầu từ một trang tính</div>
   </div>
 </footer>
 
