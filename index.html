@@ -18,6 +18,7 @@
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://vdapp.vn">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" id="biCss1">
 <script>
@@ -1735,6 +1736,17 @@ footer{display:block !important;}
 .foot-bottom strong{color:var(--text2);}
 @media(max-width:600px){.pol-grid{grid-template-columns:1fr 1fr;gap:8px;}.pol-chip{padding:10px 11px;font-size:12.5px;}.foot-bottom{justify-content:center;text-align:center;}}
 </style>
+<style>
+.logo-wordmark .lw-vd,.logo-wordmark .lw-app,.logo-wordmark .lw-dot,.foot-wm span{font-family:'Nunito','Be Vietnam Pro',sans-serif !important;font-weight:800 !important;letter-spacing:-.2px !important;}
+.logo-wordmark .lw-vd,.logo-wordmark .lw-app{font-size:23px !important;}
+.logo-wordmark .lw-dot{font-size:26px !important;font-weight:900 !important;}
+.foot-wm span{font-size:28px !important;}
+.foot-wm span:last-child{font-size:30px !important;}
+.logo-tagline{font-family:'Nunito','Be Vietnam Pro',sans-serif !important;font-weight:700 !important;font-size:9.5px !important;letter-spacing:1.5px !important;}
+.foot-vina{font-family:'Nunito','Be Vietnam Pro',sans-serif;font-size:11.5px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:#1C6B5C;-webkit-text-fill-color:#1C6B5C;margin-top:5px;}
+.foot-tag{font-family:'Nunito','Be Vietnam Pro',sans-serif;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);-webkit-text-fill-color:var(--text3);}
+[data-theme="light"] .logo-img,[data-theme="light"] .footer-logo-img{filter:brightness(0) saturate(100%) invert(31%) sepia(35%) saturate(900%) hue-rotate(125deg) brightness(97%) contrast(92%) !important;}
+</style>
 </head>
 <body>
 
@@ -2520,10 +2532,10 @@ footer{display:block !important;}
                  flex-shrink:0;"
           onerror="this.style.display='none'">
         <div style="display:flex;flex-direction:column;gap:2px;">
-          <div style="display:flex;align-items:baseline;gap:0;line-height:1;">
+          <div class="foot-wm" style="display:flex;align-items:baseline;gap:0;line-height:1;">
             <span style="font-size:24px;font-weight:900;letter-spacing:-.5px;background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">VD</span><span style="font-size:24px;font-weight:900;letter-spacing:-.5px;color:var(--text);-webkit-text-fill-color:var(--text);">APP</span><span style="font-size:26px;font-weight:900;background:linear-gradient(135deg,var(--gold),var(--gold2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">.</span>
           </div>
-          <span style="font-size:9px;font-weight:500;letter-spacing:1.6px;text-transform:uppercase;color:var(--text3);-webkit-text-fill-color:var(--text3);">Bứt phá từ trang tính</span>
+          <span class="foot-vina">Vina Digital Application</span><span class="foot-tag">Bứt phá từ trang tính</span>
         </div>
       </div>
       <p style="font-size:13px;color:var(--text2);line-height:1.75;margin-bottom:16px;max-width:280px;">Bứt phá bắt đầu từ một trang tính. Giải pháp Webapp &amp; Google Sheets chuyên nghiệp cho doanh nghiệp Việt Nam.</p>
